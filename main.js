@@ -5,7 +5,7 @@
  */
 
 import React, { Component } from 'react';
-
+var DeviceInfo = require('react-native-device-info');
 import {
   AppRegistry,
   StyleSheet,
@@ -38,6 +38,7 @@ export default class RahnemaTeam2App extends Component {
        {id :8, label: "asdasdasdasas"},
        {id :9, label: "سشیشسیسیبسذلبذبلذلیذ"},
       ] }
+    this.getUniqueID.bind(this);
   }
     getLocation(){
     return new Promise(function(resolve,reject){
@@ -65,12 +66,21 @@ export default class RahnemaTeam2App extends Component {
     
   }
 
+  getUniqueID(){
+      var id = {"unique_id" : DeviceInfo.getUniqueID()};
+      this.setState(id,()=>{});   
+  }
+  componentWillMount(){
+    this.getUniqueID();
+  }
+  
+
 
   render() {
     if (!this.state) {
       return null
     }
-    console.log('our state:', this.state);
+    // console.log('our state:', this.state);
     return (
       <View style={styles.container}>
         
