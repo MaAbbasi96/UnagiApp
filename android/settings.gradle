@@ -1,0 +1,3 @@
+rootProject.name = 'RahnemaTeam2App'
+
+include ':app'
