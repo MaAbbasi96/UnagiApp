@@ -3,12 +3,21 @@
 
     <item
         is-multidex="false"
-        jar="/Users/shahryar/.gradle/caches/modules-2/files-2.1/com.facebook.fbui.textlayoutbuilder/staticlayout-proxy/1.0/f162442a19fff13995fbd51ba414d9ee05579080/staticlayout-proxy-1.0.jar"
+        jar="/Users/shahryar/Desktop/RahmenaProject/Rahnema-Team2-App/android/app/build/intermediates/exploded-aar/com.facebook.fresco/fresco/1.0.1/jars/classes.jar"
         jumboMode="false"
         optimize="true"
         revision="23.0.1"
-        sha1="f162442a19fff13995fbd51ba414d9ee05579080">
-        <dex dex="/Users/shahryar/Desktop/Test/RahnemaTeam2App/android/app/build/intermediates/pre-dexed/debug/staticlayout-proxy-1.0_46655470ec3f8bce95ef7bbc9200740dde2d0902.jar" />
+        sha1="cf836a435a496eb22ff2aa69aa1e619462549f81">
+        <dex dex="/Users/shahryar/Desktop/RahmenaProject/Rahnema-Team2-App/android/app/build/intermediates/pre-dexed/debug/com.facebook.fresco-fresco-1.0.1_0691801644c5861de56efceb3fd50bccd7a44667.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/shahryar/Desktop/RahmenaProject/Rahnema-Team2-App/android/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.0.1/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="c31e21b53ff2f74664e498248d01453a32e32d48">
+        <dex dex="/Users/shahryar/Desktop/RahmenaProject/Rahnema-Team2-App/android/app/build/intermediates/pre-dexed/debug/com.android.support-support-v4-23.0.1_0fb18a8f69d93507728cdf67570859d08bdfa365.jar" />
     </item>
     <item
         is-multidex="false"
@@ -21,30 +30,21 @@
     </item>
     <item
         is-multidex="false"
-        jar="/Users/shahryar/Desktop/Test/RahnemaTeam2App/android/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.0.1/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="c31e21b53ff2f74664e498248d01453a32e32d48">
-        <dex dex="/Users/shahryar/Desktop/Test/RahnemaTeam2App/android/app/build/intermediates/pre-dexed/debug/com.android.support-support-v4-23.0.1_afc3fc51e7222ea33863267ecd5094336fa232e2.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/shahryar/Desktop/Test/RahnemaTeam2App/android/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.0.1/jars/libs/internal_impl-23.0.1.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="aa92916125166649d8ad4ba3940c3dd7515596d3">
-        <dex dex="/Users/shahryar/Desktop/Test/RahnemaTeam2App/android/app/build/intermediates/pre-dexed/debug/internal_impl-23.0.1_e6178a681fd05b2715b86fe410340c4d6146a17f.jar" />
-    </item>
-    <item
-        is-multidex="false"
         jar="/Users/shahryar/Desktop/Test/RahnemaTeam2App/android/app/build/intermediates/exploded-aar/com.facebook.fresco/imagepipeline-base/1.0.1/jars/classes.jar"
         jumboMode="false"
         optimize="true"
         revision="23.0.1"
         sha1="050f688115ea65a0292d8483a6ffe6bcdab1e2ef">
         <dex dex="/Users/shahryar/Desktop/Test/RahnemaTeam2App/android/app/build/intermediates/pre-dexed/debug/com.facebook.fresco-imagepipeline-base-1.0.1_30331e32ab4f4305b510e9a80c527baecbb95971.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/shahryar/Desktop/RahmenaProject/Rahnema-Team2-App/android/app/build/intermediates/exploded-aar/com.facebook.fresco/imagepipeline/1.0.1/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="d9c4402c3057225d80cbbbec52154e7a25b0ebdf">
+        <dex dex="/Users/shahryar/Desktop/RahmenaProject/Rahnema-Team2-App/android/app/build/intermediates/pre-dexed/debug/com.facebook.fresco-imagepipeline-1.0.1_dba9b801a8184142c289026acff5e4e9cdd8bf55.jar" />
     </item>
     <item
         is-multidex="false"
@@ -57,21 +57,21 @@
     </item>
     <item
         is-multidex="false"
-        jar="/Users/shahryar/Desktop/Test/RahnemaTeam2App/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.46.4/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="c5526d30278eb171f4a1325bd6b927c9057c91f4">
-        <dex dex="/Users/shahryar/Desktop/Test/RahnemaTeam2App/android/app/build/intermediates/pre-dexed/debug/com.facebook.react-react-native-0.46.4_a8f0b818bcbc444e1410cf20a55a70b99ae3dea3.jar" />
-    </item>
-    <item
-        is-multidex="false"
         jar="/Users/shahryar/.gradle/caches/modules-2/files-2.1/javax.inject/javax.inject/1/6975da39a7040257bd51d21a231b76c915872d38/javax.inject-1.jar"
         jumboMode="false"
         optimize="true"
         revision="23.0.1"
         sha1="6975da39a7040257bd51d21a231b76c915872d38">
         <dex dex="/Users/shahryar/Desktop/Test/RahnemaTeam2App/android/app/build/intermediates/pre-dexed/debug/javax.inject-1_8fcefdc3c3ece095848467f4b03a196135d4946f.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/shahryar/Desktop/RahmenaProject/Rahnema-Team2-App/android/app/build/intermediates/exploded-aar/com.facebook.fresco/imagepipeline-okhttp3/1.0.1/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="ba9b39366b723ccff6359d1117332968e98a4aca">
+        <dex dex="/Users/shahryar/Desktop/RahmenaProject/Rahnema-Team2-App/android/app/build/intermediates/pre-dexed/debug/com.facebook.fresco-imagepipeline-okhttp3-1.0.1_e3b8d5d7b146926b7ffb1e8fe314656b1d99071f.jar" />
     </item>
     <item
         is-multidex="false"
@@ -93,21 +93,21 @@
     </item>
     <item
         is-multidex="false"
+        jar="/Users/shahryar/Desktop/RahmenaProject/Rahnema-Team2-App/android/app/build/intermediates/exploded-aar/com.facebook.fresco/drawee/1.0.1/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="5a61f17cd72e20aa4323cbf5f909b7c609619275">
+        <dex dex="/Users/shahryar/Desktop/RahmenaProject/Rahnema-Team2-App/android/app/build/intermediates/pre-dexed/debug/com.facebook.fresco-drawee-1.0.1_c16674966807a5dcef793eab8cee0487b7721857.jar" />
+    </item>
+    <item
+        is-multidex="false"
         jar="/Users/shahryar/Desktop/Test/RahnemaTeam2App/android/app/build/intermediates/exploded-aar/com.facebook.fresco/imagepipeline-okhttp3/1.0.1/jars/classes.jar"
         jumboMode="false"
         optimize="true"
         revision="23.0.1"
         sha1="ba9b39366b723ccff6359d1117332968e98a4aca">
         <dex dex="/Users/shahryar/Desktop/Test/RahnemaTeam2App/android/app/build/intermediates/pre-dexed/debug/com.facebook.fresco-imagepipeline-okhttp3-1.0.1_ba2477d44c64f15c4656d9959d45de83faff8af1.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/shahryar/Desktop/Test/RahnemaTeam2App/android/app/build/intermediates/exploded-aar/com.facebook.fbui.textlayoutbuilder/textlayoutbuilder/1.0.0/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="f90b593491e4044903f0bbf68dc3fa2790b151b9">
-        <dex dex="/Users/shahryar/Desktop/Test/RahnemaTeam2App/android/app/build/intermediates/pre-dexed/debug/com.facebook.fbui.textlayoutbuilder-textlayoutbuilder-1.0.0_8ba83b4e5da12b048bb5e3b21859bc3beaf5c771.jar" />
     </item>
     <item
         is-multidex="false"
@@ -120,6 +120,15 @@
     </item>
     <item
         is-multidex="false"
+        jar="/Users/shahryar/Desktop/RahmenaProject/Rahnema-Team2-App/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.46.4/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="c5526d30278eb171f4a1325bd6b927c9057c91f4">
+        <dex dex="/Users/shahryar/Desktop/RahmenaProject/Rahnema-Team2-App/android/app/build/intermediates/pre-dexed/debug/com.facebook.react-react-native-0.46.4_552941d0490668a524dad6e529ce0094e7d6555f.jar" />
+    </item>
+    <item
+        is-multidex="false"
         jar="/Users/shahryar/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp3/okhttp/3.6.0/69edde9fc4b01c9fd51d25b83428837478c27254/okhttp-3.6.0.jar"
         jumboMode="false"
         optimize="true"
@@ -129,12 +138,12 @@
     </item>
     <item
         is-multidex="false"
-        jar="/Users/shahryar/Desktop/Test/RahnemaTeam2App/android/app/build/intermediates/exploded-aar/com.facebook.fresco/imagepipeline/1.0.1/jars/classes.jar"
+        jar="/Users/shahryar/Desktop/RahmenaProject/Rahnema-Team2-App/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.46.4/jars/libs/infer-annotations-4.0.jar"
         jumboMode="false"
         optimize="true"
         revision="23.0.1"
-        sha1="d9c4402c3057225d80cbbbec52154e7a25b0ebdf">
-        <dex dex="/Users/shahryar/Desktop/Test/RahnemaTeam2App/android/app/build/intermediates/pre-dexed/debug/com.facebook.fresco-imagepipeline-1.0.1_e620c165379e8b10c9d2f0c1cd5e6a46b783d73b.jar" />
+        sha1="9809e90be788acdb479b2b44e2112f3295a03068">
+        <dex dex="/Users/shahryar/Desktop/RahmenaProject/Rahnema-Team2-App/android/app/build/intermediates/pre-dexed/debug/infer-annotations-4.0_bc1bac986a507a4c82d17d0db49fe7c9e9fd0b6d.jar" />
     </item>
     <item
         is-multidex="false"
@@ -156,21 +165,120 @@
     </item>
     <item
         is-multidex="false"
-        jar="/Users/shahryar/Desktop/Test/RahnemaTeam2App/android/app/build/intermediates/exploded-aar/com.facebook.soloader/soloader/0.1.0/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="8f615bca00639150c9eb6175d4b5471193f70794">
-        <dex dex="/Users/shahryar/Desktop/Test/RahnemaTeam2App/android/app/build/intermediates/pre-dexed/debug/com.facebook.soloader-soloader-0.1.0_9cb8241fdbb97fd3e21848ff0d1ad43e20f8fd5b.jar" />
-    </item>
-    <item
-        is-multidex="false"
         jar="/Users/shahryar/.gradle/caches/modules-2/files-2.1/com.parse.bolts/bolts-tasks/1.4.0/d85884acf6810a3bbbecb587f239005cbc846dc4/bolts-tasks-1.4.0.jar"
         jumboMode="false"
         optimize="true"
         revision="23.0.1"
         sha1="d85884acf6810a3bbbecb587f239005cbc846dc4">
         <dex dex="/Users/shahryar/Desktop/Test/RahnemaTeam2App/android/app/build/intermediates/pre-dexed/debug/bolts-tasks-1.4.0_f6b9a3b84b2308a29b49428d9a13f0295a1097a3.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/shahryar/.gradle/caches/modules-2/files-2.1/com.facebook.fbui.textlayoutbuilder/staticlayout-proxy/1.0/f162442a19fff13995fbd51ba414d9ee05579080/staticlayout-proxy-1.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="f162442a19fff13995fbd51ba414d9ee05579080">
+        <dex dex="/Users/shahryar/Desktop/Test/RahnemaTeam2App/android/app/build/intermediates/pre-dexed/debug/staticlayout-proxy-1.0_46655470ec3f8bce95ef7bbc9200740dde2d0902.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/shahryar/Desktop/RahmenaProject/Rahnema-Team2-App/android/app/build/intermediates/exploded-aar/com.facebook.fresco/fbcore/1.0.1/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="2668e49e4e31c7d451b76a36009b902bf44e0d70">
+        <dex dex="/Users/shahryar/Desktop/RahmenaProject/Rahnema-Team2-App/android/app/build/intermediates/pre-dexed/debug/com.facebook.fresco-fbcore-1.0.1_4750480a0526a612bb9964256f797fec28e2f293.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/shahryar/Desktop/RahmenaProject/Rahnema-Team2-App/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="d86429b0f0b3f3cafbeb78dda1b9d89119ccb05d">
+        <dex dex="/Users/shahryar/Desktop/RahmenaProject/Rahnema-Team2-App/android/app/build/intermediates/pre-dexed/debug/com.android.support-appcompat-v7-23.0.1_ba0f6912f7bd199553853539f902bcf3bf55a6d6.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/shahryar/Desktop/Test/RahnemaTeam2App/android/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.0.1/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="c31e21b53ff2f74664e498248d01453a32e32d48">
+        <dex dex="/Users/shahryar/Desktop/Test/RahnemaTeam2App/android/app/build/intermediates/pre-dexed/debug/com.android.support-support-v4-23.0.1_afc3fc51e7222ea33863267ecd5094336fa232e2.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/shahryar/Desktop/Test/RahnemaTeam2App/android/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.0.1/jars/libs/internal_impl-23.0.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="aa92916125166649d8ad4ba3940c3dd7515596d3">
+        <dex dex="/Users/shahryar/Desktop/Test/RahnemaTeam2App/android/app/build/intermediates/pre-dexed/debug/internal_impl-23.0.1_e6178a681fd05b2715b86fe410340c4d6146a17f.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/shahryar/Desktop/Test/RahnemaTeam2App/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.46.4/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="c5526d30278eb171f4a1325bd6b927c9057c91f4">
+        <dex dex="/Users/shahryar/Desktop/Test/RahnemaTeam2App/android/app/build/intermediates/pre-dexed/debug/com.facebook.react-react-native-0.46.4_a8f0b818bcbc444e1410cf20a55a70b99ae3dea3.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/shahryar/Desktop/RahmenaProject/Rahnema-Team2-App/android/app/build/intermediates/exploded-aar/com.facebook.fbui.textlayoutbuilder/textlayoutbuilder/1.0.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="f90b593491e4044903f0bbf68dc3fa2790b151b9">
+        <dex dex="/Users/shahryar/Desktop/RahmenaProject/Rahnema-Team2-App/android/app/build/intermediates/pre-dexed/debug/com.facebook.fbui.textlayoutbuilder-textlayoutbuilder-1.0.0_e17af497c24c9ef493358eb6a09a312b011776ac.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/shahryar/Desktop/RahmenaProject/Rahnema-Team2-App/android/app/build/intermediates/exploded-aar/com.facebook.fresco/imagepipeline-base/1.0.1/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="050f688115ea65a0292d8483a6ffe6bcdab1e2ef">
+        <dex dex="/Users/shahryar/Desktop/RahmenaProject/Rahnema-Team2-App/android/app/build/intermediates/pre-dexed/debug/com.facebook.fresco-imagepipeline-base-1.0.1_d957c47c2e57e26209936120e209d8cd374d83be.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/shahryar/Desktop/Test/RahnemaTeam2App/android/app/build/intermediates/exploded-aar/com.facebook.fbui.textlayoutbuilder/textlayoutbuilder/1.0.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="f90b593491e4044903f0bbf68dc3fa2790b151b9">
+        <dex dex="/Users/shahryar/Desktop/Test/RahnemaTeam2App/android/app/build/intermediates/pre-dexed/debug/com.facebook.fbui.textlayoutbuilder-textlayoutbuilder-1.0.0_8ba83b4e5da12b048bb5e3b21859bc3beaf5c771.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/shahryar/Desktop/RahmenaProject/Rahnema-Team2-App/android/app/build/intermediates/exploded-aar/com.facebook.soloader/soloader/0.1.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="8f615bca00639150c9eb6175d4b5471193f70794">
+        <dex dex="/Users/shahryar/Desktop/RahmenaProject/Rahnema-Team2-App/android/app/build/intermediates/pre-dexed/debug/com.facebook.soloader-soloader-0.1.0_5ce0af7011d10a6c6e071dd11745134b049da023.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/shahryar/Desktop/Test/RahnemaTeam2App/android/app/build/intermediates/exploded-aar/com.facebook.fresco/imagepipeline/1.0.1/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="d9c4402c3057225d80cbbbec52154e7a25b0ebdf">
+        <dex dex="/Users/shahryar/Desktop/Test/RahnemaTeam2App/android/app/build/intermediates/pre-dexed/debug/com.facebook.fresco-imagepipeline-1.0.1_e620c165379e8b10c9d2f0c1cd5e6a46b783d73b.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/shahryar/Desktop/Test/RahnemaTeam2App/android/app/build/intermediates/exploded-aar/com.facebook.soloader/soloader/0.1.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="8f615bca00639150c9eb6175d4b5471193f70794">
+        <dex dex="/Users/shahryar/Desktop/Test/RahnemaTeam2App/android/app/build/intermediates/pre-dexed/debug/com.facebook.soloader-soloader-0.1.0_9cb8241fdbb97fd3e21848ff0d1ad43e20f8fd5b.jar" />
     </item>
     <item
         is-multidex="false"
@@ -189,6 +297,15 @@
         revision="23.0.1"
         sha1="3f9b16b774f2c36cfd86dd2053d0b3059531dacc">
         <dex dex="/Users/shahryar/Desktop/Test/RahnemaTeam2App/android/app/build/intermediates/pre-dexed/debug/okhttp-urlconnection-3.6.0_79ea69c588781f26d2dad3a1995b28495d731e57.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/shahryar/Desktop/RahmenaProject/Rahnema-Team2-App/android/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.0.1/jars/libs/internal_impl-23.0.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="aa92916125166649d8ad4ba3940c3dd7515596d3">
+        <dex dex="/Users/shahryar/Desktop/RahmenaProject/Rahnema-Team2-App/android/app/build/intermediates/pre-dexed/debug/internal_impl-23.0.1_753010994892383486db4145317ebfc16cc4b684.jar" />
     </item>
 
 </items>

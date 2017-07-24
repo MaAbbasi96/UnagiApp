@@ -39,6 +39,31 @@ export default class RahnemaTeam2App extends Component {
        {id :9, label: "سشیشسیسیبسذلبذبلذلیذ"},
       ] }
   }
+    getLocation(){
+    return new Promise(function(resolve,reject){
+      navigator.geolocation.getCurrentPosition(
+      (position,err) => {
+        if (err){
+          return reject();
+        }
+        var initialPosition = position;
+        var location;
+        location = {"latitude": initialPosition.coords.latitude, "longitude": initialPosition.coords.longitude};
+        // console.log("Created Location ", location);
+        this.setState({location});
+        // console.log("location",this.state.initialPosition.coords);
+        resolve();
+      },
+      (error) => alert(error.message),
+      {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000}
+    );
+      this.watchID = navigator.geolocation.watchPosition((position) => {
+      var lastPosition = JSON.stringify(position);
+      this.setState({lastPosition});
+    });
+    }.bind(this))
+    
+  }
 
 
   render() {
