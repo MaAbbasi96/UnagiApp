@@ -1,11 +1,11 @@
 [
     {
-        "merged": "/Users/shahryar/Desktop/RahmenaProject/Rahnema-Team2-App/android/app/build/intermediates/res/merged/debug/layout/notification_template_media.xml",
-        "source": "/Users/shahryar/Desktop/RahmenaProject/Rahnema-Team2-App/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/layout/notification_template_media.xml"
-    },
-    {
         "merged": "/Users/shahryar/Desktop/RahmenaProject/Rahnema-Team2-App/android/app/build/intermediates/res/merged/debug/layout/abc_screen_content_include.xml",
         "source": "/Users/shahryar/Desktop/RahmenaProject/Rahnema-Team2-App/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/layout/abc_screen_content_include.xml"
+    },
+    {
+        "merged": "/Users/shahryar/Desktop/RahmenaProject/Rahnema-Team2-App/android/app/build/intermediates/res/merged/debug/layout/notification_template_media.xml",
+        "source": "/Users/shahryar/Desktop/RahmenaProject/Rahnema-Team2-App/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/layout/notification_template_media.xml"
     },
     {
         "merged": "/Users/shahryar/Desktop/RahmenaProject/Rahnema-Team2-App/android/app/build/intermediates/res/merged/debug/layout/abc_select_dialog_material.xml",
