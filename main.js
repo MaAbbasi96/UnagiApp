@@ -5,6 +5,11 @@
  */
 
 import React, { Component } from 'react';
+import { StackNavigator, } from 'react-navigation'; 
+import PostItem from './PostItem';
+import Icon from 'react-native-vector-icons/Ionicons';
+import ActionButton from 'react-native-action-button';
+
 var DeviceInfo = require('react-native-device-info');
 import {
   AppRegistry,
@@ -14,14 +19,40 @@ import {
   TextInput,
   Button,
   ScrollView,
-  TouchableHighlight,
+  TouchableOpacity,
   Image
 } from 'react-native';
 
-import PostItem from './PostItem';
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    flexDirection: 'column',
+    backgroundColor: '#DCEDC8',
+  },
+  top: {
+    flexDirection : 'row',
+    backgroundColor: '#8BC34A',
+    height: 80,
+  },
+   fon : {
+     marginLeft : 10,
+     marginTop : 10,
+     fontSize: 26 ,
+     fontWeight: 'bold',
+     color: 'white',
+     fontFamily: 'monospace', 
+   },
 
-import Icon from 'react-native-vector-icons/Ionicons';
-import ActionButton from 'react-native-action-button';
+  sendimage :{
+    height : 35,
+    width : 35,
+    marginRight : 30,
+    // position : 'absolute',
+    // left : 0,
+    // top: 0,
+  },
+});
+
 
 
 export default class RahnemaTeam2App extends Component {
@@ -40,6 +71,15 @@ export default class RahnemaTeam2App extends Component {
       ] }
     this.getUniqueID.bind(this);
   }
+  static navigationOptions = {
+    title: 'اوناگی',
+    headerStyle: {
+      backgroundColor: '#8BC34A'
+    },
+    headerTitleStyle: {
+      color: '#fff'
+    }
+  };
     getLocation(){
     return new Promise(function(resolve,reject){
       navigator.geolocation.getCurrentPosition(
@@ -81,12 +121,9 @@ export default class RahnemaTeam2App extends Component {
       return null
     }
     // console.log('our state:', this.state);
+    const { navigate } = this.props.navigation;
     return (
       <View style={styles.container}>
-        
-          <View style={styles.top} >
-            <Text style = {styles.fon} > اوناگی</Text> 
-          </View>
         <ScrollView>
           { this.state.items.map(item => (
             <PostItem
@@ -95,31 +132,43 @@ export default class RahnemaTeam2App extends Component {
             />  
             ))}
         </ScrollView>
-        <ActionButton buttonColor="#757575">
+        <ActionButton buttonColor="#757575" onPress={() => navigate('SendPostPage')}>
         </ActionButton> 
       </View> 
     );
   }
 }
+class SendPostPage extends Component{
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: 'column',
-    backgroundColor: '#DCEDC8',
-  },
-  top: {
-    flexDirection : 'row',
-    backgroundColor: '#8BC34A',
-    height: 80,
-  },
-   fon : {
-     marginLeft : 10,
-     marginTop : 10,
-     fontSize: 26 ,
-     fontWeight: 'bold',
-     color: 'white',
-     fontFamily: 'monospace', 
-   }
+  static navigationOptions = {
+    title: 'افزودن پست',
+    headerStyle: {
+      backgroundColor: '#8BC34A'
+    },
+    headerTitleStyle: {
+      color: '#fff',
+    } ,
+    headerRight : 
+      <TouchableOpacity onPress = {console.log('press')} >
+        <Image style={styles.sendimage}  source = {require('./send.png')}  />
+      </TouchableOpacity>
+  };
+  render(){
+    return(
+      <View>
+        <TextInput
+           // style={styles.textInput}
+            underlineColorAndroid="transparent"
+            //value={this.state.text}
+      />
+      </View>
+    );
+  }
+}
+
+
+const App = StackNavigator({ 
+  Home: { screen: RahnemaTeam2App }, 
+  SendPostPage: { screen: SendPostPage }, 
 });
-AppRegistry.registerComponent('RahnemaTeam2App', () => RahnemaTeam2App);
+AppRegistry.registerComponent('RahnemaTeam2App', () => App);
