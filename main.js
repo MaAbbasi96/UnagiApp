@@ -108,18 +108,21 @@ export default class RahnemaTeam2App extends Component {
   }
 
   componentDidMount() {
+    this.getLocation = new Promise((resolve, reject) => {
+      var location;
+      location = { latitude: 35.7293757, longitude: 51.4224622 };
+      this.setState({ location });
+      resolve();
+    });
     this.getUniqueID(() => {
       this.getLocation()
-        .then(res =>{
-          console.log('here')
-          return
-          getPosts(this.state.unique_id, {
+        .then(res => {
+          console.log("here");
+          return getPosts(this.state.unique_id, {
             latitude: this.state.location.latitude,
             longitude: this.state.location.longitude
-          })
-        
-        }
-        )
+          });
+        })
         .then(res => this.setState({ items: res }))
         .catch(err => console.log(err));
     });
