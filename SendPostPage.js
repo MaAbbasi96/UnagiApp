@@ -78,7 +78,7 @@ export default class SendPostPage extends Component{
     } ,
     headerRight : 
         <View style={styles.headerRight}>
-          <Text style={styles.charLimit}> {limit} </Text>
+            <Text style={styles.charLimit}> {limit} </Text>
         <TouchableOpacity onPress = {console.log('press')} >
          <Image style={styles.sendimage}  source = {require('./send.png')}  />
        </TouchableOpacity>
@@ -97,7 +97,7 @@ export default class SendPostPage extends Component{
               this.props.navigation.setParams({charLimit : 160 - text.length});
               }}
             numberOfLines = {5}
-            maxLength ={160}
+           
         />
       </View>
     );
