@@ -61,6 +61,7 @@ export default class RahnemaTeam2App extends Component {
   constructor() {
     super();
     this.getUniqueID.bind(this);
+    this._refresh.bind(this);
     this.state = { items: [] };
   }
   static navigationOptions = {
@@ -131,17 +132,17 @@ export default class RahnemaTeam2App extends Component {
   }
 
   _refresh() {
-    return new Promise(resolve => {
-      setTimeout(() => {
         getPosts(this.state.unique_id, {
-            latitude: this.state.location.latitude,
+        latitude: this.state.location.latitude,
             longitude: this.state.location.longitude
           })
         .then(res => this.setState({ items: res }))
         .catch(err => console.log(err));
+    return new Promise(function(resolve,reject){
+      setTimeout(() => {
         resolve();
       }, 2000);
-    });
+    }).catch((err)=>console.log("Error" + err));
   }
 
   render() {
@@ -150,7 +151,7 @@ export default class RahnemaTeam2App extends Component {
     const { navigate } = this.props.navigation;
     return (
       <View style={styles.container}>
-        <PTRView onRefresh={this._refresh}>
+        <PTRView onRefresh={this._refresh.bind(this)}>
           <View>
             <ScrollView>
               {this.state.items.map(item =>
