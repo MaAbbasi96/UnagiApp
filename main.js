@@ -128,26 +128,8 @@ export default class RahnemaTeam2App extends Component {
     }
     // console.log('our state:', this.state);
     const { navigate } = this.props.navigation;
-    return (
-<<<<<<< HEAD
-      <View style={styles.container}>
-        <ScrollView>
-          { this.state.items.map(item => (
-            <PostItem
-              key={item.id}
-              label={item.label}
-            />  
-            ))}
-        </ScrollView>
-        <ActionButton buttonColor="#9E9E9E" onPress={() => navigate('SendPostPage')}>
-        </ActionButton> 
-      </View> 
-    );
-  }
-}
-
-=======
-      <View>
+    return (  
+    <View>
         <PTRView onRefresh={this._refresh} >
           <View style={styles.container}>
             <ScrollView>
@@ -166,7 +148,6 @@ export default class RahnemaTeam2App extends Component {
     );
   }
 }
->>>>>>> 1f6c3d75dbf4085871287070750d888e8784696b
 const App = StackNavigator({ 
   Home: { screen: RahnemaTeam2App }, 
   SendPostPage: { screen: SendPostPage }, 
