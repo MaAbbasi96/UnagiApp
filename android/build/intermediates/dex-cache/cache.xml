@@ -12,33 +12,6 @@
     </item>
     <item
         is-multidex="false"
-        jar="/private/var/root/.gradle/caches/modules-2/files-2.1/com.facebook.fbui.textlayoutbuilder/staticlayout-proxy/1.0/f162442a19fff13995fbd51ba414d9ee05579080/staticlayout-proxy-1.0.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="f162442a19fff13995fbd51ba414d9ee05579080">
-        <dex dex="/Users/shahryar/Desktop/RahmenaProject/Rahnema-Team2-App/android/app/build/intermediates/pre-dexed/debug/staticlayout-proxy-1.0_e5305602d6c8fb5e05aa32e56f00120ab39f6a7b.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/private/var/root/.gradle/caches/modules-2/files-2.1/com.parse.bolts/bolts-tasks/1.4.0/d85884acf6810a3bbbecb587f239005cbc846dc4/bolts-tasks-1.4.0.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="d85884acf6810a3bbbecb587f239005cbc846dc4">
-        <dex dex="/Users/shahryar/Desktop/RahmenaProject/Rahnema-Team2-App/android/app/build/intermediates/pre-dexed/debug/bolts-tasks-1.4.0_7aad2f4df60dc69e0c016e9feac2f46f7f9dfef7.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/private/var/root/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp3/okhttp-urlconnection/3.6.0/3f9b16b774f2c36cfd86dd2053d0b3059531dacc/okhttp-urlconnection-3.6.0.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="3f9b16b774f2c36cfd86dd2053d0b3059531dacc">
-        <dex dex="/Users/shahryar/Desktop/RahmenaProject/Rahnema-Team2-App/android/app/build/intermediates/pre-dexed/debug/okhttp-urlconnection-3.6.0_fd618eec78ffe9cc59e1aa29d3f1703a7b538454.jar" />
-    </item>
-    <item
-        is-multidex="false"
         jar="/Users/shahryar/Desktop/RahmenaProject/Rahnema-Team2-App/android/app/build/intermediates/exploded-aar/com.facebook.fresco/imagepipeline/1.0.1/jars/classes.jar"
         jumboMode="false"
         optimize="true"
@@ -48,12 +21,30 @@
     </item>
     <item
         is-multidex="false"
+        jar="/Users/shahryar/.gradle/caches/modules-2/files-2.1/javax.inject/javax.inject/1/6975da39a7040257bd51d21a231b76c915872d38/javax.inject-1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="6975da39a7040257bd51d21a231b76c915872d38">
+        <dex dex="/Users/shahryar/Desktop/RahmenaProject/Rahnema-Team2-App/android/app/build/intermediates/pre-dexed/debug/javax.inject-1_8fcefdc3c3ece095848467f4b03a196135d4946f.jar" />
+    </item>
+    <item
+        is-multidex="false"
         jar="/Users/shahryar/Desktop/RahmenaProject/Rahnema-Team2-App/android/app/build/intermediates/exploded-aar/com.android.support/support-core-utils/25.2.0/jars/classes.jar"
         jumboMode="false"
         optimize="true"
         revision="23.0.1"
         sha1="e820b7be8c035dd522da4bc822e8a76c8e27921a">
         <dex dex="/Users/shahryar/Desktop/RahmenaProject/Rahnema-Team2-App/android/app/build/intermediates/pre-dexed/debug/com.android.support-support-core-utils-25.2.0_2ac78c7db4d460e9dcd7559d271f0d2223efa5f9.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/shahryar/.gradle/caches/modules-2/files-2.1/com.squareup.okio/okio/1.13.0/a9283170b7305c8d92d25aff02a6ab7e45d06cbe/okio-1.13.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="a9283170b7305c8d92d25aff02a6ab7e45d06cbe">
+        <dex dex="/Users/shahryar/Desktop/RahmenaProject/Rahnema-Team2-App/android/app/build/intermediates/pre-dexed/debug/okio-1.13.0_5020a364d3f3205017968b6a800a0bb14b3a2be9.jar" />
     </item>
     <item
         is-multidex="false"
@@ -75,21 +66,21 @@
     </item>
     <item
         is-multidex="false"
+        jar="/Users/shahryar/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp3/okhttp/3.6.0/69edde9fc4b01c9fd51d25b83428837478c27254/okhttp-3.6.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="69edde9fc4b01c9fd51d25b83428837478c27254">
+        <dex dex="/Users/shahryar/Desktop/RahmenaProject/Rahnema-Team2-App/android/app/build/intermediates/pre-dexed/debug/okhttp-3.6.0_0c6d533d798f600cc100d8308245595d516f1f9f.jar" />
+    </item>
+    <item
+        is-multidex="false"
         jar="/Users/shahryar/Desktop/RahmenaProject/Rahnema-Team2-App/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.46.4/jars/libs/infer-annotations-4.0.jar"
         jumboMode="false"
         optimize="true"
         revision="23.0.1"
         sha1="9809e90be788acdb479b2b44e2112f3295a03068">
         <dex dex="/Users/shahryar/Desktop/RahmenaProject/Rahnema-Team2-App/android/app/build/intermediates/pre-dexed/debug/infer-annotations-4.0_bc1bac986a507a4c82d17d0db49fe7c9e9fd0b6d.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/private/var/root/.gradle/caches/modules-2/files-2.1/com.squareup.okio/okio/1.13.0/a9283170b7305c8d92d25aff02a6ab7e45d06cbe/okio-1.13.0.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="a9283170b7305c8d92d25aff02a6ab7e45d06cbe">
-        <dex dex="/Users/shahryar/Desktop/RahmenaProject/Rahnema-Team2-App/android/app/build/intermediates/pre-dexed/debug/okio-1.13.0_61c55d5ecfe614fc2aa823b3ff9d02a2edc31ef6.jar" />
     </item>
     <item
         is-multidex="false"
@@ -108,15 +99,6 @@
         revision="23.0.1"
         sha1="2668e49e4e31c7d451b76a36009b902bf44e0d70">
         <dex dex="/Users/shahryar/Desktop/RahmenaProject/Rahnema-Team2-App/android/app/build/intermediates/pre-dexed/debug/com.facebook.fresco-fbcore-1.0.1_4750480a0526a612bb9964256f797fec28e2f293.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/private/var/root/.gradle/caches/modules-2/files-2.1/com.google.code.findbugs/jsr305/3.0.0/5871fb60dc68d67da54a663c3fd636a10a532948/jsr305-3.0.0.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="5871fb60dc68d67da54a663c3fd636a10a532948">
-        <dex dex="/Users/shahryar/Desktop/RahmenaProject/Rahnema-Team2-App/android/app/build/intermediates/pre-dexed/debug/jsr305-3.0.0_e3e1dfcdf1091ad62101747e52cf18170b899a78.jar" />
     </item>
     <item
         is-multidex="false"
@@ -144,15 +126,6 @@
         revision="23.0.1"
         sha1="2a2d9cd43adbe7599a78f2293273a77881c1909a">
         <dex dex="/Users/shahryar/Desktop/RahmenaProject/Rahnema-Team2-App/android/app/build/intermediates/pre-dexed/debug/com.google.android.gms-play-services-base-11.0.2_72ce8a43a7158bd931ada577318378bb96f9b3dd.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/private/var/root/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp3/okhttp/3.6.0/69edde9fc4b01c9fd51d25b83428837478c27254/okhttp-3.6.0.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="69edde9fc4b01c9fd51d25b83428837478c27254">
-        <dex dex="/Users/shahryar/Desktop/RahmenaProject/Rahnema-Team2-App/android/app/build/intermediates/pre-dexed/debug/okhttp-3.6.0_2c2158fc4cbf7517dd77b44d032f33dd2c4051c3.jar" />
     </item>
     <item
         is-multidex="false"
@@ -210,6 +183,15 @@
     </item>
     <item
         is-multidex="false"
+        jar="/Users/shahryar/.gradle/caches/modules-2/files-2.1/com.google.code.findbugs/jsr305/3.0.0/5871fb60dc68d67da54a663c3fd636a10a532948/jsr305-3.0.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="5871fb60dc68d67da54a663c3fd636a10a532948">
+        <dex dex="/Users/shahryar/Desktop/RahmenaProject/Rahnema-Team2-App/android/app/build/intermediates/pre-dexed/debug/jsr305-3.0.0_297395a0237e1f677e36f7ccc78fc08d773b4fc2.jar" />
+    </item>
+    <item
+        is-multidex="false"
         jar="/Users/shahryar/Desktop/RahmenaProject/Rahnema-Team2-App/android/app/build/intermediates/exploded-aar/RahnemaTeam2App/react-native-device-info/unspecified/jars/classes.jar"
         jumboMode="false"
         optimize="true"
@@ -219,12 +201,30 @@
     </item>
     <item
         is-multidex="false"
+        jar="/Users/shahryar/.gradle/caches/modules-2/files-2.1/com.parse.bolts/bolts-tasks/1.4.0/d85884acf6810a3bbbecb587f239005cbc846dc4/bolts-tasks-1.4.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="d85884acf6810a3bbbecb587f239005cbc846dc4">
+        <dex dex="/Users/shahryar/Desktop/RahmenaProject/Rahnema-Team2-App/android/app/build/intermediates/pre-dexed/debug/bolts-tasks-1.4.0_f6b9a3b84b2308a29b49428d9a13f0295a1097a3.jar" />
+    </item>
+    <item
+        is-multidex="false"
         jar="/Users/shahryar/Desktop/RahmenaProject/Rahnema-Team2-App/android/app/build/intermediates/exploded-aar/RahnemaTeam2App/react-native-vector-icons/unspecified/jars/classes.jar"
         jumboMode="false"
         optimize="true"
         revision="23.0.1"
         sha1="b319ff9834bbeb9be394687614eb86892699ea14">
         <dex dex="/Users/shahryar/Desktop/RahmenaProject/Rahnema-Team2-App/android/app/build/intermediates/pre-dexed/debug/RahnemaTeam2App-react-native-vector-icons-unspecified_4b53c5551b133bd3c54b83a29222fc54d8710b23.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/shahryar/.gradle/caches/modules-2/files-2.1/com.facebook.fbui.textlayoutbuilder/staticlayout-proxy/1.0/f162442a19fff13995fbd51ba414d9ee05579080/staticlayout-proxy-1.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="f162442a19fff13995fbd51ba414d9ee05579080">
+        <dex dex="/Users/shahryar/Desktop/RahmenaProject/Rahnema-Team2-App/android/app/build/intermediates/pre-dexed/debug/staticlayout-proxy-1.0_46655470ec3f8bce95ef7bbc9200740dde2d0902.jar" />
     </item>
     <item
         is-multidex="false"
@@ -282,12 +282,12 @@
     </item>
     <item
         is-multidex="false"
-        jar="/private/var/root/.gradle/caches/modules-2/files-2.1/javax.inject/javax.inject/1/6975da39a7040257bd51d21a231b76c915872d38/javax.inject-1.jar"
+        jar="/Users/shahryar/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp3/okhttp-urlconnection/3.6.0/3f9b16b774f2c36cfd86dd2053d0b3059531dacc/okhttp-urlconnection-3.6.0.jar"
         jumboMode="false"
         optimize="true"
         revision="23.0.1"
-        sha1="6975da39a7040257bd51d21a231b76c915872d38">
-        <dex dex="/Users/shahryar/Desktop/RahmenaProject/Rahnema-Team2-App/android/app/build/intermediates/pre-dexed/debug/javax.inject-1_b64d0aaebd612e64d8c19002cd6f1c00e9fa086c.jar" />
+        sha1="3f9b16b774f2c36cfd86dd2053d0b3059531dacc">
+        <dex dex="/Users/shahryar/Desktop/RahmenaProject/Rahnema-Team2-App/android/app/build/intermediates/pre-dexed/debug/okhttp-urlconnection-3.6.0_79ea69c588781f26d2dad3a1995b28495d731e57.jar" />
     </item>
 
 </items>

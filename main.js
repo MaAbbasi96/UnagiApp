@@ -3,7 +3,7 @@
  * https://github.com/facebook/react-native
  * @flow
  */
-
+import SendPostPage from './SendPostPage';
 import React, { Component } from 'react';
 import { StackNavigator, } from 'react-navigation'; 
 import PostItem from './PostItem';
@@ -138,33 +138,33 @@ export default class RahnemaTeam2App extends Component {
     );
   }
 }
-class SendPostPage extends Component{
+// class SendPostPage extends Component{
 
-  static navigationOptions = {
-    title: 'افزودن پست',
-    headerStyle: {
-      backgroundColor: '#8BC34A'
-    },
-    headerTitleStyle: {
-      color: '#fff',
-    } ,
-    headerRight : 
-      <TouchableOpacity onPress = {console.log('press')} >
-        <Image style={styles.sendimage}  source = {require('./send.png')}  />
-      </TouchableOpacity>
-  };
-  render(){
-    return(
-      <View>
-        <TextInput
-           // style={styles.textInput}
-            underlineColorAndroid="transparent"
-            //value={this.state.text}
-      />
-      </View>
-    );
-  }
-}
+//   static navigationOptions = {
+//     title: 'افزودن پست',
+//     headerStyle: {
+//       backgroundColor: '#8BC34A'
+//     },
+//     headerTitleStyle: {
+//       color: '#fff',
+//     } ,
+//     headerRight : 
+//       <TouchableOpacity onPress = {console.log('press')} >
+//         <Image style={styles.sendimage}  source = {require('./send.png')}  />
+//       </TouchableOpacity>
+//   };
+//   render(){
+//     return(
+//       <View>
+//         <TextInput
+//            // style={styles.textInput}
+//             underlineColorAndroid="transparent"
+//             //value={this.state.text}
+//       />
+//       </View>
+//     );
+//   }
+// }
 
 
 const App = StackNavigator({ 
