@@ -109,12 +109,13 @@ export default class RahnemaTeam2App extends Component {
   }
 
   componentDidMount() {
-    this.getLocation = ()=> new Promise((resolve, reject) => {
-      var location;
-      location = { latitude: 35.7293757, longitude: 51.4224622 };
-      this.setState({ location });
-      resolve();
-    });
+    this.getLocation = () =>
+      new Promise((resolve, reject) => {
+        var location;
+        location = { latitude: 35.7293757, longitude: 51.4224622 };
+        this.setState({ location });
+        resolve();
+      });
     this.getUniqueID(() => {
       this.getLocation()
         .then(res => {
@@ -132,18 +133,17 @@ export default class RahnemaTeam2App extends Component {
   }
 
   _refresh() {
-        getPosts(this.state.unique_id, {
-        latitude: this.state.location.latitude,
-            longitude: this.state.location.longitude
-          })
-        .then(res => this.setState({ items: res }))
-        .catch(err => console.log(err));
-    return new Promise(function(resolve,reject){
+    getPosts(this.state.unique_id, {
+      latitude: this.state.location.latitude,
+      longitude: this.state.location.longitude
+    })
+      .then(res => this.setState({ items: res }))
+      .catch(err => console.log(err));
+    return new Promise(function(resolve, reject) {
       setTimeout(() => {
         resolve();
-      }, 1000);
-    }).catch((err)=>console.log("Error" + err));
-=======
+      }, 2000);
+    }).bind(this);
   }
 
   render() {
