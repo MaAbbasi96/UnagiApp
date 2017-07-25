@@ -10,6 +10,7 @@ import PostItem from './PostItem';
 import Icon from 'react-native-vector-icons/Ionicons';
 import ActionButton from 'react-native-action-button';
 import PTRView from 'react-native-pull-to-refresh';
+import { getPosts } from "./network";
 //import RCTRefreshControl from 'react-refresh-control';
 var DeviceInfo = require('react-native-device-info');
 
@@ -59,17 +60,7 @@ const styles = StyleSheet.create({
 export default class RahnemaTeam2App extends Component {
   constructor() {
     super()
-    this.state = {items : [
-       {id : 1 , label: "سلام دوستان روز بخیر"},
-       {id :2, label: "asdas"},
-       {id :4, label: "asdas"},
-       {id :3, label: "asdas"},
-       {id :5, label: "aasdasdasdasdassdasdasdasdasdsdsaddsadas"},
-       {id :6, label: "asdas"},
-       {id :7, label: "asdas"},
-       {id :8, label: "asdasdasdasas"},
-       {id :9, label: "سشیشسیسیبسذلبذبلذلیذ"},
-      ] }
+    this.state = {items : [{id:1, label:'ali'}] };
     this.getUniqueID.bind(this);
   }
   static navigationOptions = {
@@ -129,9 +120,9 @@ export default class RahnemaTeam2App extends Component {
     // console.log('our state:', this.state);
     const { navigate } = this.props.navigation;
     return (  
-    <View>
+    <View style={styles.container}>
         <PTRView onRefresh={this._refresh} >
-          <View style={styles.container}>
+          <View>
             <ScrollView>
               { this.state.items.map(item => (
                 <PostItem
