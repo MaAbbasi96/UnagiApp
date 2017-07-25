@@ -29,7 +29,6 @@ const styles = StyleSheet.create({
      color: 'white',
      fontFamily: 'monospace', 
    },
-
   sendimage :{
     height : 35,
     width : 35,
@@ -38,6 +37,13 @@ const styles = StyleSheet.create({
     // left : 0,
     // top: 0,
   },
+  textInput : {
+    borderRadius : 5,
+    marginRight : 10,
+    marginLeft : 10,
+    backgroundColor: '#fff',
+    marginTop : 5 
+  }
 });
 
 
@@ -59,11 +65,15 @@ export default class SendPostPage extends Component{
   };
   render(){
     return(
-      <View>
-        <TextInput
-           // style={styles.textInput}
+      <View style = {styles.container}>
+        <TextInput style = {styles.textInput}
+           {...this.props}
+            editable = {true}
+            multiline = {true}
             underlineColorAndroid="transparent"
-            //value={this.state.text}
+            onChangeText={(text) => this.setState({text})}
+            numberOfLines = {5}
+            maxLength ={160}
       />
       </View>
     );

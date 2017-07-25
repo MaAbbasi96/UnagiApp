@@ -9,8 +9,10 @@ import { StackNavigator, } from 'react-navigation';
 import PostItem from './PostItem';
 import Icon from 'react-native-vector-icons/Ionicons';
 import ActionButton from 'react-native-action-button';
-
+import PTRView from 'react-native-pull-to-refresh';
+//import RCTRefreshControl from 'react-refresh-control';
 var DeviceInfo = require('react-native-device-info');
+
 import {
   AppRegistry,
   StyleSheet,
@@ -114,6 +116,11 @@ export default class RahnemaTeam2App extends Component {
     this.getUniqueID();
   }
   
+  _refresh() {
+    return new Promise((resolve) => {
+      setTimeout(()=>{resolve()}, 2000)
+    });
+  }
 
 
   render() {
@@ -123,50 +130,25 @@ export default class RahnemaTeam2App extends Component {
     // console.log('our state:', this.state);
     const { navigate } = this.props.navigation;
     return (
-      <View style={styles.container}>
-        <ScrollView>
-          { this.state.items.map(item => (
-            <PostItem
-              key={item.id}
-              label={item.label}
-            />  
-            ))}
-        </ScrollView>
+      <View>
+        <PTRView onRefresh={this._refresh} >
+          <View style={styles.container}>
+            <ScrollView>
+              { this.state.items.map(item => (
+                <PostItem
+                  key={item.id}
+                  label={item.label}
+                />  
+                ))} 
+            </ScrollView> 
+          </View> 
+        </PTRView>
         <ActionButton buttonColor="#757575" onPress={() => navigate('SendPostPage')}>
-        </ActionButton> 
-      </View> 
+          </ActionButton>
+       </View> 
     );
   }
 }
-// class SendPostPage extends Component{
-
-//   static navigationOptions = {
-//     title: 'افزودن پست',
-//     headerStyle: {
-//       backgroundColor: '#8BC34A'
-//     },
-//     headerTitleStyle: {
-//       color: '#fff',
-//     } ,
-//     headerRight : 
-//       <TouchableOpacity onPress = {console.log('press')} >
-//         <Image style={styles.sendimage}  source = {require('./send.png')}  />
-//       </TouchableOpacity>
-//   };
-//   render(){
-//     return(
-//       <View>
-//         <TextInput
-//            // style={styles.textInput}
-//             underlineColorAndroid="transparent"
-//             //value={this.state.text}
-//       />
-//       </View>
-//     );
-//   }
-// }
-
-
 const App = StackNavigator({ 
   Home: { screen: RahnemaTeam2App }, 
   SendPostPage: { screen: SendPostPage }, 
