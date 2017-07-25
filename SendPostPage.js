@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {addPost} from './network';
 import {
   AppRegistry,
   StyleSheet,
@@ -89,12 +90,12 @@ export default class SendPostPage extends Component{
           
             { limit >= 0 && <Text style={styles.charLimit}> {limit} </Text>}
             { limit < 0 && <Text style={styles.charLimitRed}> {limit} </Text>}
-
-        {limit >= 0 && <TouchableOpacity onPress = {console.log('press')} >
+onsole
+        {limit >= 0 && <TouchableOpacity onPress = {()=>addPost(navigation.state.params.unique_id,navigation.state.params.location,this.state.text)} >
          <Image style={styles.sendimage}  source = {require('./sendEnable.png')}  />
        </TouchableOpacity>
         }
-        {limit < 0 && <TouchableOpacity onPress = {console.log('press')} disabled={true} >
+        {limit < 0 && <TouchableOpacity disabled={true} >
          <Image style={styles.sendimage}  source = {require('./sendDisable.png')}  />
        </TouchableOpacity>
         }

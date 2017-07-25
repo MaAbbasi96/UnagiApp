@@ -124,7 +124,7 @@ export default class RahnemaTeam2App extends Component {
             longitude: this.state.location.longitude
           });
         })
-        .then(res => this.setState({ items: [] }))
+        .then(res => this.setState({ items: res }))
         .catch(err => console.log(err));
     });
 
@@ -141,7 +141,7 @@ export default class RahnemaTeam2App extends Component {
     return new Promise(function(resolve,reject){
       setTimeout(() => {
         resolve();
-      }, 2000);
+      }, 1000);
     }).catch((err)=>console.log("Error" + err));
   }
 
@@ -162,7 +162,7 @@ export default class RahnemaTeam2App extends Component {
         </PTRView>
         <ActionButton
           buttonColor="#757575"
-          onPress={() => navigate("SendPostPage")}
+          onPress={() => navigate("SendPostPage",{"unique_id" : this.state.unique_id,"location":this.state.location})}
         />
       </View>
     );
@@ -170,6 +170,6 @@ export default class RahnemaTeam2App extends Component {
 }
 const App = StackNavigator({
   Home: { screen: RahnemaTeam2App },
-  SendPostPage: { screen: SendPostPage }
+  SendPostPage: { screen: SendPostPage}
 });
 AppRegistry.registerComponent("RahnemaTeam2App", () => App);
