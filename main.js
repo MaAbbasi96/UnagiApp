@@ -143,6 +143,7 @@ export default class RahnemaTeam2App extends Component {
         resolve();
       }, 1000);
     }).catch((err)=>console.log("Error" + err));
+=======
   }
 
   render() {
