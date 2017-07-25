@@ -38,13 +38,37 @@ const styles = StyleSheet.create({
     // left : 0,
     // top: 0,
   },
+  textInput :{
+    backgroundColor :"#fff",
+    marginRight : 10,
+    marginLeft : 10,
+    marginTop : 10,
+    borderRadius : 5
+  },
+  headerRight :{
+    flexDirection : "row"
+  },
+  charLimit:{
+    marginTop: 8
+  }
 });
-
-
+var charLimit = 160;
 
 export default class SendPostPage extends Component{
-
-  static navigationOptions = {
+  constructor(){
+    super();
+  }
+  componentWillMount(){
+    this.props.navigation.setParams({
+      charLimit : 160
+    });
+  }
+  static navigationOptions =(props) => {
+    var limit = 160;
+    if (props.navigation.state.params){
+      limit = props.navigation.state.params.charLimit;
+    }
+    return ({
     title: 'افزودن پست',
     headerStyle: {
       backgroundColor: '#8BC34A'
@@ -53,18 +77,28 @@ export default class SendPostPage extends Component{
       color: '#fff',
     } ,
     headerRight : 
-      <TouchableOpacity onPress = {console.log('press')} >
-        <Image style={styles.sendimage}  source = {require('./send.png')}  />
-      </TouchableOpacity>
-  };
+        <View style={styles.headerRight}>
+          <Text style={styles.charLimit}> {limit} </Text>
+        <TouchableOpacity onPress = {console.log('press')} >
+         <Image style={styles.sendimage}  source = {require('./send.png')}  />
+       </TouchableOpacity>
+      </View>
+  })};
   render(){
     return(
-      <View>
-        <TextInput
-           // style={styles.textInput}
+      <View style = {styles.container}>
+        <TextInput style={styles.textInput}
+           {...this.props}
+            editable = {true}
+            multiline = {true}
             underlineColorAndroid="transparent"
-            //value={this.state.text}
-      />
+            onChangeText={(text) => {
+              this.setState({text});
+              this.props.navigation.setParams({charLimit : 160 - text.length});
+              }}
+            numberOfLines = {5}
+            maxLength ={160}
+        />
       </View>
     );
   }

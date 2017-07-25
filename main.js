@@ -20,7 +20,8 @@ import {
   Button,
   ScrollView,
   TouchableOpacity,
-  Image
+  Image,
+  RefreshControl
 } from 'react-native';
 
 const styles = StyleSheet.create({
@@ -52,8 +53,6 @@ const styles = StyleSheet.create({
     // top: 0,
   },
 });
-
-
 
 export default class RahnemaTeam2App extends Component {
   constructor() {
@@ -132,40 +131,12 @@ export default class RahnemaTeam2App extends Component {
             />  
             ))}
         </ScrollView>
-        <ActionButton buttonColor="#757575" onPress={() => navigate('SendPostPage')}>
+        <ActionButton buttonColor="#9E9E9E" onPress={() => navigate('SendPostPage')}>
         </ActionButton> 
       </View> 
     );
   }
 }
-// class SendPostPage extends Component{
-
-//   static navigationOptions = {
-//     title: 'افزودن پست',
-//     headerStyle: {
-//       backgroundColor: '#8BC34A'
-//     },
-//     headerTitleStyle: {
-//       color: '#fff',
-//     } ,
-//     headerRight : 
-//       <TouchableOpacity onPress = {console.log('press')} >
-//         <Image style={styles.sendimage}  source = {require('./send.png')}  />
-//       </TouchableOpacity>
-//   };
-//   render(){
-//     return(
-//       <View>
-//         <TextInput
-//            // style={styles.textInput}
-//             underlineColorAndroid="transparent"
-//             //value={this.state.text}
-//       />
-//       </View>
-//     );
-//   }
-// }
-
 
 const App = StackNavigator({ 
   Home: { screen: RahnemaTeam2App }, 
