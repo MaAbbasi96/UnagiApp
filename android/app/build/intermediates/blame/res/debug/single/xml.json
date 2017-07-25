@@ -1,5 +1,9 @@
 [
     {
+        "merged": "/home/sina/Desktop/Android/android/app/build/intermediates/res/merged/debug/xml/preferences.xml",
+        "source": "/home/sina/Desktop/Android/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.46.4/res/xml/preferences.xml"
+    },
+    {
         "merged": "/Users/shahryar/Desktop/RahmenaProject/Rahnema-Team2-App/android/app/build/intermediates/res/merged/debug/xml/preferences.xml",
         "source": "/Users/shahryar/Desktop/RahmenaProject/Rahnema-Team2-App/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.46.4/res/xml/preferences.xml"
     }
