@@ -108,7 +108,7 @@ export default class RahnemaTeam2App extends Component {
   }
 
   componentDidMount() {
-    this.getLocation = new Promise((resolve, reject) => {
+    this.getLocation = ()=> new Promise((resolve, reject) => {
       var location;
       location = { latitude: 35.7293757, longitude: 51.4224622 };
       this.setState({ location });
@@ -123,7 +123,7 @@ export default class RahnemaTeam2App extends Component {
             longitude: this.state.location.longitude
           });
         })
-        .then(res => this.setState({ items: res }))
+        .then(res => this.setState({ items: [] }))
         .catch(err => console.log(err));
     });
 
@@ -133,6 +133,12 @@ export default class RahnemaTeam2App extends Component {
   _refresh() {
     return new Promise(resolve => {
       setTimeout(() => {
+        getPosts(this.state.unique_id, {
+            latitude: this.state.location.latitude,
+            longitude: this.state.location.longitude
+          })
+        .then(res => this.setState({ items: res }))
+        .catch(err => console.log(err));
         resolve();
       }, 2000);
     });
