@@ -11,6 +11,7 @@ import Icon from "react-native-vector-icons/Ionicons";
 import ActionButton from "react-native-action-button";
 import PTRView from "react-native-pull-to-refresh";
 import { getPosts } from "./network";
+var async = require("async");
 //import RCTRefreshControl from 'react-refresh-control';
 var DeviceInfo = require("react-native-device-info");
 
@@ -116,20 +117,21 @@ export default class RahnemaTeam2App extends Component {
         this.setState({ location });
         resolve();
       });
-    this.getUniqueID(() => {
-      this.getLocation()
-        .then(res => {
-          console.log("here");
-          return getPosts(this.state.unique_id, {
-            latitude: this.state.location.latitude,
-            longitude: this.state.location.longitude
-          });
-        })
-        .then(res => this.setState({ items: res }))
-        .catch(err => console.log(err));
-    });
 
-    // getPosts(this.getUniqueID(),{latitude:1,longitude:1}).then((res)=>{this.setState({items : res})});
+    async.parallel(
+      [
+        callback => this.getUniqueID(callback),
+        callback => this.getLocation().then(callback())
+      ],
+      () => {
+        getPosts(this.state.unique_id, {
+          latitude: this.state.location.latitude,
+          longitude: this.state.location.longitude
+        })
+          .then(res => this.setState({ items: res }))
+          .catch(err => console.log(err));
+      }
+    );
   }
 
   _refresh() {
@@ -158,7 +160,12 @@ export default class RahnemaTeam2App extends Component {
         </PTRView>
         <ActionButton
           buttonColor="#757575"
-          onPress={() => navigate("SendPostPage",{unique_id:this.state.unique_id,location:this.state.location,navigate:navigate.bind(null,'Home')})}
+          onPress={() =>
+            navigate("SendPostPage", {
+              unique_id: this.state.unique_id,
+              location: this.state.location,
+              navigate: navigate.bind(null, "Home")
+            })}
         />
       </View>
     );
@@ -166,6 +173,6 @@ export default class RahnemaTeam2App extends Component {
 }
 const App = StackNavigator({
   Home: { screen: RahnemaTeam2App },
-  SendPostPage: { screen: SendPostPage}
+  SendPostPage: { screen: SendPostPage }
 });
 AppRegistry.registerComponent("RahnemaTeam2App", () => App);
