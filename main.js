@@ -166,6 +166,6 @@ export default class RahnemaTeam2App extends Component {
 }
 const App = StackNavigator({
   Home: { screen: RahnemaTeam2App },
-  SendPostPage: { screen: SendPostPage }
+  SendPostPage: { screen: SendPostPage}
 });
 AppRegistry.registerComponent("RahnemaTeam2App", () => App);
