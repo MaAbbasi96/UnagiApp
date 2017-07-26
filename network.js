@@ -13,14 +13,14 @@ export function getPosts(unique_id,location){
     }).then(function(res){
         return res.json();
     })
-    .then(function(res){
-        return new Promise((resolve,reject)=>{
-            resolve(res.posts);
-        });
+    .then(function(res) {
+      return new Promise((resolve, reject) => {
+        resolve(res.posts);
+      });
     })
-    .catch(err=>{
-        console.log(err);
-    })
+    .catch(err => {
+      console.log(err);
+    });
 }
 
 
@@ -43,7 +43,11 @@ export function addPost(unique_id,location,text){
         // console.log("Response" , res);
         return;
     })
-    .catch(err=>{
+      .then(function(res) {
+        func();
+        return;
+      })
+      .catch(err => {
         console.log(err);
-    })
+      });
 }
