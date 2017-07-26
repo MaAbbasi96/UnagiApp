@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import Fetch from 'react-native-fetch';
-
+var serverPath = "http://192.168.11.201:3000"
 export function getPosts(unique_id,location){
-    return fetch('http://192.168.11.96:3000/post/', {
+    return fetch(serverPath + '/post', {
         method: 'GET',
         headers: {
             'Accept': 'application/json',
@@ -25,7 +25,10 @@ export function getPosts(unique_id,location){
 
 
 export function addPost(unique_id,location,text){
-    return fetch('http://192.168.11.96:3000/post/', {
+    console.log("SentText : "+ text);
+    console.log("Unique id " , unique_id);
+
+    return fetch(serverPath + '/post', {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
@@ -37,6 +40,7 @@ export function addPost(unique_id,location,text){
             text
         })
     }).then(function(res){
+        // console.log("Response" , res);
         return;
     })
     .catch(err=>{

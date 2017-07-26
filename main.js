@@ -125,7 +125,7 @@ export default class RahnemaTeam2App extends Component {
             longitude: this.state.location.longitude
           });
         })
-        .then(res => this.setState({ items: res }))
+        .then(res => {this.setState({ items: res })})
         .catch(err => console.log(err));
     });
 
@@ -143,7 +143,7 @@ export default class RahnemaTeam2App extends Component {
       setTimeout(() => {
         resolve();
       }, 2000);
-    }).bind(this);
+    });
   }
 
   render() {
@@ -164,6 +164,7 @@ export default class RahnemaTeam2App extends Component {
         <ActionButton
           buttonColor="#757575"
           onPress={() => navigate("SendPostPage",{"unique_id" : this.state.unique_id,"location":this.state.location})}
+
         />
       </View>
     );

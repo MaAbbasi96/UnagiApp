@@ -70,13 +70,13 @@ export default class SendPostPage extends Component{
   }
 
   
-
+//props.state.params
   static navigationOptions =(props) => {
     var limit = 160;
     if (props.navigation.state.params){
+      // console.log("Props",props );
       limit = props.navigation.state.params.charLimit;
     }
-    const b = true
     return ({
     title: 'افزودن پست',
     headerStyle: {
@@ -90,12 +90,14 @@ export default class SendPostPage extends Component{
           
             { limit >= 0 && <Text style={styles.charLimit}> {limit} </Text>}
             { limit < 0 && <Text style={styles.charLimitRed}> {limit} </Text>}
-onsole
-        {limit >= 0 && <TouchableOpacity onPress = {()=>addPost(navigation.state.params.unique_id,navigation.state.params.location,this.state.text)} >
+        {(limit >= 0 && limit !== 160) && <TouchableOpacity onPress = {()=>{
+          addPost(props.navigation.state.params.unique_id,props.navigation.state.params.location,props.navigation.state.params.text);
+          props.navigation.goBack();
+          }} >
          <Image style={styles.sendimage}  source = {require('./sendEnable.png')}  />
        </TouchableOpacity>
         }
-        {limit < 0 && <TouchableOpacity disabled={true} >
+        {(limit < 0 || limit ===160) && <TouchableOpacity disabled={true} >
          <Image style={styles.sendimage}  source = {require('./sendDisable.png')}  />
        </TouchableOpacity>
         }
@@ -111,7 +113,7 @@ onsole
             underlineColorAndroid="transparent"
             onChangeText={(text) => {
               this.setState({text});
-              this.props.navigation.setParams({charLimit : 160 - text.length});
+              this.props.navigation.setParams({charLimit : 160 - text.length,text});
               }}
             numberOfLines = {5}
            
