@@ -60,7 +60,11 @@ export default class RahnemaTeam2App extends Component {
     super()
     this.getUniqueID.bind(this);
     this._refresh.bind(this)
-    this.state = { items: [{_id : 4 ,text : "نسشپیش" , like :true ,likes : 12456}] };
+    // this.state = { items: [] };
+  }
+  componentWillMount(){
+      // this.state = { items: [{_id : 4 ,text : "نسشپیش" , isLiked :true ,likes : 12456}] };
+      this.setState({items: []});
   }
   static navigationOptions = {
     title: "اوناگی",
@@ -168,14 +172,18 @@ export default class RahnemaTeam2App extends Component {
          <PTRView onRefresh={this._refresh.bind(this)}> 
            <View> 
             <ScrollView>
-              {this.state.items.map(item => (
+              {this.state.items.map(item => {
+                return(
                 <PostItem
-                key={item._id} 
+                key={item._id}
+                id = {item._id} 
                 label={item.text}
-                like = {item.like}
+                isLiked = {item.isLiked}
                 likes = {item.likes}
+                unique_id = {this.state.unique_id}
+                location = {this.state.location}
               />
-              ))}
+              )})}
               </ScrollView>
            </View> 
          </PTRView> 

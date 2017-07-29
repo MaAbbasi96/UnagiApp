@@ -1,23 +1,29 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native'
-
+import {likePost} from './network';
 class PostItem extends Component {
-
-  onChange (){
-
+  componentWillMount(){
+    this.setState({isLiked : this.props.isLiked});
+    this.setState({likes : this.props.likes});
+  }
+  
+  likeChanged(){
+    likePost(this.props.unique_id,this.props.location,this.props.id,!this.state.isLiked);
+    this.setState({'isLiked' : !this.state.isLiked});
+    this.state.isLiked ? this.setState({'likes' : this.state.likes-1}) : this.setState({'likes' : this.state.likes +1});
   }
   render() {
       return (
           <View style={styles.todoItem}>
             <Text style={styles.todoLabel}>{this.props.label}</Text>
-            <View style = {styles.zir}>
-              <TouchableOpacity onPress={() => this.onChange()} >
-                {this.props.like ? 
+            <View style = {styles.bottomOfPost}>
+              <TouchableOpacity onPress={() => this.likeChanged()} >
+                {this.state.isLiked ? 
                     <Image style = {styles.LikeImage} source = {require('./LikeImage.png') } />
                   : <Image style = {styles.LikeImage} source = {require('./UnLikeImage.png') } />
                 }
               </TouchableOpacity>
-            <Text style = {styles.Likes}>{this.props.likes}</Text>
+            <Text style = {styles.Likes}>{this.state.likes}</Text>
             </View>
           </View>
       )
@@ -46,7 +52,7 @@ const styles = StyleSheet.create({
       height : 15,
       width : 15,
     },
-    zir: {
+    bottomOfPost: {
       flexDirection : 'row',
       height : 20, 
     },

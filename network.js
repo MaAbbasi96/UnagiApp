@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Fetch from 'react-native-fetch';
-var serverPath = "http://192.168.11.201:3000"
+var serverPath = "http://192.168.11.201:3000";
 export function getPosts(unique_id,location){
     return fetch(serverPath + '/post', {
         method: 'GET',
@@ -25,9 +25,6 @@ export function getPosts(unique_id,location){
 
 
 export function addPost(unique_id,location,text){
-    console.log("SentText : "+ text);
-    console.log("Unique id " , unique_id);
-
     return fetch(serverPath + '/post', {
         method: 'POST',
         headers: {
@@ -44,7 +41,29 @@ export function addPost(unique_id,location,text){
         return;
     })
       .then(function(res) {
-        func();
+        // func();
+        return;
+      })
+      .catch(err => {
+        console.log(err);
+      });
+}
+export function likePost(unique_id,location,postId,like){
+    var requestMethod;
+    like ? requestMethod = "PUT" : requestMethod = "DELETE";
+    return fetch(serverPath + '/post/' + postId + '/like', {
+        method: requestMethod,
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'unique_id': unique_id,
+            'location': JSON.stringify(location)
+        },
+    }).then(function(res){
+        // console.log("Response" , res);
+        return;
+    })
+      .then(function(res) {
         return;
       })
       .catch(err => {
