@@ -44,7 +44,8 @@ const styles = StyleSheet.create({
     marginRight: 10,
     marginLeft: 10,
     marginTop: 10,
-    borderRadius: 5
+    borderRadius: 5,
+    textAlignVertical : "top"
   },
   headerRight: {
     flexDirection: "row"
@@ -84,9 +85,9 @@ export default class SendPostPage extends Component {
     } ,
     headerRight : 
         <View style={styles.headerRight}>
-          
-            { limit >= 0 && <Text style={styles.charLimit}> {limit} </Text>}
-            { limit < 0 && <Text style={styles.charLimitRed}> {limit} </Text>}
+
+        { limit >= 0 && <Text style={styles.charLimit}> {limit} </Text>}
+        { limit < 0 && <Text style={styles.charLimitRed}> {limit} </Text>}
         {(limit >= 0 && limit !== 160) && <TouchableOpacity onPress = {()=>{
           addPost(props.navigation.state.params.unique_id,props.navigation.state.params.location,props.navigation.state.params.text);
           props.navigation.goBack();
@@ -113,7 +114,7 @@ export default class SendPostPage extends Component {
               this.props.navigation.setParams({charLimit : 160 - text.length,text});
               }}
             numberOfLines = {5}
-           
+            
         />
       </View>
     );

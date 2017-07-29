@@ -12,9 +12,7 @@ import ActionButton from "react-native-action-button";
 import PTRView from "react-native-pull-to-refresh";
 import { getPosts } from "./network";
 var async = require("async");
-//import RCTRefreshControl from 'react-refresh-control';
 var DeviceInfo = require("react-native-device-info");
-
 import {
   AppRegistry,
   StyleSheet,
@@ -25,8 +23,10 @@ import {
   ScrollView,
   TouchableOpacity,
   Image,
-  RefreshControl
+  RefreshControl,
+  StatusBar
 } from "react-native";
+
 
 const styles = StyleSheet.create({
   container: {
@@ -47,23 +47,20 @@ const styles = StyleSheet.create({
     color: "white",
     fontFamily: "monospace"
   },
-
   sendimage: {
     height: 35,
     width: 35,
     marginRight: 30
-    // position : 'absolute',
-    // left : 0,
-    // top: 0,
   }
 });
 
+var _listViewOffset = 0;
 export default class RahnemaTeam2App extends Component {
   constructor() {
-    super();
+    super()
     this.getUniqueID.bind(this);
-    this._refresh.bind(this);
-    this.state = { items: [] };
+    this._refresh.bind(this)
+    this.state = { items: [{_id : 4 ,text : "نسشپیش" , like :true ,likes : 12456}] };
   }
   static navigationOptions = {
     title: "اوناگی",
@@ -108,7 +105,7 @@ export default class RahnemaTeam2App extends Component {
   getUniqueID(func) {
     this.setState({ unique_id: DeviceInfo.getUniqueID() }, func);
   }
-
+  
   componentDidMount() {
     this.getLocation = () =>
       new Promise((resolve, reject) => {
@@ -160,26 +157,30 @@ export default class RahnemaTeam2App extends Component {
     });
   }
 
+
   render() {
     if (!this.state) return null;
     // console.log('our state:', this.state);
     const { navigate } = this.props.navigation;
     return (
       <View style={styles.container}>
-        <PTRView onRefresh={this._refresh.bind(this)}>
-          <View>
+        <StatusBar backgroundColor="#689F38" barStyle="light-content" />
+         <PTRView onRefresh={this._refresh.bind(this)}> 
+           <View> 
             <ScrollView>
-              {this.state.items.map(item =>
-                <PostItem key={item._id} label={item.text} />
-              )}
-            </ScrollView>
-          </View>
-        </PTRView>
-        <ActionButton
-          buttonColor="#757575"
-          onPress={() => navigate("SendPostPage",{"unique_id" : this.state.unique_id,"location":this.state.location})}
-
-        />
+              {this.state.items.map(item => (
+                <PostItem
+                key={item._id} 
+                label={item.text}
+                like = {item.like}
+                likes = {item.likes}
+              />
+              ))}
+              </ScrollView>
+           </View> 
+         </PTRView> 
+          <ActionButton buttonColor="#757575"  
+        onPress={() => navigate("SendPostPage",{"unique_id" : this.state.unique_id,"location":this.state.location})}/>  
       </View>
     );
   }
