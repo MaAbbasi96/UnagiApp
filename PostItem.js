@@ -10,15 +10,15 @@ class PostItem extends Component {
       return (
           <View style={styles.todoItem}>
             <Text style={styles.todoLabel}>{this.props.label}</Text>
-              <View style = {styles.zir}>
+            <View style = {styles.zir}>
               <TouchableOpacity onPress={() => this.onChange()} >
                 {this.props.like ? 
                     <Image style = {styles.LikeImage} source = {require('./LikeImage.png') } />
                   : <Image style = {styles.LikeImage} source = {require('./UnLikeImage.png') } />
                 }
               </TouchableOpacity>
-              <Text style = {styles.Likes}>{this.props.likes}</Text>
-              </View>
+            <Text style = {styles.Likes}>{this.props.likes}</Text>
+            </View>
           </View>
       )
   }

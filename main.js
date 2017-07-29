@@ -20,7 +20,7 @@ import {
   View,
   TextInput,
   Button,
-  ListView,
+  ScrollView,
   TouchableOpacity,
   Image,
   RefreshControl,
@@ -60,8 +60,7 @@ export default class RahnemaTeam2App extends Component {
     super()
     this.getUniqueID.bind(this);
     this._refresh.bind(this)
-    const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-    this.state = { items: ds.cloneWithRows([{_id : 4 ,text : "نسشپیش" , like :true ,likes : 12456}]), };
+    this.state = { items: [{_id : 4 ,text : "نسشپیش" , like :true ,likes : 12456}] };
   }
   static navigationOptions = {
     title: "اوناگی",
@@ -168,19 +167,16 @@ export default class RahnemaTeam2App extends Component {
         <StatusBar backgroundColor="#689F38" barStyle="light-content" />
          <PTRView onRefresh={this._refresh.bind(this)}> 
            <View> 
-            <ListView
-              dataSource = {this.state.items}
-              onEndReachedThreshold = {0}
-              onEndReached = {() => {this._refresh.bind(this)} }
-              renderRow = {(item) =>( 
+            <ScrollView>
+              {this.state.items.map(item => (
                 <PostItem
                 key={item._id} 
                 label={item.text}
                 like = {item.like}
                 likes = {item.likes}
-                />
-              )}
               />
+              ))}
+              </ScrollView>
            </View> 
          </PTRView> 
           <ActionButton buttonColor="#757575"  
