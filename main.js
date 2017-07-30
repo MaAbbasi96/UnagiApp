@@ -58,11 +58,18 @@ export default class RahnemaTeam2App extends Component {
 		super();
 		this.getUniqueID.bind(this);
 		this._refresh.bind(this);
-		// this.state = { items: [] };
+		let tmpArr = new Array();
+		//generating random length strings for homepage test
+		const TMP_STRING =
+			'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است ';
+		for (var i = 0; i < 10; i++) {
+			tmpArr[i] = { _id: i, text: TMP_STRING };
+		}
+		this.state = { items: tmpArr };
 	}
 	componentWillMount() {
 		// this.state = { items: [{_id : 4 ,text : "نسشپیش" , isLiked :true ,likes : 12456}] };
-		this.setState({ items: [] });
+		//this.setState({ items: [] });
 	}
 	static navigationOptions = {
 		title: 'اوناگی',
@@ -70,7 +77,8 @@ export default class RahnemaTeam2App extends Component {
 			backgroundColor: '#8BC34A'
 		},
 		headerTitleStyle: {
-			color: '#fff'
+			color: '#fff',
+			fontFamily: 'IRAN_Sans'
 		}
 	};
 

@@ -45,7 +45,8 @@ const styles = StyleSheet.create({
 		marginLeft: 10,
 		marginTop: 10,
 		borderRadius: 5,
-		textAlignVertical: 'top'
+		textAlignVertical: 'top',
+		fontFamily: 'IRAN_Sans'
 	},
 	headerRight: {
 		flexDirection: 'row',
@@ -85,7 +86,8 @@ export default class SendPostPage extends Component {
 				backgroundColor: '#8BC34A'
 			},
 			headerTitleStyle: {
-				color: '#fff'
+				color: '#fff',
+				fontFamily: 'IRAN_Sans'
 			},
 			headerTintColor: 'white',
 			headerRight: (

@@ -21,8 +21,8 @@ class PostItem extends Component {
 	}
 	render() {
 		return (
-			<View style={styles.todoItem}>
-				<Text style={styles.todoLabel}>
+			<View style={styles.postItem}>
+				<Text style={styles.postContent}>
 					{this.props.label}
 				</Text>
 				<View style={styles.bottomOfPost}>
@@ -47,7 +47,7 @@ class PostItem extends Component {
 }
 
 const styles = StyleSheet.create({
-	todoItem: {
+	postItem: {
 		marginLeft: 5,
 		marginRight: 5,
 		marginTop: 10,
@@ -56,10 +56,11 @@ const styles = StyleSheet.create({
 		flexDirection: 'column',
 		borderRadius: 5
 	},
-	todoLabel: {
+	postContent: {
 		flex: 1,
 		marginRight: 16,
-		height: 100
+		height: 100,
+		fontFamily: 'IRAN_Sans'
 	},
 	LikeImage: {
 		flex: 1,
