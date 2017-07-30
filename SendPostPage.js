@@ -48,14 +48,19 @@ const styles = StyleSheet.create({
 		textAlignVertical: 'top'
 	},
 	headerRight: {
-		flexDirection: 'row'
+		flexDirection: 'row',
+		justifyContent: 'center',
+		alignItems: 'center'
 	},
 	charLimit: {
-		marginTop: 8
+		marginRight: 10,
+		color: '#FFF',
+		fontSize: 19
 	},
 	charLimitRed: {
-		marginTop: 8,
-		color: 'red'
+		marginRight: 10,
+		color: 'red',
+		fontSize: 19
 	}
 });
 var charLimit = 160;
@@ -82,6 +87,7 @@ export default class SendPostPage extends Component {
 			headerTitleStyle: {
 				color: '#fff'
 			},
+			headerTintColor: 'white',
 			headerRight: (
 				<View style={styles.headerRight}>
 					{limit >= 0 &&
