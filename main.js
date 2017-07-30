@@ -63,7 +63,12 @@ export default class RahnemaTeam2App extends Component {
 		const TMP_STRING =
 			'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است ';
 		for (var i = 0; i < 10; i++) {
-			tmpArr[i] = { _id: i, text: TMP_STRING };
+			tmpArr[i] = {
+				_id: i,
+				text: TMP_STRING.substring(0, Math.random() * 156 + 4),
+				isLiked: false,
+				likes: parseInt(Math.random() * 100000)
+			};
 		}
 		this.state = { items: tmpArr };
 	}

@@ -27,15 +27,14 @@ class PostItem extends Component {
 				</Text>
 				<View style={styles.bottomOfPost}>
 					<TouchableOpacity onPress={() => this.likeChanged()}>
-						{this.state.isLiked
-							? <Image
-									style={styles.LikeImage}
-									source={require('./LikeImage.png')}
-								/>
-							: <Image
-									style={styles.LikeImage}
-									source={require('./UnLikeImage.png')}
-								/>}
+						<Image
+							style={styles.LikeImage}
+							source={
+								this.state.isLiked
+									? require('./LikeImage.png')
+									: require('./UnLikeImage.png')
+							}
+						/>
 					</TouchableOpacity>
 					<Text style={styles.Likes}>
 						{this.state.likes}
@@ -54,27 +53,28 @@ const styles = StyleSheet.create({
 		padding: 5,
 		backgroundColor: '#ffffff',
 		flexDirection: 'column',
-		borderRadius: 5
+		elevation: 4
 	},
 	postContent: {
 		flex: 1,
 		marginRight: 16,
-		height: 100,
-		fontFamily: 'IRAN_Sans'
+		fontFamily: 'IRAN_Sans',
+		color: '#212121'
 	},
 	LikeImage: {
 		flex: 1,
 		marginLeft: 5,
 		marginTop: 5,
-		height: 15,
-		width: 15
+		height: 22,
+		width: 22
 	},
 	bottomOfPost: {
 		flexDirection: 'row',
-		height: 20
+		justifyContent: 'center',
+		alignItems: 'center'
 	},
 	Likes: {
-		fontSize: 10,
+		fontSize: 13,
 		flex: 1,
 		marginLeft: 10,
 		marginTop: 5
