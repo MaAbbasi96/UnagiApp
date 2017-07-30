@@ -35,18 +35,16 @@ const styles = StyleSheet.create({
 		height: 35,
 		width: 35,
 		marginRight: 30
-		// position : 'absolute',
-		// left : 0,
-		// top: 0,
 	},
 	textInput: {
-		backgroundColor: '#fff',
+		backgroundColor: '#DCEDC8',
+		color: 'black',
 		marginRight: 10,
 		marginLeft: 10,
-		marginTop: 10,
-		borderRadius: 5,
 		textAlignVertical: 'top',
-		fontFamily: 'IRAN_Sans'
+		fontFamily: 'IRAN_Sans',
+		fontSize: 15,
+		height: '100%'
 	},
 	headerRight: {
 		flexDirection: 'row',
@@ -135,10 +133,10 @@ export default class SendPostPage extends Component {
 					{...this.props}
 					editable={true}
 					multiline={true}
-					placeholder="جدید مدید چه خبر!؟!"
+					placeholder="جدید مدید چه خبر؟!"
 					placeholderTextColor="#757575"
 					underlineColorAndroid="transparent"
-					numberOfLines={5}
+					numberOfLines={7}
 					onChangeText={text => {
 						this.setState({ text });
 						this.props.navigation.setParams({
