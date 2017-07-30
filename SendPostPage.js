@@ -135,7 +135,10 @@ export default class SendPostPage extends Component {
 					{...this.props}
 					editable={true}
 					multiline={true}
+					placeholder="جدید مدید چه خبر!؟!"
+					placeholderTextColor="#757575"
 					underlineColorAndroid="transparent"
+					numberOfLines={5}
 					onChangeText={text => {
 						this.setState({ text });
 						this.props.navigation.setParams({
@@ -143,7 +146,6 @@ export default class SendPostPage extends Component {
 							text
 						});
 					}}
-					numberOfLines={5}
 				/>
 			</View>
 		);
