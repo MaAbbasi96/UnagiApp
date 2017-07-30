@@ -23,8 +23,7 @@ import {
   ScrollView,
   TouchableOpacity,
   Image,
-  RefreshControl,
-  StatusBar
+  RefreshControl
 } from "react-native";
 
 
@@ -168,7 +167,6 @@ export default class RahnemaTeam2App extends Component {
     const { navigate } = this.props.navigation;
     return (
       <View style={styles.container}>
-        <StatusBar backgroundColor="#689F38" barStyle="light-content" />
          <PTRView onRefresh={this._refresh.bind(this)}> 
            <View> 
             <ScrollView>
