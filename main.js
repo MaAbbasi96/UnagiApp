@@ -138,7 +138,6 @@ export default class RahnemaTeam2App extends Component {
 		this.getUniqueID(() => {
 			this.getLocation()
 				.then(res => {
-					console.log('here');
 					return getPosts(this.state.unique_id, {
 						latitude: this.state.location.latitude,
 						longitude: this.state.location.longitude
@@ -173,7 +172,7 @@ export default class RahnemaTeam2App extends Component {
 			longitude: this.state.location.longitude
 			},
 			this.state.items[this.state.items.length-1]._id)
-			.then(res => this.setState({ items: items.concat(res) }))
+			.then(res => this.setState({ items: this.state.items.concat(res) }))
 			.catch(err => console.log(err));
 		}
 		else{
@@ -212,7 +211,7 @@ export default class RahnemaTeam2App extends Component {
 						<FlatList
 							data={this.state.items}
 							keyExtractor = {item => item._id}
-							onEndReachedThreshold={1}
+							onEndReachedThreshold={0.1}
 							onEndReached={this._refresh.bind(this,getOld = true)}
 							renderItem={({ item }) => (
 							<PostItem
