@@ -74,10 +74,6 @@ export default class RahnemaTeam2App extends Component {
 		}
 		this.state = { items: tmpArr };
 	}
-	componentWillMount() {
-		// this.state = { items: [{_id : 4 ,text : "نسشپیش" , isLiked :true ,likes : 12456}] };
-		//this.setState({ items: [] });
-	}
 	static navigationOptions = {
 		title: 'اوناگی',
 		headerStyle: {
@@ -190,16 +186,6 @@ export default class RahnemaTeam2App extends Component {
 			}, 2000);
 		});
 	}
-	// _refresh2(){
-	// 	getOlderPosts(this.state.unique_id, {
-	// 		latitude: this.state.location.latitude,
-	// 		longitude: this.state.location.longitude
-	// 		},
-	// 		this.state.items[this.state.items.length-1]._id)
-	// 		.then(res => this.setState({ items: items.concat(res) }))
-	// 		.catch(err => console.log(err));
-	// }
-
 	render() {
 		if (!this.state) return null;
 		// console.log('our state:', this.state);
