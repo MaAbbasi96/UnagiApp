@@ -10,7 +10,7 @@ import PostItem from './PostItem';
 import Icon from 'react-native-vector-icons/Ionicons';
 import ActionButton from 'react-native-action-button';
 import PTRView from 'react-native-pull-to-refresh';
-import { getPosts } from './network';
+import { getPosts,getOlderPosts } from './network';
 var async = require('async');
 var DeviceInfo = require('react-native-device-info');
 import {
@@ -23,7 +23,9 @@ import {
 	ScrollView,
 	TouchableOpacity,
 	Image,
-	RefreshControl
+	RefreshControl,
+	FlatList,
+	ListView
 } from 'react-native';
 
 const styles = StyleSheet.create({
@@ -71,10 +73,6 @@ export default class RahnemaTeam2App extends Component {
 			};
 		}
 		this.state = { items: tmpArr };
-	}
-	componentWillMount() {
-		// this.state = { items: [{_id : 4 ,text : "نسشپیش" , isLiked :true ,likes : 12456}] };
-		//this.setState({ items: [] });
 	}
 	static navigationOptions = {
 		title: 'اوناگی',
@@ -136,7 +134,6 @@ export default class RahnemaTeam2App extends Component {
 		this.getUniqueID(() => {
 			this.getLocation()
 				.then(res => {
-					console.log('here');
 					return getPosts(this.state.unique_id, {
 						latitude: this.state.location.latitude,
 						longitude: this.state.location.longitude
@@ -164,43 +161,55 @@ export default class RahnemaTeam2App extends Component {
 		);
 	}
 
-	_refresh() {
-		getPosts(this.state.unique_id, {
+	_refresh(getOld) {
+		if (getOld){
+			getOlderPosts(this.state.unique_id, {
 			latitude: this.state.location.latitude,
 			longitude: this.state.location.longitude
-		})
+			},
+			this.state.items[this.state.items.length-1]._id)
+			.then(res => this.setState({ items: this.state.items.concat(res) }))
+			.catch(err => console.log(err));
+		}
+		else{
+			getPosts(this.state.unique_id, {
+				latitude: this.state.location.latitude,
+				longitude: this.state.location.longitude
+			})
+		
 			.then(res => this.setState({ items: res }))
 			.catch(err => console.log(err));
+		}
 		return new Promise(function(resolve, reject) {
 			setTimeout(() => {
 				resolve();
 			}, 2000);
 		});
 	}
-
 	render() {
 		if (!this.state) return null;
 		// console.log('our state:', this.state);
 		const { navigate } = this.props.navigation;
 		return (
 			<View style={styles.container}>
-				<PTRView onRefresh={this._refresh.bind(this)}>
+				<PTRView onRefresh={this._refresh.bind(this,getOld=false)}>
 					<View>
-						<ScrollView>
-							{this.state.items.map(item => {
-								return (
-									<PostItem
-										key={item._id}
-										id={item._id}
-										label={item.text}
-										isLiked={item.isLiked}
-										likes={item.likes}
-										unique_id={this.state.unique_id}
-										location={this.state.location}
-									/>
-								);
-							})}
-						</ScrollView>
+						<FlatList
+							data={this.state.items}
+							keyExtractor = {item => item._id}
+							onEndReachedThreshold={0.1}
+							onEndReached={this._refresh.bind(this,getOld = true)}
+							renderItem={({ item }) => (
+							<PostItem
+								id = {item._id}
+								label = {item.text}
+								isLiked = {item.isLiked}
+								like = {item.likes}
+								location = {this.state.location}
+								unique_id = {this.state.unique_id}
+							/>
+							)}
+						/>
 					</View>
 				</PTRView>
 				<ActionButton

@@ -23,7 +23,29 @@ export function getPosts(unique_id, location) {
 			console.log(err);
 		});
 }
-
+export function getOlderPosts(unique_id, location,lastpost) {
+	return fetch(serverPath + '/post', {
+		method: 'GET',
+		headers: {
+			Accept: 'application/json',
+			'Content-Type': 'application/json',
+			unique_id: unique_id,
+			location: JSON.stringify(location),
+			lastpost : lastpost
+		}
+	})
+		.then(function(res) {
+			return res.json();
+		})
+		.then(function(res) {
+			return new Promise((resolve, reject) => {
+				resolve(res.posts);
+			});
+		})
+		.catch(err => {
+			console.log(err);
+		});
+}
 export function addPost(unique_id, location, text) {
 	return fetch(serverPath + '/post', {
 		method: 'POST',

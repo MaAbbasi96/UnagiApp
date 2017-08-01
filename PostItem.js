@@ -6,6 +6,10 @@ class PostItem extends Component {
 		this.setState({ isLiked: this.props.isLiked });
 		this.setState({ likes: this.props.likes });
 	}
+	componentWillReceiveProps(props){
+		this.setState({ isLiked: props.isLiked });
+		this.setState({ likes: props.likes });
+	}
 
 	likeChanged() {
 		likePost(
