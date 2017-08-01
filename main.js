@@ -23,7 +23,9 @@ import {
 	ScrollView,
 	TouchableOpacity,
 	Image,
-	RefreshControl
+	RefreshControl,
+	FlatList,
+	ListView
 } from 'react-native';
 
 const styles = StyleSheet.create({
@@ -186,21 +188,21 @@ export default class RahnemaTeam2App extends Component {
 			<View style={styles.container}>
 				<PTRView onRefresh={this._refresh.bind(this)}>
 					<View>
-						<ScrollView>
-							{this.state.items.map(item => {
-								return (
-									<PostItem
-										key={item._id}
-										id={item._id}
-										label={item.text}
-										isLiked={item.isLiked}
-										likes={item.likes}
-										unique_id={this.state.unique_id}
-										location={this.state.location}
-									/>
-								);
-							})}
-						</ScrollView>
+						<FlatList
+							data={this.state.items}
+							keyExtractor = {item => item._id}
+							renderItem={({ item }) => (
+							<PostItem
+								keyExtractor = {item => 27}
+								id = {item._id}
+								label = {item.text}
+								isLiked = {item.isLiked}
+								like = {item.likes}
+								location = {this.state.location}
+								unique_id = {this.state.unique_id}
+							/>
+							)}
+						/>
 					</View>
 				</PTRView>
 				<ActionButton
