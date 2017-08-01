@@ -10,7 +10,7 @@ import PostItem from './PostItem';
 import Icon from 'react-native-vector-icons/Ionicons';
 import ActionButton from 'react-native-action-button';
 import PTRView from 'react-native-pull-to-refresh';
-import { getPosts } from './network';
+import { getPosts,getOlderPosts } from './network';
 var async = require('async');
 var DeviceInfo = require('react-native-device-info');
 import {
@@ -166,19 +166,40 @@ export default class RahnemaTeam2App extends Component {
 		);
 	}
 
-	_refresh() {
-		getPosts(this.state.unique_id, {
+	_refresh(getOld) {
+		if (getOld){
+			getOlderPosts(this.state.unique_id, {
 			latitude: this.state.location.latitude,
 			longitude: this.state.location.longitude
-		})
+			},
+			this.state.items[this.state.items.length-1]._id)
+			.then(res => this.setState({ items: items.concat(res) }))
+			.catch(err => console.log(err));
+		}
+		else{
+			getPosts(this.state.unique_id, {
+				latitude: this.state.location.latitude,
+				longitude: this.state.location.longitude
+			})
+		
 			.then(res => this.setState({ items: res }))
 			.catch(err => console.log(err));
+		}
 		return new Promise(function(resolve, reject) {
 			setTimeout(() => {
 				resolve();
 			}, 2000);
 		});
 	}
+	// _refresh2(){
+	// 	getOlderPosts(this.state.unique_id, {
+	// 		latitude: this.state.location.latitude,
+	// 		longitude: this.state.location.longitude
+	// 		},
+	// 		this.state.items[this.state.items.length-1]._id)
+	// 		.then(res => this.setState({ items: items.concat(res) }))
+	// 		.catch(err => console.log(err));
+	// }
 
 	render() {
 		if (!this.state) return null;
@@ -186,14 +207,15 @@ export default class RahnemaTeam2App extends Component {
 		const { navigate } = this.props.navigation;
 		return (
 			<View style={styles.container}>
-				<PTRView onRefresh={this._refresh.bind(this)}>
+				<PTRView onRefresh={this._refresh.bind(this,getOld=false)}>
 					<View>
 						<FlatList
 							data={this.state.items}
 							keyExtractor = {item => item._id}
+							onEndReachedThreshold={1}
+							onEndReached={this._refresh.bind(this,getOld = true)}
 							renderItem={({ item }) => (
 							<PostItem
-								keyExtractor = {item => 27}
 								id = {item._id}
 								label = {item.text}
 								isLiked = {item.isLiked}
