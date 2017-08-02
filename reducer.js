@@ -1,7 +1,6 @@
 import { addPost,getPosts,getOlderPosts,likePost } from './network';
 import {getUniqueID} from './helpers';
 
-const myLocation = {'latitude' :35.7293756 , 'longitude' :51.42246219 };
 const reducer = (state,action) => {
     if(action.type === 'get_posts'){
         getPosts(state.unique_id,myLocation)
@@ -31,6 +30,12 @@ const reducer = (state,action) => {
     }
     if (action.type === 'unlike_post'){
         likePost(state.unique_id,myLocation,action.postID,false);
+    }
+    if (action.type === 'save_posts'){
+        return ({...state,'items' : action.posts});
+    }
+    if (action.type == 'save_unique_id'){
+        return ({...state,'unique_id' : action.uniqueID})
     }
 };
 
