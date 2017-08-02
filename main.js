@@ -13,6 +13,11 @@ import PTRView from 'react-native-pull-to-refresh';
 import { getPosts,getOlderPosts } from './network';
 var async = require('async');
 var DeviceInfo = require('react-native-device-info');
+
+import {Provider} from 'react-redux';
+import { createStore } from "redux";
+import reducer from './reducer'
+
 import {
 	AppRegistry,
 	StyleSheet,
@@ -54,7 +59,7 @@ const styles = StyleSheet.create({
 	}
 });
 
-var _listViewOffset = 0;
+const store = createStore(reducer);
 export default class RahnemaTeam2App extends Component {
 	constructor() {
 		super();
@@ -191,6 +196,7 @@ export default class RahnemaTeam2App extends Component {
 		// console.log('our state:', this.state);
 		const { navigate } = this.props.navigation;
 		return (
+			<Provider store={store}>
 			<View style={styles.container}>
 				<PTRView onRefresh={this._refresh.bind(this,getOld=false)}>
 					<View>
@@ -221,6 +227,7 @@ export default class RahnemaTeam2App extends Component {
 						})}
 				/>
 			</View>
+		</Provider>
 		);
 	}
 }
