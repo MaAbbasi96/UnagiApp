@@ -147,7 +147,7 @@ class RahnemaTeam2App extends Component {
     return (
       <Provider store={store}>
         <View style={styles.container}>
-          <PTRView onRefresh={() => console.log("props", this.props)}>
+          <PTRView onRefresh={() => console.log("refreshing")}>
             <View>
               <FlatList
                 data={this.props.storeState.items}
@@ -159,9 +159,9 @@ class RahnemaTeam2App extends Component {
                     id={item._id}
                     label={item.text}
                     isLiked={item.isLiked}
-                    like={item.likes}
-                    location={this.state.location}
-                    unique_id={this.state.unique_id}
+                    likes={item.likes}
+                    location={myLocation}
+                    unique_id={this.props.storeState.unique_id}
                   />}
               />
             </View>
