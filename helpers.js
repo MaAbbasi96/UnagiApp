@@ -1,7 +1,11 @@
 export function getUniqueID() {
-  var DeviceInfo = require("react-native-device-info");
-  var uniqueID = DeviceInfo.getUniqueID();
-  return uniqueID;
+    return new Promise((resolve, reject)=>{
+        var DeviceInfo = require("react-native-device-info");
+        var uniqueID = DeviceInfo.getUniqueID();
+        if (uniqueID.length === 16)
+            uniqueID += uniqueID;
+        resolve(uniqueID);
+    })
 }
 export function getLocation() {
   return new Promise(
