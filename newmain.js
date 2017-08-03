@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Provider } from "react-redux";
 import { createStore, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
-import { StackNavigator } from "react-navigation";
+import { TabNavigator,StackNavigator } from "react-navigation";
 import SendPostPage from "./SendPostPage";
 import {
   AppRegistry,
@@ -21,8 +21,31 @@ import {
 
 import reducer from "./reducer";
 import RahnemaTeam2App from "./main";
+import HotPosts from "./HotPosts";
+const MainScreenNavigator = TabNavigator({
+"جدیدترین": { screen: RahnemaTeam2App },
+	"داغ‌ترین": { screen: HotPosts },
+},
+	{
+		tabBarOptions: {
+			style: {
+				backgroundColor: '#8BC34A',
+
+			}
+		}
+	});
+MainScreenNavigator.navigationOptions = {
+	title: 'اوناگی',
+	headerStyle: {
+		backgroundColor: '#8BC34A'
+	},
+	headerTitleStyle: {
+		color: '#fff',
+		fontFamily: 'IRAN_Sans'
+	},
+};
 const App = StackNavigator({
-  Home: { screen: RahnemaTeam2App },
+  Home: { screen: MainScreenNavigator },
   SendPostPage: { screen: SendPostPage }
 });
 const setup = () => {
