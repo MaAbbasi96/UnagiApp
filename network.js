@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Fetch from 'react-native-fetch';
-var serverPath = 'http://192.168.11.201:3000';
+var serverPath = 'http://192.168.1.104:3000';
 export function getPosts(unique_id, location) {
 	return fetch(serverPath + '/post', {
 		method: 'GET',
@@ -23,7 +23,7 @@ export function getPosts(unique_id, location) {
 			console.log(err);
 		});
 }
-export function getOlderPosts(unique_id, location,lastpost) {
+export function getOldPosts(unique_id, location,lastpost) {
 	return fetch(serverPath + '/post', {
 		method: 'GET',
 		headers: {

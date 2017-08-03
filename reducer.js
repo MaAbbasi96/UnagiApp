@@ -8,13 +8,7 @@ const reducer = (state,action) => {
             return ({...state,'items' : res});
         })
     }
-    if (action.type === 'get_older_posts'){
-        getOlderPosts(state.unique_id,myLocation,action.lastPostID)
-        .then((res)=>{
-            var newItems = state.items.concat(res);
-            return newItems;
-        })
-    }
+   
     if (action.type === 'add_post'){
         addPost(state.unique_id,myLocation,action.text)
         .then(res=>{
@@ -37,22 +31,10 @@ const reducer = (state,action) => {
     if (action.type == 'save_unique_id'){
         return ({...state,'unique_id' : action.uniqueID})
     }
+     if (action.type === 'save_old_posts'){
+        var newItems = state.items.concat(action.posts);
+        return ({...state,'items' : newItems});
+    }
 };
 
 export default reducer
-
-
-
-
-// const reducer2 = (state = { todos: [] }, action) => {
-//     console.log('CALLED', action);
-//     if (action.type === 'add_todo') {
-//         return Object.assign({}, state, {
-//             todos: [...state.todos, {
-//                 id: Date.now(),
-//                 text: action.text
-//             }]
-//         })
-//     }
-//     return state
-// }
