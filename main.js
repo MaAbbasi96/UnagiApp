@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
 });
 var myLocation = { latitude: 35.7293756, longitude: 51.42246219 };
 
-const store = createStore(reducer);
+
 class RahnemaTeam2App extends Component {
   constructor() {
     super();
@@ -136,14 +136,16 @@ class RahnemaTeam2App extends Component {
       }, 2000);
     });
   }
+  
+  //this.props.getAndSavePosts(this.props.storeState.unique_id,myLocation)}
   render() {
     
     if (!this.props.storeState)
       return null;
+    const {navigate} = this.props.navigation;
     return (
-      <Provider store={store}>
         <View style={styles.container}>
-          <PTRView onRefresh={() => this.props.getAndSavePosts(this.props.storeState.unique_id,myLocation)}>
+          <PTRView onRefresh={() => console.log("PPPPPPPPPPPPPPPPPPPPPPPPPP",this.props)}>
             <View>
               <FlatList
                 data={this.props.storeState.items}
@@ -166,19 +168,14 @@ class RahnemaTeam2App extends Component {
             buttonColor="#757575"
             onPress={() =>
               navigate("SendPostPage", {
-                unique_id: this.state.unique_id,
-                location: this.state.location
+                unique_id: this.props.storeState.unique_id,
+                location: myLocation
               })}
           />
         </View>
-      </Provider>
     );
   }
 }
-const App = StackNavigator({
-  Home: { screen: RahnemaTeam2App },
-  SendPostPage: { screen: SendPostPage }
-});
 mapStateToProps = state => {
   return {
     storeState: state
@@ -186,5 +183,5 @@ mapStateToProps = state => {
 };
 export default connect(mapStateToProps, {
   getAndSaveUniqueID,
-  getAndSavePosts
+  getAndSavePosts,
 })(RahnemaTeam2App);
