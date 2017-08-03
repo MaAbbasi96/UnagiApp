@@ -5,6 +5,7 @@ export const GET_UNIQUE_ID = "get_unique_id";
 export const LIKE_POST = "like_post";
 export const UNLIKE_POST = "unlike_post";
 export const SAVE_POSTS = "save_posts";
+export const SAVE_HOT_POSTS = "save_hot_posts";
 export const SAVE_UNIQUE_ID = "save_unique_id";
 var Helpers = require("./helpers");
 var Network = require("./network");
@@ -48,6 +49,12 @@ export function savePosts(posts) {
     posts: posts
   };
 }
+export function saveHotPosts(posts){
+  return {
+    type : SAVE_HOT_POSTS,
+    posts : posts
+  };
+}
 export function saveUniqueID(uniqueID) {
   return {
     type: SAVE_UNIQUE_ID,
@@ -74,11 +81,21 @@ export function getAndSavePosts(uniqueID, location) {
 }
 export function getAndSaveOldPosts(uniqueID, location, lastPostID) {
   return function(dispatch) {
-    return Network.getOldPosts(uniqueID, location.lastPostID).then(
+    return Network.getOldPosts(uniqueID, location,lastPostID).then(
       posts => {
         dispatch(saveOldPosts(posts));
       },
       err => console.log(err)
     );
   };
+}
+export function getAndSaveHotPosts(uniqueID,location){
+  return function(dispatch){
+    return Network.getHotPosts(uniqueID,location).then(
+      posts=>{
+        dispatch(saveHotPosts(posts));
+      },
+      err => console.log(err)
+    )
+  }
 }

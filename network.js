@@ -94,3 +94,25 @@ export function likePost(unique_id, location, postId, like) {
       console.log(err);
     });
 }
+export function getHotPosts(unique_id, location) {
+  return fetch(serverPath + "/post/hot", {
+    method: "GET",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      unique_id: unique_id,
+      location: JSON.stringify(location)
+    }
+  })
+    .then(function(res) {
+      return res.json();
+    })
+    .then(function(res) {
+      return new Promise((resolve, reject) => {
+        resolve(res.posts);
+      });
+    })
+    .catch(err => {
+      console.log(err);
+    });
+}
