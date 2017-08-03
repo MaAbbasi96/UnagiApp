@@ -5,6 +5,7 @@
  */
 import SendPostPage from "./SendPostPage";
 import PostItem from "./PostItem";
+import PostsList from "./PostsList";
 var Network = require("./network");
 var Helpers = require("./helpers");
 
@@ -12,7 +13,6 @@ import React, { Component } from "react";
 import { StackNavigator } from "react-navigation";
 import Icon from "react-native-vector-icons/Ionicons";
 import ActionButton from "react-native-action-button";
-import PTRView from "react-native-pull-to-refresh";
 import {
   AppRegistry,
   StyleSheet,
@@ -67,32 +67,12 @@ class RahnemaTeam2App extends Component {
     const { navigate } = this.props.navigation;
     return (
       <View style={styles.container}>
-        <PTRView
-          onRefresh={() =>
-            this.props.getAndSavePosts(
-              this.props.storeState.unique_id,
-              myLocation
-            )}
-        >
-          <View>
-            <FlatList
-              data={this.props.storeState.items}
-              keyExtractor={item => item._id}
-              onEndReachedThreshold={0.5}
-              onEndReached={() =>
-                console.log("***************************************")}
-              renderItem={({ item }) =>
-                <PostItem
-                  id={item._id}
-                  label={item.text}
-                  isLiked={item.isLiked}
-                  likes={item.likes}
-                  location={myLocation}
-                  unique_id={this.props.storeState.unique_id}
-                />}
-            />
-          </View>
-        </PTRView>
+       <PostsList
+        items = {this.props.storeState.items}
+        getAndSavePosts = {this.props.getAndSavePosts}
+        unique_id = {this.props.storeState.unique_id}
+        location = {myLocation}
+        />
         <ActionButton
           buttonColor="#757575"
           onPress={() =>
