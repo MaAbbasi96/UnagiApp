@@ -7,7 +7,6 @@ import SendPostPage from "./SendPostPage";
 import PostItem from "./PostItem";
 var Network = require("./network");
 var Helpers = require("./helpers");
-// import { getPosts,getOlderPosts } from './network';
 
 import React, { Component } from "react";
 import { StackNavigator } from "react-navigation";
@@ -37,9 +36,7 @@ import { createStore } from "redux";
 import reducer from "./reducer";
 
 import {
-  getPosts,
   getAndSaveUniqueID,
-  savePosts,
   getAndSavePosts
 } from "./actions";
 
@@ -74,21 +71,20 @@ const store = createStore(reducer);
 class RahnemaTeam2App extends Component {
   constructor() {
     super();
-    // this.getUniqueID.bind(this);
     this._refresh.bind(this);
     let tmpArr = new Array();
     //generating random length strings for homepage test
-    const TMP_STRING =
-      "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است ";
-    for (var i = 0; i < 10; i++) {
-      tmpArr[i] = {
-        _id: i,
-        text: TMP_STRING.substring(0, Math.random() * 156 + 4),
-        isLiked: false,
-        likes: parseInt(Math.random() * 100000)
-      };
-    }
-    this.state = { items: tmpArr };
+    // const TMP_STRING =
+    //   "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است ";
+    // for (var i = 0; i < 10; i++) {
+    //   tmpArr[i] = {
+    //     _id: i,
+    //     text: TMP_STRING.substring(0, Math.random() * 156 + 4),
+    //     isLiked: false,
+    //     likes: parseInt(Math.random() * 100000)
+    //   };
+    // }
+    // this.state = { items: tmpArr };
   }
   static navigationOptions = {
     title: "اوناگی",
@@ -112,7 +108,7 @@ class RahnemaTeam2App extends Component {
     //     myLocation = location;
     //   });
 	// }, 2000);
-	this.props.getAndSavePosts("11111111111111111111111111111111",myLocation);
+	this.props.getAndSavePosts("ab540b666c9cbce9ab540b666c9cbce9",myLocation);
   }
   _refresh(getOld) {
     if (getOld) {
@@ -141,19 +137,19 @@ class RahnemaTeam2App extends Component {
     });
   }
   render() {
-    if (!this.props.storeState) return null;
-    // console.log('our state:', this.state);
-    // const { navigate } = this.props.navigation;
+    
+    if (!this.props.storeState)
+      return null;
     return (
       <Provider store={store}>
         <View style={styles.container}>
-          <PTRView onRefresh={() => console.log("refreshing")}>
+          <PTRView onRefresh={() => this.props.getAndSavePosts(this.props.storeState.unique_id,myLocation)}>
             <View>
               <FlatList
                 data={this.props.storeState.items}
                 keyExtractor={item => item._id}
-                onEndReachedThreshold={0.1}
-                onEndReached={() => console.log("refresh2")}
+                onEndReachedThreshold={0.5}
+                onEndReached={() => console.log("***************************************")}
                 renderItem={({ item }) =>
                   <PostItem
                     id={item._id}
@@ -189,8 +185,6 @@ mapStateToProps = state => {
   };
 };
 export default connect(mapStateToProps, {
-  getPosts,
   getAndSaveUniqueID,
-  savePosts,
   getAndSavePosts
 })(RahnemaTeam2App);
