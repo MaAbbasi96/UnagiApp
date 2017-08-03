@@ -1,1 +1,1 @@
-import './newmain';
+import './main';
