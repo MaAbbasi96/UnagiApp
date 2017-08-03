@@ -35,57 +35,18 @@ import { Provider } from "react-redux";
 import { createStore } from "redux";
 import reducer from "./reducer";
 
-import {
-  getAndSaveUniqueID,
-  getAndSavePosts
-} from "./actions";
+import { getAndSaveUniqueID, getAndSavePosts } from "./actions";
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: "column",
     backgroundColor: "#DCEDC8"
-  },
-  top: {
-    flexDirection: "row",
-    backgroundColor: "#8BC34A",
-    height: 80
-  },
-  fon: {
-    marginLeft: 10,
-    marginTop: 10,
-    fontSize: 26,
-    fontWeight: "bold",
-    color: "white",
-    fontFamily: "monospace"
-  },
-  sendimage: {
-    height: 35,
-    width: 35,
-    marginRight: 30
   }
 });
 var myLocation = { latitude: 35.7293756, longitude: 51.42246219 };
 
-
 class RahnemaTeam2App extends Component {
-  constructor() {
-    super();
-    this._refresh.bind(this);
-    let tmpArr = new Array();
-    //generating random length strings for homepage test
-    // const TMP_STRING =
-    //   "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است ";
-    // for (var i = 0; i < 10; i++) {
-    //   tmpArr[i] = {
-    //     _id: i,
-    //     text: TMP_STRING.substring(0, Math.random() * 156 + 4),
-    //     isLiked: false,
-    //     likes: parseInt(Math.random() * 100000)
-    //   };
-    // }
-    // this.state = { items: tmpArr };
-  }
   static navigationOptions = {
     title: "اوناگی",
     headerStyle: {
@@ -97,82 +58,50 @@ class RahnemaTeam2App extends Component {
     }
   };
   componentDidMount() {
-	var myLocation = { latitude: 35.7293756, longitude: 51.42246219 };
+    var myLocation = { latitude: 35.7293756, longitude: 51.42246219 };
     this.props.getAndSaveUniqueID();
-    // setTimeout(() => {
-    //   Helpers.getLocation().then((location, err) => {
-    //     if (err) {
-    //       console.log(err);
-    //       return;
-    //     }
-    //     myLocation = location;
-    //   });
-	// }, 2000);
-	this.props.getAndSavePosts("ab540b666c9cbce9ab540b666c9cbce9",myLocation);
+    this.props.getAndSavePosts("ab540b666c9cbce9ab540b666c9cbce9", myLocation);
   }
-  _refresh(getOld) {
-    if (getOld) {
-      getOlderPosts(
-        this.state.unique_id,
-        {
-          latitude: this.state.location.latitude,
-          longitude: this.state.location.longitude
-        },
-        this.state.items[this.state.items.length - 1]._id
-      )
-        .then(res => this.setState({ items: this.state.items.concat(res) }))
-        .catch(err => console.log(err));
-    } else {
-      getPosts(this.state.unique_id, {
-        latitude: this.state.location.latitude,
-        longitude: this.state.location.longitude
-      })
-        .then(res => this.setState({ items: res }))
-        .catch(err => console.log(err));
-    }
-    return new Promise(function(resolve, reject) {
-      setTimeout(() => {
-        resolve();
-      }, 2000);
-    });
-  }
-  
-  //this.props.getAndSavePosts(this.props.storeState.unique_id,myLocation)}
   render() {
-    
-    if (!this.props.storeState)
-      return null;
-    const {navigate} = this.props.navigation;
+    if (!this.props.storeState) return null;
+    const { navigate } = this.props.navigation;
     return (
-        <View style={styles.container}>
-          <PTRView onRefresh={() => console.log("PPPPPPPPPPPPPPPPPPPPPPPPPP",this.props)}>
-            <View>
-              <FlatList
-                data={this.props.storeState.items}
-                keyExtractor={item => item._id}
-                onEndReachedThreshold={0.5}
-                onEndReached={() => console.log("***************************************")}
-                renderItem={({ item }) =>
-                  <PostItem
-                    id={item._id}
-                    label={item.text}
-                    isLiked={item.isLiked}
-                    likes={item.likes}
-                    location={myLocation}
-                    unique_id={this.props.storeState.unique_id}
-                  />}
-              />
-            </View>
-          </PTRView>
-          <ActionButton
-            buttonColor="#757575"
-            onPress={() =>
-              navigate("SendPostPage", {
-                unique_id: this.props.storeState.unique_id,
-                location: myLocation
-              })}
-          />
-        </View>
+      <View style={styles.container}>
+        <PTRView
+          onRefresh={() =>
+            this.props.getAndSavePosts(
+              this.props.storeState.unique_id,
+              myLocation
+            )}
+        >
+          <View>
+            <FlatList
+              data={this.props.storeState.items}
+              keyExtractor={item => item._id}
+              onEndReachedThreshold={0.5}
+              onEndReached={() =>
+                console.log("***************************************")}
+              renderItem={({ item }) =>
+                <PostItem
+                  id={item._id}
+                  label={item.text}
+                  isLiked={item.isLiked}
+                  likes={item.likes}
+                  location={myLocation}
+                  unique_id={this.props.storeState.unique_id}
+                />}
+            />
+          </View>
+        </PTRView>
+        <ActionButton
+          buttonColor="#757575"
+          onPress={() =>
+            navigate("SendPostPage", {
+              unique_id: this.props.storeState.unique_id,
+              location: myLocation
+            })}
+        />
+      </View>
     );
   }
 }
@@ -183,5 +112,5 @@ mapStateToProps = state => {
 };
 export default connect(mapStateToProps, {
   getAndSaveUniqueID,
-  getAndSavePosts,
+  getAndSavePosts
 })(RahnemaTeam2App);
