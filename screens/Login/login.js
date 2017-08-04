@@ -1,4 +1,4 @@
-//import LoginScreen from "./screens/Login/login";
+// import LoginScreen from "./screens/Login/login";
 import React, { Component } from 'react';
 import {
   AppRegistry,
@@ -65,7 +65,7 @@ export default class LoginScreen extends Component {
               <View style={styles.signupWrap}>
                 <TouchableOpacity activeOpacity={.5}>
                   <View>
-                    <Text style={styles.signupLinkText}>عضویت</Text>
+                    <Text style={styles.signupLinkText}>ثبت نام</Text>
                   </View>
                 </TouchableOpacity>
                 <Text style={styles.accountText}>حساب کاربری ندارید؟</Text>
