@@ -32,8 +32,23 @@ const reducer = (state, action) => {
     var newItems = state.items.concat(action.posts);
     return { ...state, items: newItems };
   }
-  if (action.type === "save_hot_posts"){
-    return {...state, hotItems : action.posts};
+  if (action.type === "save_hot_posts") {
+    return { ...state, hotItems: action.posts };
+  }
+  if (action.type === "update_post") {
+    var postsArray = Array.prototype.slice.call(state.hotItems);
+    postsArray.forEach((post) => {
+      // console.log("hot id : ",post, "updated id : ",action.updatedPostID);
+      if (post._id === action.updatedPostID){
+        // console.log("updatePost",action.updatedPost);
+        // forceUpdate();
+        post.isLiked = true;
+        post.likes = 23;
+        console.log("OK");
+        console.log("state.hotItems", state.hotItems);
+      }
+    })
+    return state;
   }
 };
 

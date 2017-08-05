@@ -7,6 +7,7 @@ export const UNLIKE_POST = "unlike_post";
 export const SAVE_POSTS = "save_posts";
 export const SAVE_HOT_POSTS = "save_hot_posts";
 export const SAVE_UNIQUE_ID = "save_unique_id";
+export const UPDATE_POST = "update_post";
 var Helpers = require("./helpers");
 var Network = require("./network");
 export function getPosts() {
@@ -97,5 +98,12 @@ export function getAndSaveHotPosts(uniqueID,location){
       },
       err => console.log(err)
     )
+  }
+}
+export function updatePost(updatedPostID,updateHotPost){
+  return {
+    type : UPDATE_POST,
+    updatedPostID : updatedPostID,
+    updateHotPost : updateHotPost
   }
 }

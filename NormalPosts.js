@@ -16,7 +16,7 @@ import {
   ListView
 } from "react-native";
 import { connect } from "react-redux";
-import { getAndSaveUniqueID, getAndSavePosts } from "./actions";
+import { getAndSaveUniqueID, getAndSavePosts,updatePost } from "./actions";
 import SendPostPage from "./SendPostPage";
 import PostItem from "./PostItem";
 import PostsList from "./PostsList";
@@ -49,6 +49,8 @@ class NormalPosts extends Component {
         getAndSavePosts = {this.props.getAndSavePosts}
         unique_id = {this.props.storeState.unique_id}
         location = {myLocation}
+        updatePost = {this.props.updatePost}
+        updateHotPost = {true}
         />
         <ActionButton
           buttonColor="#757575"
@@ -69,5 +71,6 @@ mapStateToProps = state => {
 };
 export default connect(mapStateToProps, {
   getAndSaveUniqueID,
-  getAndSavePosts
+  getAndSavePosts,
+  updatePost
 })(NormalPosts);

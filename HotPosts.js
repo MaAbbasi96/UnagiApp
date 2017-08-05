@@ -12,7 +12,7 @@ import {
 	RefreshControl
 } from 'react-native';
 import { connect } from "react-redux";
-import { getAndSaveUniqueID, getAndSaveHotPosts } from "./actions";
+import { getAndSaveUniqueID, getAndSaveHotPosts,updatePost } from "./actions";
 import ActionButton from "react-native-action-button";
 import PostsList from './PostsList';
 const styles = StyleSheet.create({
@@ -33,6 +33,8 @@ class HotPosts extends Component {
         getAndSavePosts = {this.props.getAndSaveHotPosts}
         unique_id = {this.props.storeState.unique_id}
         location = {myLocation}
+        updatePost = {this.props.updatePost}
+        updateHotPost = {false}
         />
         <ActionButton
           buttonColor="#757575"
@@ -53,5 +55,6 @@ mapStateToProps = state => {
 };
 export default connect(mapStateToProps, {
   getAndSaveUniqueID,
-  getAndSaveHotPosts
+  getAndSaveHotPosts,
+  updatePost
 })(HotPosts);
