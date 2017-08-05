@@ -31,6 +31,7 @@ var myLocation = { latitude: 35.7293756, longitude: 51.42246219 };
 class HotPosts extends Component {
   render() {
     if (!this.props.storeState) return null;
+    const { navigate } = this.props.navigation;
     return (
       <View style={styles.container}>
         <PostsList
