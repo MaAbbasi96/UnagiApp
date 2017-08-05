@@ -36,19 +36,23 @@ const reducer = (state, action) => {
     return { ...state, hotItems: action.posts };
   }
   if (action.type === "update_post") {
-    var postsArray = Array.prototype.slice.call(state.hotItems);
-    postsArray.forEach((post) => {
-      // console.log("hot id : ",post, "updated id : ",action.updatedPostID);
-      if (post._id === action.updatedPostID){
-        // console.log("updatePost",action.updatedPost);
-        // forceUpdate();
-        post.isLiked = true;
-        post.likes = 23;
-        console.log("OK");
-        console.log("state.hotItems", state.hotItems);
+    var postsArray = Array.prototype.slice.call(state.items);
+    for (var i = 0; i < postsArray.length; i++) {
+      if (postsArray[i]._id === action.updatedPostID) {
+        postsArray[i].isLiked = action.likeStatus;
+        postsArray[i].likes = action.updatedPostLikes;
       }
-    })
-    return state;
+    }
+    if (!state.hotItems) return { ...state, items: postsArray };
+    state = { ...state, items: postsArray };
+    var postsArray = Array.prototype.slice.call(state.hotItems);
+    for (var i = 0; i < postsArray.length; i++) {
+      if (postsArray[i]._id === action.updatedPostID) {
+        postsArray[i].isLiked = action.likeStatus;
+        postsArray[i].likes = action.updatedPostLikes;
+      }
+    }
+    return { ...state, hotItems: postsArray };
   }
 };
 

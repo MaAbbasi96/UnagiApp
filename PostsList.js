@@ -42,8 +42,6 @@ export default class PostsList extends Component {
                 likes={item.likes}
                 location={this.props.location}
                 unique_id={this.props.unique_id}
-                updatePost={this.props.updatePost}
-                updateHotPost={this.props.updateHotPost}
               />}
           />
         </View>
