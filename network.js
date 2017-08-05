@@ -24,7 +24,7 @@ export function getPosts(unique_id, location) {
     });
 }
 export function getOldPosts(unique_id, location, lastpost) {
-  return fetch(serverPath + "/post", {
+  return fetch(serverPath + "/post/", {
     method: "GET",
     headers: {
       Accept: "application/json",
@@ -102,6 +102,29 @@ export function getHotPosts(unique_id, location) {
       "Content-Type": "application/json",
       unique_id: unique_id,
       location: JSON.stringify(location)
+    }
+  })
+    .then(function(res) {
+      return res.json();
+    })
+    .then(function(res) {
+      return new Promise((resolve, reject) => {
+        resolve(res.posts);
+      });
+    })
+    .catch(err => {
+      console.log(err);
+    });
+}
+export function getOldHotPosts(unique_id, location, lastpost) {
+  return fetch(serverPath + "/post/hot", {
+    method: "GET",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      unique_id: unique_id,
+      location: JSON.stringify(location),
+      lastpost: lastpost
     }
   })
     .then(function(res) {

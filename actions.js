@@ -84,6 +84,16 @@ export function getAndSaveOldPosts(uniqueID, location, lastPostID) {
     );
   };
 }
+export function getAndSaveOldHotPosts(uniqueID, location, lastPostID) {
+  return function(dispatch) {
+    return Network.getOldHotPosts(uniqueID, location, lastPostID).then(
+      posts => {
+        dispatch(saveOldPosts(posts));
+      },
+      err => console.log(err)
+    );
+  };
+}
 export function getAndSaveHotPosts(uniqueID, location) {
   return function(dispatch) {
     return Network.getHotPosts(uniqueID, location).then(
