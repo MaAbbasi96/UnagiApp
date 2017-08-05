@@ -1,5 +1,6 @@
 export const GET_POSTS = "get_posts";
 export const SAVE_OLD_POSTS = "save_old_posts";
+export const SAVE_OLD_HOT_POSTS  = "save_old_hot_posts";
 export const ADD_POST = "add_post";
 export const GET_UNIQUE_ID = "get_unique_id";
 export const LIKE_POST = "like_post";
@@ -20,6 +21,12 @@ export function saveOldPosts(posts) {
     type: SAVE_OLD_POSTS,
     posts: posts
   };
+}
+export function saveOldHotPosts(posts){
+  return{
+    type : SAVE_OLD_HOT_POSTS,
+    posts : posts
+  }
 }
 export function addPost(text) {
   return {
@@ -88,7 +95,7 @@ export function getAndSaveOldHotPosts(uniqueID, location, lastPostID) {
   return function(dispatch) {
     return Network.getOldHotPosts(uniqueID, location, lastPostID).then(
       posts => {
-        dispatch(saveOldPosts(posts));
+        dispatch(saveOldHotPosts(posts));
       },
       err => console.log(err)
     );

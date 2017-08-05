@@ -32,6 +32,10 @@ const reducer = (state, action) => {
     var newItems = state.items.concat(action.posts);
     return { ...state, items: newItems };
   }
+  if(action.type === "save_old_hot_posts"){
+    var newItems = state.hotItems.concat(action.posts);
+    return {...state,hotItems : newItems};
+  }
   if (action.type === "save_hot_posts") {
     return { ...state, hotItems: action.posts };
   }
