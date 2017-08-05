@@ -16,7 +16,12 @@ import {
   ListView
 } from "react-native";
 import { connect } from "react-redux";
-import { getAndSaveUniqueID, getAndSavePosts,updatePost } from "./actions";
+import {
+  getAndSaveUniqueID,
+  getAndSavePosts,
+  updatePost,
+  likePost
+} from "./actions";
 import SendPostPage from "./SendPostPage";
 import PostItem from "./PostItem";
 import PostsList from "./PostsList";
@@ -44,13 +49,11 @@ class NormalPosts extends Component {
     const { navigate } = this.props.navigation;
     return (
       <View style={styles.container}>
-       <PostsList
-        items = {this.props.storeState.items}
-        getAndSavePosts = {this.props.getAndSavePosts}
-        unique_id = {this.props.storeState.unique_id}
-        location = {myLocation}
-        updatePost = {this.props.updatePost}
-        updateHotPost = {true}
+        <PostsList
+          items={this.props.storeState.items}
+          getAndSavePosts={this.props.getAndSavePosts}
+          unique_id={this.props.storeState.unique_id}
+          location={myLocation}
         />
         <ActionButton
           buttonColor="#757575"

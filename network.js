@@ -85,10 +85,10 @@ export function likePost(unique_id, location, postId, like) {
   })
     .then(function(res) {
       // console.log("Response" , res);
-      return;
+      return res.json();
     })
     .then(function(res) {
-      return;
+      return res.json();
     })
     .catch(err => {
       console.log(err);

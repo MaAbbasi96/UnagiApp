@@ -32,12 +32,6 @@ export function getUniqueID() {
     type: GET_UNIQUE_ID
   };
 }
-export function likePost(postID) {
-  return {
-    type: LIKE_POST,
-    postID: postID
-  };
-}
 export function unlikePost(postID) {
   return {
     type: UNLIKE_POST,
@@ -50,10 +44,10 @@ export function savePosts(posts) {
     posts: posts
   };
 }
-export function saveHotPosts(posts){
+export function saveHotPosts(posts) {
   return {
-    type : SAVE_HOT_POSTS,
-    posts : posts
+    type: SAVE_HOT_POSTS,
+    posts: posts
   };
 }
 export function saveUniqueID(uniqueID) {
@@ -82,7 +76,7 @@ export function getAndSavePosts(uniqueID, location) {
 }
 export function getAndSaveOldPosts(uniqueID, location, lastPostID) {
   return function(dispatch) {
-    return Network.getOldPosts(uniqueID, location,lastPostID).then(
+    return Network.getOldPosts(uniqueID, location, lastPostID).then(
       posts => {
         dispatch(saveOldPosts(posts));
       },
@@ -90,20 +84,29 @@ export function getAndSaveOldPosts(uniqueID, location, lastPostID) {
     );
   };
 }
-export function getAndSaveHotPosts(uniqueID,location){
-  return function(dispatch){
-    return Network.getHotPosts(uniqueID,location).then(
-      posts=>{
+export function getAndSaveHotPosts(uniqueID, location) {
+  return function(dispatch) {
+    return Network.getHotPosts(uniqueID, location).then(
+      posts => {
         dispatch(saveHotPosts(posts));
       },
       err => console.log(err)
-    )
-  }
+    );
+  };
 }
-export function updatePost(updatedPostID,updateHotPost){
+export function updatePost(updatedPostID, likeStatus, likes) {
   return {
-    type : UPDATE_POST,
-    updatedPostID : updatedPostID,
-    updateHotPost : updateHotPost
-  }
+    type: UPDATE_POST,
+    updatedPostID: updatedPostID,
+    updatedPostLikes: likeStatus ? likes + 1 : likes - 1,
+    likeStatus: likeStatus
+  };
+}
+export function likePost(uniqueID, location, postID, likeStatus, likes) {
+  return function(dispatch) {
+    return Network.likePost(uniqueID, location, postID, likeStatus).then(
+      res => dispatch(updatePost(postID, likeStatus, likes)),
+      err => console.log(err)
+    );
+  };
 }
