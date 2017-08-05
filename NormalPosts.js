@@ -19,6 +19,7 @@ import { connect } from "react-redux";
 import {
   getAndSaveUniqueID,
   getAndSavePosts,
+  getAndSaveOldPosts,
   updatePost,
   likePost
 } from "./actions";
@@ -52,6 +53,7 @@ class NormalPosts extends Component {
         <PostsList
           items={this.props.storeState.items}
           getAndSavePosts={this.props.getAndSavePosts}
+          getAndSaveOldPosts={this.props.getAndSaveOldPosts}
           unique_id={this.props.storeState.unique_id}
           location={myLocation}
         />
@@ -75,5 +77,6 @@ mapStateToProps = state => {
 export default connect(mapStateToProps, {
   getAndSaveUniqueID,
   getAndSavePosts,
+  getAndSaveOldPosts,
   updatePost
 })(NormalPosts);

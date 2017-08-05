@@ -15,6 +15,7 @@ import { connect } from "react-redux";
 import {
   getAndSaveUniqueID,
   getAndSaveHotPosts,
+  getAndSaveOldHotPosts,
   updatePost,
   likePost
 } from "./actions";
@@ -37,6 +38,7 @@ class HotPosts extends Component {
         <PostsList
           items={this.props.storeState.hotItems}
           getAndSavePosts={this.props.getAndSaveHotPosts}
+          getAndSaveOldPosts={this.props.getAndSaveOldHotPosts}
           unique_id={this.props.storeState.unique_id}
           location={myLocation}
         />
@@ -60,5 +62,6 @@ mapStateToProps = state => {
 export default connect(mapStateToProps, {
   getAndSaveUniqueID,
   getAndSaveHotPosts,
+  getAndSaveOldHotPosts,
   updatePost
 })(HotPosts);

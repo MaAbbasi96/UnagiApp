@@ -13,25 +13,21 @@ import {
   FlatList,
   ListView
 } from "react-native";
-import PostItem from './PostItem';
+import PostItem from "./PostItem";
 import PTRView from "react-native-pull-to-refresh";
-
 
 export default class PostsList extends Component {
   render() {
     return (
       <PTRView
         onRefresh={() =>
-          this.props.getAndSavePosts(
-            this.props.unique_id,
-            this.props.location
-          )}
+          this.props.getAndSavePosts(this.props.unique_id, this.props.location)}
       >
         <View>
           <FlatList
             data={this.props.items}
             keyExtractor={item => item._id}
-            onEndReachedThreshold={0.5}
+            onEndReachedThreshold={0}
             onEndReached={() =>
               console.log("***************************************")}
             renderItem={({ item }) =>
@@ -43,6 +39,15 @@ export default class PostsList extends Component {
                 location={this.props.location}
                 unique_id={this.props.unique_id}
               />}
+          />
+          <Button
+            title={"Load More"}
+            onPress={() =>
+               this.props.getAndSaveOldPosts(
+                this.props.unique_id,
+                this.props.location,
+                this.props.items[this.props.items.length - 1]._id
+              )} 
           />
         </View>
       </PTRView>
