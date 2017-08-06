@@ -26,7 +26,7 @@ export default class PostsList extends Component {
         <View>
           <FlatList
             data={this.props.items}
-            keyExtractor={item => item._id}
+            keyExtractor={item => (Math.random())}
             onEndReachedThreshold={0}
             onEndReached={() =>
               console.log("***************************************")}
