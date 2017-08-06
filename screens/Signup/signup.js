@@ -1,4 +1,8 @@
-import { TabNavigator, StackNavigator } from "react-navigation";
+import {
+  TabNavigator,
+  StackNavigator,
+  NavigationActions
+} from "react-navigation";
 import React, { Component } from "react";
 import {
   AppRegistry,
@@ -21,6 +25,7 @@ const personIcon = require("./signup_person.png");
 const lockIcon = require("./signup_lock.png");
 const emailIcon = require("./signup_email.png");
 const birthdayIcon = require("./signup_birthday.png");
+var animating = false;
 
 class SignupScreen extends Component {
   static navigationOptions = {
@@ -33,21 +38,36 @@ class SignupScreen extends Component {
       fontFamily: "IRAN_Sans"
     }
   };
+  componentWillReceiveProps(props) {
+    if (props.storeState) {
+      if (props.signupStatus) {
+        const resetAction = NavigationActions.reset({
+          index: 0,
+          actions: [NavigationActions.navigate({ routeName: "MainScreen" })]
+        });
+        this.props.navigation.dispatch(resetAction);
+      }
+    }
+  }
   render() {
     const { navigate } = this.props.navigation;
-    var animating = false;
-    if (this.props.storeState)
-        animating = this.props.storeState.signupWaiting
+    if (this.props.storeState) {
+      if (false) {
+        navigate("MainScreen");
+        return null;
+      }
+      if (this.props.storeState.signupWaiting)
+        animating = this.props.storeState.signupWaiting;
+    }
+    // if (!this.props.storeState.signupWaiting)
+    //     animating = false;
     return (
       <View style={styles.container}>
         <View style={[styles.container, styles.bg]}>
           <View style={styles.headerTitleView}>
             <Text style={styles.titleViewText}>ثبت نام</Text>
           </View>
-          <ActivityIndicator
-            animating={animating}
-            size="small"
-          />
+          <ActivityIndicator animating={animating} size="small" />
 
           <View style={styles.inputsContainer}>
             <View style={styles.inputContainer}>
