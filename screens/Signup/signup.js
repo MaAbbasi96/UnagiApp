@@ -1,4 +1,5 @@
 // import SignupScreen from "./screens/Signup/signup";
+import { TabNavigator, StackNavigator } from "react-navigation";
 import React, { Component } from 'react'
 import {
     AppRegistry,
@@ -9,6 +10,7 @@ import {
     TextInput,
     TouchableOpacity
 } from 'react-native'
+import { signup } from "../../network";
 
 const background = require("./signup_bg.png");
 const backIcon = require("./back.png");
@@ -18,8 +20,19 @@ const emailIcon = require("./signup_email.png");
 const birthdayIcon = require("./signup_birthday.png");
 
 
-export default class singup extends Component {
+export default class SignupScreen extends Component {
+    static navigationOptions = {
+        title: 'اوناگی',
+        headerStyle: {
+            backgroundColor: '#8BC34A'
+        },
+        headerTitleStyle: {
+            color: '#fff',
+            fontFamily: 'IRAN_Sans'
+        },
+    };
     render() {
+        const { navigate } = this.props.navigation;
         return (
             <View style={styles.container}>
                 {/* <Image 
@@ -60,7 +73,8 @@ export default class singup extends Component {
                                 style={[styles.input, styles.whiteFont]}
                                 placeholder="نام کاربری"
                                 placeholderTextColor="#FFF"
-                                underlineColorAndroid="#8BC34A"
+                                //underlineColorAndroid="#8BC34A"
+                                onChangeText={(username) => this.setState({ username })}
                             />
                         </View>
 
@@ -76,6 +90,7 @@ export default class singup extends Component {
                                 style={[styles.input, styles.whiteFont]}
                                 placeholder="ایمیل"
                                 placeholderTextColor="#FFF"
+                                onChangeText={(email) => this.setState({ email })}
                             />
                         </View>
 
@@ -92,6 +107,7 @@ export default class singup extends Component {
                                 style={[styles.input, styles.whiteFont]}
                                 placeholder="گذرواژه"
                                 placeholderTextColor="#FFF"
+                                onChangeText={(password) => this.setState({ password })}
                             />
                         </View>
 
@@ -114,20 +130,28 @@ export default class singup extends Component {
                     </View>
 
                     <View style={styles.footerContainer}>
-                        <TouchableOpacity activeOpacity={.5}>
+                        <TouchableOpacity activeOpacity={.5}
+                            onPress={() => {
+                                signup(
+                                    this.state.username,
+                                    this.state.password
+                                );
+                            }}
+                        >
                             <View style={styles.signup}>
                                 <Text style={styles.buttonText}>تایید</Text>
                             </View>
                         </TouchableOpacity>
                         <View />
-                        <View style={styles.loginWrap}>
-                            <TouchableOpacity activeOpacity={.5}>
+                        {/* <View style={styles.loginWrap}>
+                            <TouchableOpacity activeOpacity={.5} onPress={() =>
+                                navigate("LoginPage", {})}>
                                 <View>
                                     <Text style={styles.signupLinkText}>ورود</Text>
                                 </View>
                             </TouchableOpacity>
                             <Text style={styles.whiteFont}>دارای حساب کاربری هستید؟</Text>
-                        </View>
+                        </View> */}
                     </View>
                 </View>
                 {/* </Image> */}
@@ -225,7 +249,7 @@ let styles = StyleSheet.create({
         backgroundColor: 'transparent',
     },
     greyFont: {
-    color: '#D8D8D8'
+        color: '#D8D8D8'
     },
     whiteFont: {
         color: '#FFF',
