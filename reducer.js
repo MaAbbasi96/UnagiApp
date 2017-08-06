@@ -42,6 +42,15 @@ const reducer = (state, action) => {
   if (action.type === "save_hot_posts") {
     return { ...state, hotItems: action.posts };
   }
+  if (action.type === "signup_waiting"){
+    return {...state, signupWaiting : true}
+  }
+  if (action.type === "signup_fail"){
+    return {...state, signupWaiting : false ,signupStatus : false}
+  }
+  if (action.type === "signup_done"){
+    return {...state, signupWaiting : false ,signupStatus : true}
+  }
   if (action.type === "update_post") {
     var postsArray = Array.prototype.slice.call(state.items);
     for (var i = 0; i < postsArray.length; i++) {

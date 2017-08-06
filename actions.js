@@ -9,7 +9,10 @@ export const SAVE_POSTS = "save_posts";
 export const SAVE_HOT_POSTS = "save_hot_posts";
 export const SAVE_UNIQUE_ID = "save_unique_id";
 export const UPDATE_POST = "update_post";
-export const SET_LOCATION = "set_location"
+export const SET_LOCATION = "set_location";
+export const SIGNUP_DONE = "signup_done";
+export const SIGNUP_FAIL = "signup_fail";
+export const SIGNUP_WAITING = "signup_waiting";
 var Helpers = require("./helpers");
 var Network = require("./network");
 export function getPosts() {
@@ -64,11 +67,11 @@ export function saveUniqueID(uniqueID) {
     uniqueID: uniqueID
   };
 }
-export function setLocation(location){
+export function setLocation(location) {
   return {
-    type : SET_LOCATION,
-    location : location
-  }
+    type: SET_LOCATION,
+    location: location
+  };
 }
 export function getAndSaveUniqueID() {
   return function(dispatch) {
@@ -139,4 +142,28 @@ export function likePost(uniqueID, location, postID, likeStatus, likes) {
       err => console.log(err)
     );
   };
+}
+export function signup(username, password) {
+  return function(dispatch) {
+    dispatch(signupWaiting());
+    return Network.signup(username, password).then(
+      message => dispatch(signupResponse(message)),
+      err => console.log(err)
+    );
+  };
+}
+export function signupResponse(message){
+  if (message === "ok")
+    return {
+      type : SIGNUP_DONE,
+    }
+    else
+      return {
+        type : SIGNUP_FAIL
+      }
+}
+export function signupWaiting(){
+  return {
+    type : SIGNUP_WAITING,
+  }
 }
