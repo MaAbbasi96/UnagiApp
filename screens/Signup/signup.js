@@ -47,20 +47,12 @@ class SignupScreen extends Component {
         });
         this.props.navigation.dispatch(resetAction);
       }
+      if (props.storeState.signUpwaiting)
+        animating = props.storeState.signupWaiting;
     }
   }
   render() {
     const { navigate } = this.props.navigation;
-    if (this.props.storeState) {
-      if (false) {
-        navigate("MainScreen");
-        return null;
-      }
-      if (this.props.storeState.signupWaiting)
-        animating = this.props.storeState.signupWaiting;
-    }
-    // if (!this.props.storeState.signupWaiting)
-    //     animating = false;
     return (
       <View style={styles.container}>
         <View style={[styles.container, styles.bg]}>

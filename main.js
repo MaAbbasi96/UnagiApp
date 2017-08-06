@@ -46,6 +46,7 @@ MainScreenNavigator.navigationOptions = {
     color: "#fff",
     fontFamily: "IRAN_Sans"
   }
+
 };
 
 var auth = true;
@@ -58,7 +59,9 @@ const setup = () => {
         if (!result) auth = false;
          App = StackNavigator({
           Home: { screen: auth ? MainScreenNavigator : LoginScreen },
-          SignUpPage: { screen: SignupScreen }
+          SignUpPage: { screen: SignupScreen },
+          MainScreen : {screen : MainScreenNavigator},
+          SendPostPage : {screen : SendPostPage}
         });
         this.forceUpdate();
       });
