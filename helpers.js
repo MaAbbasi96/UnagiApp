@@ -22,9 +22,9 @@ export function getLocation() {
             longitude: initialPosition.coords.longitude
           };
           // console.log("Created Location ", location);
-          return location;
+          return resolve(location);
           // console.log("location",this.state.initialPosition.coords);
-          resolve();
+          // resolve();
         },
         error => alert(error.message),
         {
