@@ -51,6 +51,15 @@ const reducer = (state, action) => {
   if (action.type === "signup_done"){
     return {...state, signupWaiting : false ,signupStatus : true}
   }
+  if (action.type === "login_waiting"){
+    return {...state, loginWaiting : true};
+  }
+  if (action.type === "login_fail"){
+    return {...state, loginWaiting : false, loginStatus : false}
+  }
+  if (action.type === "login_done"){
+    return {...state, loginWaiting : false, loginStatus : true}
+  }
   if (action.type === "update_post") {
     var postsArray = Array.prototype.slice.call(state.items);
     for (var i = 0; i < postsArray.length; i++) {

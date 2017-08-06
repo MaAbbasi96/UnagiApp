@@ -13,6 +13,9 @@ export const SET_LOCATION = "set_location";
 export const SIGNUP_DONE = "signup_done";
 export const SIGNUP_FAIL = "signup_fail";
 export const SIGNUP_WAITING = "signup_waiting";
+export const LOGIN_DONE = "login_done";
+export const LOGIN_FAIL = "login_fail";
+export const LOGIN_WAITING = "login_waiting";
 var Helpers = require("./helpers");
 var Network = require("./network");
 export function getPosts() {
@@ -152,18 +155,42 @@ export function signup(username, password) {
     );
   };
 }
-export function signupResponse(message){
+export function signupResponse(message) {
   if (message === "ok")
     return {
-      type : SIGNUP_DONE,
-    }
-    else
-      return {
-        type : SIGNUP_FAIL
-      }
+      type: SIGNUP_DONE
+    };
+  else
+    return {
+      type: SIGNUP_FAIL
+    };
 }
-export function signupWaiting(){
+export function signupWaiting() {
   return {
-    type : SIGNUP_WAITING,
+    type: SIGNUP_WAITING
+  };
+}
+export function login(username, password) {
+  return function(dispatch) {
+    dispatch(loginWaiting());
+    return Network.login(username, password).then(
+      message => dispatch(loginResponse(message)),
+      err => console.log(err)
+    );
+  };
+}
+export function loginResponse(message) {
+  if (message === "ok")
+    return {
+      type: LOGIN_DONE
+    };
+  else
+    return {
+      type: LOGIN_FAIL
+    };
+}
+export function loginWaiting(){
+  return {
+    type : LOGIN_WAITING
   }
 }
