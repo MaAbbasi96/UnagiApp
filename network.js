@@ -29,17 +29,17 @@ export function login(username, password) {
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
-      type: password
+      type: "password"
     },
-    body: {
+    body: JSON.stringify({
       username: username,
       password: password
-    }
+    })
   })
-    .then(function (res) {
+    .then(function(res) {
       return;
     })
-    .then(function (res) {
+    .then(function(res) {
       return;
     })
     .catch(err => {
@@ -51,17 +51,17 @@ export function signup(username, password) {
     method: "POST",
     headers: {
       Accept: "application/json",
-      "Content-Type": "application/json",
+      "Content-Type": "application/json"
     },
-    body: {
+    body: JSON.stringify({
       username: username,
       password: password
-    }
+    })
   })
-    .then(function (res) {
+    .then(function(res) {
       return res.json();
     })
-    .then(function (res) {
+    .then(function(res) {
       return new Promise((resolve, reject) => {
         resolve(res.accesstoken, res.refreshtoken);
       });
@@ -136,28 +136,6 @@ export function likePost(unique_id, location, postId, like) {
     })
     .then(function(res) {
       return;
-    })
-    .catch(err => {
-      console.log(err);
-    });
-}
-export function getHotPosts(unique_id, location) {
-  return fetch(serverPath + "/post/hot", {
-    method: "GET",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-      unique_id: unique_id,
-      location: JSON.stringify(location)
-    }
-  })
-    .then(function(res) {
-      return res.json();
-    })
-    .then(function(res) {
-      return new Promise((resolve, reject) => {
-        resolve(res.posts);
-      });
     })
     .catch(err => {
       console.log(err);
