@@ -40,14 +40,14 @@ class HotPosts extends Component {
           getAndSavePosts={this.props.getAndSaveHotPosts}
           getAndSaveOldPosts={this.props.getAndSaveOldHotPosts}
           unique_id={this.props.storeState.unique_id}
-          location={myLocation}
+          location={this.props.storeState.location}
         />
         <ActionButton
           buttonColor="#757575"
           onPress={() =>
             navigate("SendPostPage", {
               unique_id: this.props.storeState.unique_id,
-              location: myLocation
+              location: this.props.storeState.location
             })}
         />
       </View>

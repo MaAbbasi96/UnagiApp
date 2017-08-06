@@ -22,6 +22,9 @@ const reducer = (state, action) => {
   if (action.type === "unlike_post") {
     likePost(state.unique_id, myLocation, action.postID, false);
   }
+  if (action.type === "set_location"){
+    return ({...state,'location' : action.location});
+  }
   if (action.type === "save_posts") {
     return { ...state, items: action.posts };
   }

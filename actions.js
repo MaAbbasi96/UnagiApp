@@ -1,6 +1,6 @@
 export const GET_POSTS = "get_posts";
 export const SAVE_OLD_POSTS = "save_old_posts";
-export const SAVE_OLD_HOT_POSTS  = "save_old_hot_posts";
+export const SAVE_OLD_HOT_POSTS = "save_old_hot_posts";
 export const ADD_POST = "add_post";
 export const GET_UNIQUE_ID = "get_unique_id";
 export const LIKE_POST = "like_post";
@@ -9,6 +9,7 @@ export const SAVE_POSTS = "save_posts";
 export const SAVE_HOT_POSTS = "save_hot_posts";
 export const SAVE_UNIQUE_ID = "save_unique_id";
 export const UPDATE_POST = "update_post";
+export const SET_LOCATION = "set_location"
 var Helpers = require("./helpers");
 var Network = require("./network");
 export function getPosts() {
@@ -22,11 +23,11 @@ export function saveOldPosts(posts) {
     posts: posts
   };
 }
-export function saveOldHotPosts(posts){
-  return{
-    type : SAVE_OLD_HOT_POSTS,
-    posts : posts
-  }
+export function saveOldHotPosts(posts) {
+  return {
+    type: SAVE_OLD_HOT_POSTS,
+    posts: posts
+  };
 }
 export function addPost(text) {
   return {
@@ -63,6 +64,12 @@ export function saveUniqueID(uniqueID) {
     uniqueID: uniqueID
   };
 }
+export function setLocation(location){
+  return {
+    type : SET_LOCATION,
+    location : location
+  }
+}
 export function getAndSaveUniqueID() {
   return function(dispatch) {
     return Helpers.getUniqueID().then(
@@ -73,9 +80,15 @@ export function getAndSaveUniqueID() {
 }
 export function getAndSavePosts(uniqueID, location) {
   return function(dispatch) {
-    return Network.getPosts(uniqueID, location).then(
-      posts => {
-        dispatch(savePosts(posts));
+    return Helpers.getLocation().then(
+      location => {
+        return Network.getPosts(uniqueID, location).then(
+          posts => {
+            dispatch(savePosts(posts));
+            dispatch(setLocation(location));
+          },
+          err => console.log(err)
+        );
       },
       err => console.log(err)
     );

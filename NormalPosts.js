@@ -37,13 +37,18 @@ const styles = StyleSheet.create({
     backgroundColor: "#DCEDC8"
   }
 });
-var myLocation = { latitude: 35.7293756, longitude: 51.42246219 };
+let myLocation; //= { latitude: 35.7293756, longitude: 51.42246219 };
 
 class NormalPosts extends Component {
   componentDidMount() {
-    var myLocation = { latitude: 35.7293756, longitude: 51.42246219 };
+    // var myLocation = { latitude: 35.7293756, longitude: 51.42246219 };
+    // Helpers.getLocation().then(
+    //   location => {myLocation = location;console.log(location);this.props.getAndSavePosts("ab540b666c9cbce9ab540b666c9cbce9", myLocation);},
+    //   err => console.error(err)
+    // )
     this.props.getAndSaveUniqueID();
-    this.props.getAndSavePosts("ab540b666c9cbce9ab540b666c9cbce9", myLocation);
+
+    this.props.getAndSavePosts("ab540b666c9cbce9ab540b666c9cbce9");
   }
   render() {
     if (!this.props.storeState) return null;
@@ -55,14 +60,14 @@ class NormalPosts extends Component {
           getAndSavePosts={this.props.getAndSavePosts}
           getAndSaveOldPosts={this.props.getAndSaveOldPosts}
           unique_id={this.props.storeState.unique_id}
-          location={myLocation}
+          location={this.props.storeState.location}
         />
         <ActionButton
           buttonColor="#757575"
           onPress={() =>
             navigate("SendPostPage", {
               unique_id: this.props.storeState.unique_id,
-              location: myLocation
+              location: this.props.storeState.location
             })}
         />
       </View>
