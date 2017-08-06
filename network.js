@@ -23,8 +23,55 @@ export function getPosts(unique_id, location) {
       console.log(err);
     });
 }
+export function login(username, password) {
+  return fetch(serverPath + "/auth/login", {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      type: password
+    },
+    body: {
+      username: username,
+      password: password
+    }
+  })
+    .then(function (res) {
+      return;
+    })
+    .then(function (res) {
+      return;
+    })
+    .catch(err => {
+      console.log(err);
+    });
+}
+export function signup(username, password) {
+  return fetch(serverPath + "/auth/register ", {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: {
+      username: username,
+      password: password
+    }
+  })
+    .then(function (res) {
+      return res.json();
+    })
+    .then(function (res) {
+      return new Promise((resolve, reject) => {
+        resolve(res.accesstoken, res.refreshtoken);
+      });
+    })
+    .catch(err => {
+      console.log(err);
+    });
+}
 export function getOldPosts(unique_id, location, lastpost) {
-  return fetch(serverPath + "/post/", {
+  return fetch(serverPath + "/post", {
     method: "GET",
     headers: {
       Accept: "application/json",
@@ -85,10 +132,32 @@ export function likePost(unique_id, location, postId, like) {
   })
     .then(function(res) {
       // console.log("Response" , res);
+      return;
+    })
+    .then(function(res) {
+      return;
+    })
+    .catch(err => {
+      console.log(err);
+    });
+}
+export function getHotPosts(unique_id, location) {
+  return fetch(serverPath + "/post/hot", {
+    method: "GET",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      unique_id: unique_id,
+      location: JSON.stringify(location)
+    }
+  })
+    .then(function(res) {
       return res.json();
     })
     .then(function(res) {
-      return res.json();
+      return new Promise((resolve, reject) => {
+        resolve(res.posts);
+      });
     })
     .catch(err => {
       console.log(err);
