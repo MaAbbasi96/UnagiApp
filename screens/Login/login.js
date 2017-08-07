@@ -1,4 +1,4 @@
-import { TabNavigator, StackNavigator } from "react-navigation";
+import { TabNavigator, StackNavigator,NavigationActions } from "react-navigation";
 import React, { Component } from "react";
 import {
   AppRegistry,
@@ -10,7 +10,9 @@ import {
   TextInput,
   Button,
   TouchableOpacity,
-  ActivityIndicator
+  ActivityIndicator,
+  AsyncStorage,
+  Alert
 } from "react-native";
 import { connect } from "react-redux";
 import { login } from "../../actions";
@@ -38,15 +40,24 @@ class LoginScreen extends Component {
   };
   componentWillReceiveProps(props) {
     if (props.storeState) {
-      if (props.loginStatus) {
+      if (props.storeState.loginStatus) {
         const resetAction = NavigationActions.reset({
           index: 0,
           actions: [NavigationActions.navigate({ routeName: "MainScreen" })]
         });
         this.props.navigation.dispatch(resetAction);
+        AsyncStorage.setItem("refreshToken",props.storeState.refreshToken);
+        AsyncStorage.setItem("accessToken",props.storeState.accessToken);
+        return;
       }
-      if (props.storeState.loginWaiting)
+      if (props.storeState.loginWaiting){
         animating = props.storeState.loginWaiting;
+        return;
+      }
+      if (!props.storeState.signupStatus && !props.storeState.signupWaiting){
+        Alert.alert(null,"کلمه عبور یا نام‌کاربری اشتباه است");
+        return;
+      } 
     }
   }
   render() {
