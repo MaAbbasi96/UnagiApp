@@ -156,10 +156,12 @@ export function signup(username, password) {
   };
 }
 export function signupResponse(response) {
-  if (response.message === "ok")
+  if (response.message === "ok"){
     return {
-      type: SIGNUP_DONE
+      type: SIGNUP_DONE,
+      response : response
     };
+  }
   else
     return {
       type: SIGNUP_FAIL

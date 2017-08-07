@@ -13,7 +13,8 @@ import {
   TextInput,
   TouchableOpacity,
   Alert,
-  ActivityIndicator
+  ActivityIndicator,
+  AsyncStorage
 } from "react-native";
 // import { signup } from "../../network";
 import { signup } from "../../actions";
@@ -46,6 +47,8 @@ class SignupScreen extends Component {
           actions: [NavigationActions.navigate({ routeName: "MainScreen" })]
         });
         this.props.navigation.dispatch(resetAction);
+        AsyncStorage.setItem("refreshToken", props.storeState.refreshToken);
+        AsyncStorage.setItem("accessToken", props.storeState.accessToken);
         return;
       }
       if (props.storeState.signUpwaiting){
