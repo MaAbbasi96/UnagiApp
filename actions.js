@@ -143,9 +143,22 @@ export function updatePost(updatedPostID, likeStatus, likes) {
     likeStatus: likeStatus
   };
 }
-export function likePost(uniqueID, location, postID, likeStatus, likes) {
+export function likePost(
+  accessToken,
+  refreshToken,
+  location,
+  postID,
+  likeStatus,
+  likes
+) {
   return function(dispatch) {
-    return Network.likePost(uniqueID, location, postID, likeStatus).then(
+    return Network.likePost(
+      accessToken,
+      refreshToken,
+      location,
+      postID,
+      likeStatus
+    ).then(
       res => dispatch(updatePost(postID, likeStatus, likes)),
       err => console.log(err)
     );
@@ -180,6 +193,14 @@ export function login(username, password) {
   return function(dispatch) {
     dispatch(loginWaiting());
     return Network.login(username, password).then(
+      response => dispatch(loginResponse(response)),
+      err => console.log(err)
+    );
+  };
+}
+export function loginWithToken(refreshToken) {
+  return function(dispatch) {
+    return Network.loginWithToken(refreshToken).then(
       response => dispatch(loginResponse(response)),
       err => console.log(err)
     );

@@ -14,7 +14,8 @@ class PostItem extends Component {
 
   likeChanged() {
     this.props.likePost(
-      this.props.unique_id,
+      this.props.accessToken, 
+      this.props.refreshToken,
       this.props.location,
       this.props.id,
       !this.props.isLiked,

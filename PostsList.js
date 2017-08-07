@@ -38,7 +38,8 @@ export default class PostsList extends Component {
                 isLiked={item.isLiked}
                 likes={item.likes}
                 location={this.props.location}
-                unique_id={this.props.unique_id}
+                accessToken={this.props.accessToken}
+                refreshToken={this.props.refreshToken}
               />}
           />
           <Button

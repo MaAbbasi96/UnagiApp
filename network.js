@@ -1,15 +1,15 @@
 import React, { Component } from "react";
 import Fetch from "react-native-fetch";
 var serverPath = "http://192.168.11.201:3000";
-export function getPosts(location,accessToken,refreshToken) {
+export function getPosts(location, accessToken, refreshToken) {
   return fetch(serverPath + "/post", {
     method: "GET",
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
       location: JSON.stringify(location),
-      accesstoken : accessToken,
-      refreshtoken : refreshToken,
+      accesstoken: accessToken,
+      refreshtoken: refreshToken
     }
   })
     .then(function(res) {
@@ -42,7 +42,35 @@ export function login(username, password) {
     })
     .then(function(res) {
       return new Promise((resolve, reject) => {
-          resolve(res);
+        resolve(res);
+      });
+    })
+    .catch(err => {
+      console.log(err);
+    });
+}
+export function loginWithToken(refreshToken) {
+  console.log("Refresh token", refreshToken);
+  return fetch(serverPath + "/auth/login", {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      type: "token",
+      refreshtoken: refreshToken
+    },
+    body: JSON.stringify({
+      username: "a",
+      password: "a"
+    })
+  })
+    .then(function(res) {
+      console.log("RRRRRRRRRRRRRRRRRRRRR", res);
+      return res.json();
+    })
+    .then(function(res) {
+      return new Promise((resolve, reject) => {
+        resolve(res);
       });
     })
     .catch(err => {
@@ -98,13 +126,14 @@ export function getOldPosts(unique_id, location, lastpost) {
       console.log(err);
     });
 }
-export function addPost(unique_id, location, text) {
+export function addPost(accessToken, refreshToken, location, text) {
   return fetch(serverPath + "/post", {
     method: "POST",
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
-      unique_id: unique_id,
+      accesstoken : accessToken,
+      refreshtoken : refreshToken,
       location: JSON.stringify(location)
     },
     body: JSON.stringify({
@@ -123,7 +152,7 @@ export function addPost(unique_id, location, text) {
       console.log(err);
     });
 }
-export function likePost(unique_id, location, postId, like) {
+export function likePost(accessToken, refreshToken, location, postId, like) {
   var requestMethod;
   like ? (requestMethod = "PUT") : (requestMethod = "DELETE");
   return fetch(serverPath + "/post/" + postId + "/like", {
@@ -131,7 +160,8 @@ export function likePost(unique_id, location, postId, like) {
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
-      unique_id: unique_id,
+      accesstoken : accessToken,
+      refreshtoken : refreshToken,
       location: JSON.stringify(location)
     }
   })
@@ -146,16 +176,16 @@ export function likePost(unique_id, location, postId, like) {
       console.log(err);
     });
 }
-export function getHotPosts(location, accessToken,refreshToken) {
-  console.log("parameters", location, accessToken ,refreshToken);
+export function getHotPosts(location, accessToken, refreshToken) {
+  console.log("parameters", location, accessToken, refreshToken);
   return fetch(serverPath + "/post/hot", {
     method: "GET",
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
       location: JSON.stringify(location),
-      accesstoken : accessToken,
-      refreshtoken : refreshToken
+      accesstoken: accessToken,
+      refreshtoken: refreshToken
     }
   })
     .then(function(res) {
