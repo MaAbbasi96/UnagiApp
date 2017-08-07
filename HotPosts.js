@@ -41,6 +41,8 @@ class HotPosts extends Component {
           getAndSaveOldPosts={this.props.getAndSaveOldHotPosts}
           unique_id={this.props.storeState.unique_id}
           location={this.props.storeState.location}
+          refreshToken = {this.props.storeState.refreshToken}
+          accessToken = {this.props.storeState.accessToken}
         />
         <ActionButton
           buttonColor="#757575"

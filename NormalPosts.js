@@ -46,9 +46,9 @@ class NormalPosts extends Component {
     //   location => {myLocation = location;console.log(location);this.props.getAndSavePosts("ab540b666c9cbce9ab540b666c9cbce9", myLocation);},
     //   err => console.error(err)
     // )
-    this.props.getAndSaveUniqueID();
+    // this.props.getAndSaveUniqueID();
 
-    this.props.getAndSavePosts("ab540b666c9cbce9ab540b666c9cbce9");
+    // this.props.getAndSavePosts("ab540b666c9cbce9ab540b666c9cbce9");
   }
   render() {
     if (!this.props.storeState) return null;
@@ -61,6 +61,8 @@ class NormalPosts extends Component {
           getAndSaveOldPosts={this.props.getAndSaveOldPosts}
           unique_id={this.props.storeState.unique_id}
           location={this.props.storeState.location}
+          refreshToken = {this.props.storeState.refreshToken}
+          accessToken = {this.props.storeState.accessToken}
         />
         <ActionButton
           buttonColor="#757575"

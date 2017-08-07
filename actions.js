@@ -84,11 +84,11 @@ export function getAndSaveUniqueID() {
     );
   };
 }
-export function getAndSavePosts(uniqueID, location) {
+export function getAndSavePosts(accessToken, refreshToken) {
   return function(dispatch) {
     return Helpers.getLocation().then(
       location => {
-        return Network.getPosts(uniqueID, location).then(
+        return Network.getPosts(location, accessToken, refreshToken).then(
           posts => {
             dispatch(savePosts(posts));
             dispatch(setLocation(location));
@@ -120,11 +120,16 @@ export function getAndSaveOldHotPosts(uniqueID, location, lastPostID) {
     );
   };
 }
-export function getAndSaveHotPosts(uniqueID, location) {
+export function getAndSaveHotPosts(accessToken, refreshToken) {
   return function(dispatch) {
-    return Network.getHotPosts(uniqueID, location).then(
-      posts => {
-        dispatch(saveHotPosts(posts));
+    return Helpers.getLocation().then(
+      location => {
+        return Network.getHotPosts(location, accessToken, refreshToken).then(
+          posts => {
+            dispatch(saveHotPosts(posts));
+          },
+          err => console.log(err)
+        );
       },
       err => console.log(err)
     );
@@ -156,13 +161,12 @@ export function signup(username, password) {
   };
 }
 export function signupResponse(response) {
-  if (response.message === "ok"){
+  if (response.message === "ok") {
     return {
       type: SIGNUP_DONE,
-      response : response
+      response: response
     };
-  }
-  else
+  } else
     return {
       type: SIGNUP_FAIL
     };
@@ -176,23 +180,24 @@ export function login(username, password) {
   return function(dispatch) {
     dispatch(loginWaiting());
     return Network.login(username, password).then(
-      message => dispatch(loginResponse(message)),
+      response => dispatch(loginResponse(response)),
       err => console.log(err)
     );
   };
 }
-export function loginResponse(message) {
-  if (message === "ok")
+export function loginResponse(response) {
+  if (response.message === "ok")
     return {
-      type: LOGIN_DONE
+      type: LOGIN_DONE,
+      response: response
     };
   else
     return {
       type: LOGIN_FAIL
     };
 }
-export function loginWaiting(){
+export function loginWaiting() {
   return {
-    type : LOGIN_WAITING
-  }
+    type: LOGIN_WAITING
+  };
 }

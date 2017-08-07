@@ -20,8 +20,9 @@ export default class PostsList extends Component {
   render() {
     return (
       <PTRView
-        onRefresh={() =>
-          this.props.getAndSavePosts(this.props.unique_id, this.props.location)}
+        onRefresh={() =>{
+          this.props.getAndSavePosts(this.props.accessToken,this.props.refreshToken)}
+        }
       >
         <View>
           <FlatList

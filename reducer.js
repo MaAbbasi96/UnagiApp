@@ -54,7 +54,7 @@ const reducer = (state, action) => {
       signupWaiting: false,
       signupStatus: true,
       refreshToken: action.response.refreshtoken,
-      accessToken : action.response.accessToken
+      accessToken: action.response.accesstoken
     };
   }
   if (action.type === "login_waiting") {
@@ -64,7 +64,13 @@ const reducer = (state, action) => {
     return { ...state, loginWaiting: false, loginStatus: false };
   }
   if (action.type === "login_done") {
-    return { ...state, loginWaiting: false, loginStatus: true };
+    return {
+      ...state,
+      loginWaiting: false,
+      loginStatus: true,
+      refreshToken: action.response.refreshToken,
+      accessToken: action.response.accessToken
+    };
   }
   if (action.type === "update_post") {
     var postsArray = Array.prototype.slice.call(state.items);

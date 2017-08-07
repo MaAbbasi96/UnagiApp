@@ -1,14 +1,15 @@
 import React, { Component } from "react";
 import Fetch from "react-native-fetch";
 var serverPath = "http://192.168.11.201:3000";
-export function getPosts(unique_id, location) {
+export function getPosts(location,accessToken,refreshToken) {
   return fetch(serverPath + "/post", {
     method: "GET",
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
-      unique_id: unique_id,
-      location: JSON.stringify(location)
+      location: JSON.stringify(location),
+      accesstoken : accessToken,
+      refreshtoken : refreshToken,
     }
   })
     .then(function(res) {
@@ -37,10 +38,12 @@ export function login(username, password) {
     })
   })
     .then(function(res) {
-      return;
+      return res.json();
     })
     .then(function(res) {
-      return;
+      return new Promise((resolve, reject) => {
+          resolve(res);
+      });
     })
     .catch(err => {
       console.log(err);
@@ -143,14 +146,16 @@ export function likePost(unique_id, location, postId, like) {
       console.log(err);
     });
 }
-export function getHotPosts(unique_id, location) {
+export function getHotPosts(location, accessToken,refreshToken) {
+  console.log("parameters", location, accessToken ,refreshToken);
   return fetch(serverPath + "/post/hot", {
     method: "GET",
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
-      unique_id: unique_id,
-      location: JSON.stringify(location)
+      location: JSON.stringify(location),
+      accesstoken : accessToken,
+      refreshtoken : refreshToken
     }
   })
     .then(function(res) {
