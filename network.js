@@ -104,15 +104,16 @@ export function signup(username, password) {
             console.log(err);
         });
 }
-export function getOldPosts(unique_id, location, lastpost) {
+export function getOldPosts(accessToken, refreshToken, location, lastpost) {
     return fetch(serverPath + "/post", {
         method: "GET",
         headers: {
             Accept: "application/json",
             "Content-Type": "application/json",
-            unique_id: unique_id,
             location: JSON.stringify(location),
-            lastpost: lastpost
+            lastpost: lastpost,
+            accesstoken: accessToken,
+            refreshtoken: refreshToken
         }
     })
         .then(function(res) {
@@ -201,13 +202,14 @@ export function getHotPosts(location, accessToken, refreshToken) {
             console.log(err);
         });
 }
-export function getOldHotPosts(unique_id, location, lastpost) {
+export function getOldHotPosts(accessToken, refreshToken, location, lastpost) {
     return fetch(serverPath + "/post/hot", {
         method: "GET",
         headers: {
             Accept: "application/json",
             "Content-Type": "application/json",
-            unique_id: unique_id,
+            accesstoken: accessToken,
+            refreshtoken: refreshToken,
             location: JSON.stringify(location),
             lastpost: lastpost
         }
