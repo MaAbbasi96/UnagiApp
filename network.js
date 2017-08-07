@@ -63,7 +63,9 @@ export function signup(username, password) {
     })
     .then(function(res) {
       return new Promise((resolve, reject) => {
-        resolve(res.accesstoken, res.refreshtoken);
+        resolve(res);
+        if (res.message === "ok") resolve(res);
+        else resolve(res);
       });
     })
     .catch(err => {

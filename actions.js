@@ -150,13 +150,13 @@ export function signup(username, password) {
   return function(dispatch) {
     dispatch(signupWaiting());
     return Network.signup(username, password).then(
-      message => dispatch(signupResponse(message)),
+      response => dispatch(signupResponse(response)),
       err => console.log(err)
     );
   };
 }
-export function signupResponse(message) {
-  if (message === "ok")
+export function signupResponse(response) {
+  if (response.message === "ok")
     return {
       type: SIGNUP_DONE
     };

@@ -40,15 +40,21 @@ class SignupScreen extends Component {
   };
   componentWillReceiveProps(props) {
     if (props.storeState) {
-      if (props.signupStatus) {
+      if (props.storeState.signupStatus) {
         const resetAction = NavigationActions.reset({
           index: 0,
           actions: [NavigationActions.navigate({ routeName: "MainScreen" })]
         });
         this.props.navigation.dispatch(resetAction);
+        return;
       }
-      if (props.storeState.signUpwaiting)
+      if (props.storeState.signUpwaiting){
         animating = props.storeState.signupWaiting;
+        return;
+      }
+      if (!props.storeState.signupStatus && !props.storeState.signupWaiting){
+        Alert.alert(null,"این نام‌کاربری قبلاً گرفته شده");
+      } 
     }
   }
   render() {
