@@ -64,12 +64,13 @@ const reducer = (state, action) => {
     return { ...state, loginWaiting: false, loginStatus: false };
   }
   if (action.type === "login_done") {
+    // console.log("resposnse",action.response.refresh);
     return {
       ...state,
       loginWaiting: false,
       loginStatus: true,
-      refreshToken: action.response.refreshToken,
-      accessToken: action.response.accessToken
+      refreshToken: action.response.refreshtoken,
+      accessToken: action.response.accesstoken
     };
   }
   if (action.type === "update_post") {
