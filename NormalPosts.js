@@ -13,7 +13,8 @@ import {
   Image,
   RefreshControl,
   FlatList,
-  ListView
+  ListView,
+  AsyncStorage
 } from "react-native";
 import { connect } from "react-redux";
 import {
@@ -21,7 +22,8 @@ import {
   getAndSavePosts,
   getAndSaveOldPosts,
   updatePost,
-  likePost
+  likePost,
+  loginWithToken
 } from "./actions";
 import SendPostPage from "./SendPostPage";
 import PostItem from "./PostItem";
@@ -41,6 +43,17 @@ let myLocation; //= { latitude: 35.7293756, longitude: 51.42246219 };
 
 class NormalPosts extends Component {
   componentDidMount() {
+    console.log("***********************************************", this.props);
+    if (!this.props.storeState) {
+      AsyncStorage.getItem("refreshToken", (err, result) => {
+        if (result) this.props.loginWithToken(result);
+      });
+    } else {
+      this.props.getAndSavePosts(
+        this.props.storeState.accessToken,
+        this.props.storeState.refreshToken
+      );
+    }
     // var myLocation = { latitude: 35.7293756, longitude: 51.42246219 };
     // Helpers.getLocation().then(
     //   location => {myLocation = location;console.log(location);this.props.getAndSavePosts("ab540b666c9cbce9ab540b666c9cbce9", myLocation);},
@@ -49,6 +62,7 @@ class NormalPosts extends Component {
     // this.props.getAndSaveUniqueID();
 
     // this.props.getAndSavePosts("ab540b666c9cbce9ab540b666c9cbce9");
+    // console.log("PROPSsssssssssssssssss", this.props);
   }
   render() {
     if (!this.props.storeState) return null;
@@ -61,14 +75,15 @@ class NormalPosts extends Component {
           getAndSaveOldPosts={this.props.getAndSaveOldPosts}
           unique_id={this.props.storeState.unique_id}
           location={this.props.storeState.location}
-          refreshToken = {this.props.storeState.refreshToken}
-          accessToken = {this.props.storeState.accessToken}
+          refreshToken={this.props.storeState.refreshToken}
+          accessToken={this.props.storeState.accessToken}
         />
         <ActionButton
           buttonColor="#757575"
           onPress={() =>
             navigate("SendPostPage", {
-              unique_id: this.props.storeState.unique_id,
+              accessToken : this.props.storeState.accessToken,
+              refreshToken : this.props.storeState.refreshToken,
               location: this.props.storeState.location
             })}
         />
@@ -85,5 +100,6 @@ export default connect(mapStateToProps, {
   getAndSaveUniqueID,
   getAndSavePosts,
   getAndSaveOldPosts,
-  updatePost
+  updatePost,
+  loginWithToken
 })(NormalPosts);

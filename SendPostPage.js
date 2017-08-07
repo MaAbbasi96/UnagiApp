@@ -86,7 +86,8 @@ export default class SendPostPage extends Component {
             <TouchableOpacity
               onPress={() => {
                 addPost(
-                  props.navigation.state.params.unique_id,
+                  props.navigation.state.params.accessToken,
+                  props.navigation.state.params.refreshToken,
                   props.navigation.state.params.location,
                   props.navigation.state.params.text
                 );
@@ -117,7 +118,7 @@ export default class SendPostPage extends Component {
           {...this.props}
           editable={true}
           multiline={true}
-          placeholder="جدید مدید چه خبر؟!"
+          placeholder="جدید مدید چه خبر...؟!"
           placeholderTextColor="#757575"
           underlineColorAndroid="transparent"
           numberOfLines={7}
