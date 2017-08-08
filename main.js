@@ -37,15 +37,29 @@ const MainScreenNavigator = TabNavigator(
         }
     }
 );
-MainScreenNavigator.navigationOptions = {
-    title: "اوناگی",
-    headerStyle: {
-        backgroundColor: "#8BC34A"
-    },
-    headerTitleStyle: {
-        color: "#fff",
-        fontFamily: "IRAN_Sans"
+const styles = StyleSheet.create({
+    logout: {
+        height: 35,
+        width: 35,
+        marginRight: 30
     }
+});
+MainScreenNavigator.navigationOptions = props => {
+    return {
+        title: "اوناگی",
+        headerStyle: {
+            backgroundColor: "#8BC34A"
+        },
+        headerTitleStyle: {
+            color: "#fff",
+            fontFamily: "IRAN_Sans"
+        },
+        headerRight: (
+            <TouchableOpacity onPress={() => console.warn("asd")}>
+                <Image style={styles.logout} source={require("./logout.png")} />
+            </TouchableOpacity>
+        )
+    };
 };
 
 var auth = true;

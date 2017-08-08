@@ -37,6 +37,10 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: "column",
         backgroundColor: "#DCEDC8"
+    },
+    img: {
+        height: 60,
+        width: 60
     }
 });
 let myLocation; //= { latitude: 35.7293756, longitude: 51.42246219 };
@@ -78,11 +82,13 @@ class NormalPosts extends Component {
                     accessToken={this.props.storeState.accessToken}
                 />
                 <ActionButton
-                    buttonColor="#757575"
+                    buttonColor="rgb(170,170,170)"
+                    icon={
+                        <Image style={styles.img} source={require("./i.png")} />
+                    }
                     onPress={() =>
                         navigate("SendPostPage", {
-                            accessToken: this.props.storeState.accessToken,
-                            refreshToken: this.props.storeState.refreshToken,
+                            unique_id: this.props.storeState.unique_id,
                             location: this.props.storeState.location
                         })}
                 />
