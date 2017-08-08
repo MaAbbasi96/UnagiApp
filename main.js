@@ -18,7 +18,7 @@ import {
   FlatList,
   ListView
 } from "react-native";
-
+import SideMenu from 'react-native-side-menu';
 import reducer from "./reducer";
 import NormalPosts from "./NormalPosts";
 import HotPosts from "./HotPosts";
@@ -33,16 +33,30 @@ const MainScreenNavigator = TabNavigator({
 
 			}
 		}
-	});
-MainScreenNavigator.navigationOptions = {
-	title: 'اوناگی',
+  });
+const styles = StyleSheet.create({
+  logout: {
+     height: 35,
+    width: 35,
+    marginRight: 30
+  }
+});  
+MainScreenNavigator.navigationOptions = props => {
+  return{
+  title: 'اوناگی',
 	headerStyle: {
 		backgroundColor: '#8BC34A'
 	},
 	headerTitleStyle: {
 		color: '#fff',
 		fontFamily: 'IRAN_Sans'
-	},
+  },
+  headerRight : (
+    <TouchableOpacity onPress={() => console.warn("asd")}>
+      <Image style = {styles.logout} source = {require('./logout.png')} />
+    </TouchableOpacity>
+  )
+  }
 };
 const App = StackNavigator({
   Home: { screen: MainScreenNavigator },
@@ -54,11 +68,23 @@ const setup = () => {
     render() {
       return (
         <Provider store={store}>
-          <App />
+           <Application />
         </Provider>
       );
     }
   }
   return Root;
 };
+
+class Application extends React.Component {
+  render() {
+    // const menu = <Menu navigator={navigator}/>;
+    return (
+      <SideMenu >
+        <App />
+      </SideMenu>
+    );
+  }
+}
+
 AppRegistry.registerComponent("RahnemaTeam2App", setup);
