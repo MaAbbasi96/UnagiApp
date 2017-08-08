@@ -20,12 +20,12 @@ export default class PostsList extends Component {
     this.state = {refreshing : false}
   }
 
-  _onrefresh = () =>  {
+  _onRefresh = () =>  {
     this.setState(
       {
         refreshing : true
       },
-      () => {for(var i = 1; i < 10 ; i++){} console.warn("here recieve items")},
+      () => {while(1){} console.warn("here recieve items")},
       )
       console.warn("ready")
       this.setState(
@@ -73,7 +73,7 @@ export default class PostsList extends Component {
                 unique_id={this.props.unique_id}
               />}
               refreshing = {this.state.refreshing}
-              onRefresh ={() => this._onrefresh()} 
+              onRefresh ={() => this._onRefresh()} 
           />
           {/* <Button
             title={"Load More"}
