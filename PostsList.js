@@ -19,50 +19,31 @@ export default class PostsList extends Component {
     super();
     this.state = {refreshing : false}
   }
-
   _onRefresh = () =>  {
-    this.setState(
-      {
+    this.setState({
         refreshing : true
-      },
-      () => {while(1){} console.warn("here recieve items")},
-      )
-      console.warn("ready")
-      this.setState(
-        {
+      })
+      this.props.getAndSavePosts(this.props.accessToken,this.props.refreshToken)
+      this.setState({
           refreshing : false
         }
-      )
-      //this.props.getAndSavePosts(this.props.unique_id, this.props.location) ,
+      )  
   }  
   render() {
     return (
         <View>
           <FlatList
-            data={[
-              {_id : 18 , text : "axcvbnm" , likes : 123 , isLiked : true},
-              {_id : 17 , text : "axcvbnm" , likes : 123 , isLiked : true},
-              {_id : 16 , text : "axcvbnm" , likes : 123 , isLiked : true},
-              {_id : 15 , text : "axcvbnm" , likes : 123 , isLiked : true},
-              {_id : 14 , text : "axcvbnm" , likes : 123 , isLiked : true},
-              {_id : 13 , text : "axcvbnm" , likes : 123 , isLiked : false},
-              {_id : 1233 , text : "axcvbnm" , likes : 123 , isLiked : true},
-              {_id : 1222 , text : "axcvbnm" , likes : 123 , isLiked : true},
-              {_id : 120 , text : "axcvbnm" , likes : 123 , isLiked : true},
-              {_id : 129 , text : "axcvbnm" , likes : 123 , isLiked : false},
-              {_id : 128 , text : "axcvbnm" , likes : 123 , isLiked : true},
-              {_id : 127 , text : "axcvbnm" , likes : 123 , isLiked : true},
-              {_id : 126 , text : "axcvbnm" , likes : 123 , isLiked : true},
-              {_id : 125 , text : "axcvbnm" , likes : 123 , isLiked : true},
-              {_id : 124 , text : "axcvbnm" , likes : 123 , isLiked : true},
-              {_id : 123 , text : "axcvbnm" , likes : 123 , isLiked : true},
-              {_id : 122 , text : "axcvbnm" , likes : 123 , isLiked : true},
-              {_id : 121 , text : "axcvbnm" , likes : 123 , isLiked : true},
-            ]}
+            data={this.props.items}
             keyExtractor={item => (Math.random())}
             onEndReachedThreshold={0.5}
             onEndReached={() =>
-              console.warn("***************************************")}
+              this.props.getAndSaveOldPosts(
+                this.props.accessToken,
+                this.props.refreshToken,
+                this.props.location,
+                this.props.items[this.props.items.length - 1]._id
+              )
+             }
             renderItem={({ item }) =>
               <PostItem
                 id={item._id}
@@ -70,20 +51,12 @@ export default class PostsList extends Component {
                 isLiked={item.isLiked}
                 likes={item.likes}
                 location={this.props.location}
-                unique_id={this.props.unique_id}
+                accessToken = {this.props.accessToken}
+                refreshToken = {this.props.refreshToken}
               />}
               refreshing = {this.state.refreshing}
               onRefresh ={() => this._onRefresh()} 
           />
-          {/* <Button
-            title={"Load More"}
-            onPress={() =>
-              this.props.getAndSaveOldPosts(
-              this.props.unique_id,
-              this.props.location,
-              this.props.items[this.props.items.length - 1]._id
-              )} 
-          /> */}
         </View>
     );
   }

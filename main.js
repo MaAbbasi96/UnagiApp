@@ -18,7 +18,7 @@ import {
   FlatList,
   ListView
 } from "react-native";
-import SideMenu from 'react-native-side-menu';
+
 import reducer from "./reducer";
 import NormalPosts from "./NormalPosts";
 import HotPosts from "./HotPosts";
@@ -68,23 +68,11 @@ const setup = () => {
     render() {
       return (
         <Provider store={store}>
-           <Application />
+           <App />
         </Provider>
       );
     }
   }
   return Root;
 };
-
-class Application extends React.Component {
-  render() {
-    // const menu = <Menu navigator={navigator}/>;
-    return (
-      <SideMenu >
-        <App />
-      </SideMenu>
-    );
-  }
-}
-
 AppRegistry.registerComponent("RahnemaTeam2App", setup);
