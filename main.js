@@ -2,7 +2,11 @@ import React, { Component } from "react";
 import { Provider } from "react-redux";
 import { createStore, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
-import { TabNavigator, StackNavigator } from "react-navigation";
+import {
+    TabNavigator,
+    StackNavigator,
+    NavigationActions
+} from "react-navigation";
 import SendPostPage from "./SendPostPage";
 import {
     AppRegistry,
@@ -24,6 +28,8 @@ import SignupScreen from "./screens/Signup/signup";
 import reducer from "./reducer";
 import NormalPosts from "./NormalPosts";
 import HotPosts from "./HotPosts";
+import { logout } from "./actions";
+const store = createStore(reducer, applyMiddleware(thunk));
 const MainScreenNavigator = TabNavigator(
     {
         جدیدترین: { screen: NormalPosts },
@@ -55,7 +61,20 @@ MainScreenNavigator.navigationOptions = props => {
             fontFamily: "IRAN_Sans"
         },
         headerRight: (
-            <TouchableOpacity onPress={() => console.warn("asd")}>
+            <TouchableOpacity
+                onPress={() => {
+                    store.dispatch(logout());
+                    const resetAction = NavigationActions.reset({
+                        index: 0,
+                        actions: [
+                            NavigationActions.navigate({
+                                routeName: "LoginScreen"
+                            })
+                        ]
+                    });
+                    props.navigation.dispatch(resetAction);
+                }}
+            >
                 <Image style={styles.logout} source={require("./logout.png")} />
             </TouchableOpacity>
         )
@@ -65,7 +84,6 @@ MainScreenNavigator.navigationOptions = props => {
 var auth = true;
 var App = null;
 const setup = () => {
-    const store = createStore(reducer, applyMiddleware(thunk));
     class Root extends Component {
         componentWillMount() {
             var refreshToken = AsyncStorage.getItem(

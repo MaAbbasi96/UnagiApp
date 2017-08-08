@@ -46,7 +46,13 @@ const reducer = (state, action) => {
         return { ...state, signupWaiting: true };
     }
     if (action.type === "signup_fail") {
-        return { ...state, signupWaiting: false, signupStatus: false };
+        return {
+            ...state,
+            signupWaiting: false,
+            signupStatus: false,
+            loginStatus: false,
+            loginWaiting: false
+        };
     }
     if (action.type === "signup_done") {
         AsyncStorage.setItem("refreshToken", action.response.refreshtoken);
@@ -60,10 +66,22 @@ const reducer = (state, action) => {
         };
     }
     if (action.type === "login_waiting") {
-        return { ...state, loginWaiting: true };
+        return {
+            ...state,
+            loginWaiting: true,
+            signupWaiting: false,
+            signupStatus: false,
+            loginStatus: false
+        };
     }
     if (action.type === "login_fail") {
-        return { ...state, loginWaiting: false, loginStatus: false };
+        return {
+            ...state,
+            signupWaiting: false,
+            signupStatus: false,
+            loginStatus: false,
+            loginWaiting: false
+        };
     }
     if (action.type === "login_done") {
         AsyncStorage.setItem("refreshToken", action.response.refreshtoken);
@@ -94,6 +112,16 @@ const reducer = (state, action) => {
             }
         }
         return { ...state, hotItems: postsArray };
+    }
+    if (action.type === "logout") {
+        AsyncStorage.clear();
+        return {
+            ...state,
+            loginWaiting: false,
+            loginStatus: false,
+            signupWaiting: false,
+            signupStatus: false
+        };
     }
 };
 

@@ -76,7 +76,6 @@ class NormalPosts extends Component {
                     items={this.props.storeState.items}
                     getAndSavePosts={this.props.getAndSavePosts}
                     getAndSaveOldPosts={this.props.getAndSaveOldPosts}
-                    unique_id={this.props.storeState.unique_id}
                     location={this.props.storeState.location}
                     refreshToken={this.props.storeState.refreshToken}
                     accessToken={this.props.storeState.accessToken}
@@ -88,7 +87,8 @@ class NormalPosts extends Component {
                     }
                     onPress={() =>
                         navigate("SendPostPage", {
-                            unique_id: this.props.storeState.unique_id,
+                            accessToken: this.props.storeState.accessToken,
+                            refreshToken: this.props.storeState.refreshToken,
                             location: this.props.storeState.location
                         })}
                 />

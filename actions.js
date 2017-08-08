@@ -16,6 +16,7 @@ export const SIGNUP_WAITING = "signup_waiting";
 export const LOGIN_DONE = "login_done";
 export const LOGIN_FAIL = "login_fail";
 export const LOGIN_WAITING = "login_waiting";
+export const LOGOUT = "logout";
 var Helpers = require("./helpers");
 var Network = require("./network");
 export function getPosts() {
@@ -248,5 +249,10 @@ export function loginResponse(response) {
 export function loginWaiting() {
     return {
         type: LOGIN_WAITING
+    };
+}
+export function logout() {
+    return {
+        type: LOGOUT
     };
 }

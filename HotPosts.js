@@ -50,7 +50,6 @@ class HotPosts extends Component {
                     items={this.props.storeState.hotItems}
                     getAndSavePosts={this.props.getAndSaveHotPosts}
                     getAndSaveOldPosts={this.props.getAndSaveOldHotPosts}
-                    unique_id={this.props.storeState.unique_id}
                     location={this.props.storeState.location}
                     refreshToken={this.props.storeState.refreshToken}
                     accessToken={this.props.storeState.accessToken}
@@ -62,7 +61,8 @@ class HotPosts extends Component {
                     }
                     onPress={() =>
                         navigate("SendPostPage", {
-                            unique_id: this.props.storeState.unique_id,
+                            accessToken: this.props.storeState.accessToken,
+                            refreshToken: this.props.storeState.refreshToken,
                             location: this.props.storeState.location
                         })}
                 />
