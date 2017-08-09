@@ -59,7 +59,7 @@ MainScreenNavigator.navigationOptions = props => {
                 onPress={() => {
                     Alert.alert(
                         "اوناگی",
-                        "آیا قصد خروج از برنامه را دارید؟",
+                        " قصد خروج از حساب کاربری را دارید؟",
                         [
                             {
                                 text: "بله",

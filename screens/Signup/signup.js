@@ -14,7 +14,8 @@ import {
     TouchableOpacity,
     Alert,
     ActivityIndicator,
-    AsyncStorage
+    AsyncStorage,
+    ScrollView
 } from "react-native";
 // import { signup } from "../../network";
 import { signup } from "../../actions";
@@ -25,7 +26,6 @@ const backIcon = require("./back.png");
 const personIcon = require("./signup_person.png");
 const lockIcon = require("./signup_lock.png");
 const emailIcon = require("./signup_email.png");
-const birthdayIcon = require("./signup_birthday.png");
 var animating = false;
 
 class SignupScreen extends Component {
@@ -76,110 +76,120 @@ class SignupScreen extends Component {
         const { navigate } = this.props.navigation;
         return (
             <View style={styles.container}>
-                <View style={[styles.container, styles.bg]}>
-                    <View style={styles.headerTitleView}>
-                        <Text style={styles.titleViewText}>ثبت نام</Text>
-                    </View>
-                    <ActivityIndicator animating={animating} size="small" />
+                <ScrollView>
+                    <View style={[styles.container]}>
+                        <View style={styles.headerTitleView}>
+                            <Text style={styles.titleViewText}>ثبت نام</Text>
+                        </View>
+                        <ActivityIndicator animating={animating} size="small" />
 
-                    <View style={styles.inputsContainer}>
-                        <View style={styles.inputContainer}>
-                            <View style={styles.iconContainer}>
-                                <Image
-                                    source={personIcon}
-                                    style={styles.inputIcon}
-                                    resizeMode="contain"
+                        <View style={styles.inputsContainer}>
+                            <View style={styles.inputContainer}>
+                                <View style={styles.iconContainer}>
+                                    <Image
+                                        source={personIcon}
+                                        style={styles.inputIcon}
+                                        resizeMode="contain"
+                                    />
+                                </View>
+                                <TextInput
+                                    style={[styles.input, styles.whiteFont]}
+                                    placeholder="نام کاربری"
+                                    underlineColorAndroid="transparent"
+                                    placeholderTextColor="#FFF"
+                                    //underlineColorAndroid="#8BC34A"
+                                    onChangeText={username =>
+                                        this.setState({ username })}
                                 />
                             </View>
-                            <TextInput
-                                style={[styles.input, styles.whiteFont]}
-                                placeholder="نام کاربری"
-                                placeholderTextColor="#FFF"
-                                //underlineColorAndroid="#8BC34A"
-                                onChangeText={username =>
-                                    this.setState({ username })}
-                            />
-                        </View>
 
-                        <View style={styles.inputContainer}>
-                            <View style={styles.iconContainer}>
-                                <Image
-                                    source={emailIcon}
-                                    style={styles.inputIcon}
-                                    resizeMode="contain"
+                            <View style={styles.inputContainer}>
+                                <View style={styles.iconContainer}>
+                                    <Image
+                                        source={emailIcon}
+                                        style={styles.inputIcon}
+                                        resizeMode="contain"
+                                    />
+                                </View>
+                                <TextInput
+                                    style={[styles.input, styles.whiteFont]}
+                                    placeholder="ایمیل"
+                                    underlineColorAndroid="transparent"
+                                    placeholderTextColor="#FFF"
+                                    onChangeText={email =>
+                                        this.setState({ email })}
                                 />
                             </View>
-                            <TextInput
-                                style={[styles.input, styles.whiteFont]}
-                                placeholder="ایمیل"
-                                placeholderTextColor="#FFF"
-                                onChangeText={email => this.setState({ email })}
-                            />
-                        </View>
 
-                        <View style={styles.inputContainer}>
-                            <View style={styles.iconContainer}>
-                                <Image
-                                    source={lockIcon}
-                                    style={styles.inputIcon}
-                                    resizeMode="contain"
+                            <View style={styles.inputContainer}>
+                                <View style={styles.iconContainer}>
+                                    <Image
+                                        source={lockIcon}
+                                        style={styles.inputIcon}
+                                        resizeMode="contain"
+                                    />
+                                </View>
+                                <TextInput
+                                    secureTextEntry={true}
+                                    style={[styles.input, styles.whiteFont]}
+                                    placeholder="گذرواژه"
+                                    underlineColorAndroid="transparent"
+                                    placeholderTextColor="#FFF"
+                                    onChangeText={password =>
+                                        this.setState({ password })}
                                 />
                             </View>
-                            <TextInput
-                                secureTextEntry={true}
-                                style={[styles.input, styles.whiteFont]}
-                                placeholder="گذرواژه"
-                                placeholderTextColor="#FFF"
-                                onChangeText={password =>
-                                    this.setState({ password })}
-                            />
-                        </View>
 
-                        <View style={styles.inputContainer}>
-                            <View style={styles.iconContainer}>
-                                <Image
-                                    source={lockIcon}
-                                    style={styles.inputIcon}
-                                    resizeMode="contain"
+                            <View style={styles.inputContainer}>
+                                <View style={styles.iconContainer}>
+                                    <Image
+                                        source={lockIcon}
+                                        style={styles.inputIcon}
+                                        resizeMode="contain"
+                                    />
+                                </View>
+                                <TextInput
+                                    secureTextEntry={true}
+                                    style={[styles.input, styles.whiteFont]}
+                                    placeholder="تکرار گذرواژه"
+                                    underlineColorAndroid="transparent"
+                                    placeholderTextColor="#FFF"
+                                    onChangeText={repeatPassword =>
+                                        this.setState({ repeatPassword })}
                                 />
                             </View>
-                            <TextInput
-                                secureTextEntry={true}
-                                style={[styles.input, styles.whiteFont]}
-                                placeholder="تکرار گذرواژه"
-                                placeholderTextColor="#FFF"
-                                onChangeText={repeatPassword =>
-                                    this.setState({ repeatPassword })}
-                            />
+                            <Text />
+                            <Text />
+                            <Text />
+                            <View />
                         </View>
-                    </View>
-                    <View style={styles.footerContainer}>
-                        <TouchableOpacity
-                            activeOpacity={0.5}
-                            onPress={() => {
-                                if (
-                                    this.state.password !=
-                                    this.state.repeatPassword
-                                ) {
-                                    Alert.alert(
-                                        null,
-                                        "رمز عبور و تکرار آن تطابق ندارند"
+                        <View style={styles.footerContainer}>
+                            <TouchableOpacity
+                                activeOpacity={0.5}
+                                onPress={() => {
+                                    if (
+                                        this.state.password !=
+                                        this.state.repeatPassword
+                                    ) {
+                                        Alert.alert(
+                                            null,
+                                            "رمز عبور و تکرار آن تطابق ندارند"
+                                        );
+                                        return;
+                                    }
+                                    this.props.signup(
+                                        this.state.username,
+                                        this.state.password
                                     );
-                                    return;
-                                }
-                                this.props.signup(
-                                    this.state.username,
-                                    this.state.password
-                                );
-                            }}
-                        >
-                            <View style={styles.signup}>
-                                <Text style={styles.buttonText}>تایید</Text>
-                            </View>
-                        </TouchableOpacity>
-                        <View />
-                        {/* <View style={styles.loginWrap}> */}
-                        {/* <TouchableOpacity
+                                }}
+                            >
+                                <View style={styles.signup}>
+                                    <Text style={styles.buttonText}>تایید</Text>
+                                </View>
+                            </TouchableOpacity>
+                            <View />
+                            {/* <View style={styles.loginWrap}> */}
+                            {/* <TouchableOpacity
                 activeOpacity={0.5}
                 onPress={() => navigate("LoginPage", {})}
               >
@@ -188,9 +198,10 @@ class SignupScreen extends Component {
                 </View>
               </TouchableOpacity>
               <Text style={styles.whiteFont}>دارای حساب کاربری هستید؟</Text> */}
-                        {/* </View> */}
+                            {/* </View> */}
+                        </View>
                     </View>
-                </View>
+                </ScrollView>
             </View>
         );
     }
@@ -200,11 +211,11 @@ let styles = StyleSheet.create({
         backgroundColor: "#212121",
         flex: 1
     },
-    //   bg: {
-    //     paddingTop: 30,
+    // bg: {
+    //     paddingTop: 40,
     //     width: null,
     //     height: null
-    //   },
+    // },
     headerContainer: {
         flex: 1
     },
@@ -230,7 +241,7 @@ let styles = StyleSheet.create({
     },
     headerTitleView: {
         backgroundColor: "transparent",
-        marginTop: 10,
+        marginTop: 30,
         marginLeft: 25,
         alignItems: "center"
     },
@@ -246,7 +257,7 @@ let styles = StyleSheet.create({
         borderBottomColor: "#8BC34A",
         borderColor: "transparent",
         flexDirection: "row",
-        height: 75
+        height: 55
     },
     loginWrap: {
         backgroundColor: "transparent",
@@ -260,20 +271,22 @@ let styles = StyleSheet.create({
         alignItems: "center"
     },
     inputIcon: {
-        width: 30,
-        height: 30
+        width: 20,
+        height: 20
     },
     input: {
         flex: 1,
         paddingHorizontal: 10,
-        fontSize: 20,
+        paddingVertical: 5,
+        marginBottom: 20,
+        fontSize: 15,
         fontWeight: "bold",
         color: "#FF3366",
         textAlign: "right"
     },
     signup: {
         backgroundColor: "#689F38",
-        paddingVertical: 25,
+        paddingVertical: 20,
         alignItems: "center",
         justifyContent: "center",
         marginBottom: 15
