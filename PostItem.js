@@ -39,8 +39,17 @@ class PostItem extends Component {
               }
             />
           </TouchableOpacity>
-          <Text style={styles.Likes}>
+           <Text style={styles.Likes}>
             {this.state.likes}
+          </Text>  
+          <TouchableOpacity onPress = {() => console.warn("goto reply page")}>
+            <Image
+              style = {styles.LikeImage}
+              source={require('./ReplyImage.png')}/>
+          </TouchableOpacity>
+          <Text style={styles.Likes}>
+            {/* {this.state.replyes} */}
+            1213213
           </Text>
         </View>
       </View>
@@ -66,20 +75,21 @@ const styles = StyleSheet.create({
   },
   LikeImage: {
     flex: 1,
-    marginLeft: 5,
+   // marginLeft: 5,
     marginTop: 5,
     height: 22,
     width: 22
   },
   bottomOfPost: {
+    flex :1,
     flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center"
+    justifyContent: "flex-start",
+    alignItems: "flex-start"
   },
   Likes: {
     fontSize: 13,
     flex: 1,
-    marginLeft: 10,
+    marginLeft: 5,
     marginTop: 5
   }
 });
