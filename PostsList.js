@@ -1,56 +1,64 @@
 import React, { Component } from "react";
 import {
-  AppRegistry,
-  StyleSheet,
-  Text,
-  View,
-  TextInput,
-  Button,
-  ScrollView,
-  TouchableOpacity,
-  Image,
-  RefreshControl,
-  FlatList,
-  ListView
+    AppRegistry,
+    StyleSheet,
+    Text,
+    View,
+    TextInput,
+    Button,
+    ScrollView,
+    TouchableOpacity,
+    Image,
+    RefreshControl,
+    FlatList
 } from "react-native";
 import PostItem from "./PostItem";
-import PTRView from "react-native-pull-to-refresh";
 
 export default class PostsList extends Component {
-  render() {
-    return (
-      <PTRView
-        onRefresh={() =>
-          this.props.getAndSavePosts(this.props.unique_id, this.props.location)}
-      >
-        <View>
-          <FlatList
-            data={this.props.items}
-            keyExtractor={item => (Math.random())}
-            onEndReachedThreshold={0}
-            onEndReached={() =>
-              console.log("***************************************")}
-            renderItem={({ item }) =>
-              <PostItem
-                id={item._id}
-                label={item.text}
-                isLiked={item.isLiked}
-                likes={item.likes}
-                location={this.props.location}
-                unique_id={this.props.unique_id}
-              />}
-          />
-          <Button
-            title={"Load More"}
-            onPress={() =>
-               this.props.getAndSaveOldPosts(
-                this.props.unique_id,
-                this.props.location,
-                this.props.items[this.props.items.length - 1]._id
-              )} 
-          />
-        </View>
-      </PTRView>
-    );
-  }
+    constructor() {
+        super();
+        this.state = { refreshing: false };
+    }
+    _onRefresh = () => {
+        this.setState({
+            refreshing: true
+        });
+        this.props.getAndSavePosts(
+            this.props.accessToken,
+            this.props.refreshToken
+        );
+        this.setState({
+            refreshing: false
+        });
+    };
+    render() {
+        return (
+            <View>
+                <FlatList
+                    data={this.props.items}
+                    keyExtractor={item => Math.random()}
+                    onEndReachedThreshold={0.5}
+                    onEndReached={() =>
+                        this.props.getAndSaveOldPosts(
+                            this.props.accessToken,
+                            this.props.refreshToken,
+                            this.props.location,
+                            this.props.items[this.props.items.length - 1]._id
+                        )}
+                    renderItem={({ item }) =>
+                        <PostItem
+                            id={item._id}
+                            label={item.text}
+                            isLiked={item.isLiked}
+                            likes={item.likes}
+                            location={this.props.location}
+                            accessToken={this.props.accessToken}
+                            refreshToken={this.props.refreshToken}
+                        />}
+                    refreshing={this.state.refreshing}
+                    onRefresh={() => this._onRefresh()}
+                />
+            </View>
+        );
+    }
 }
