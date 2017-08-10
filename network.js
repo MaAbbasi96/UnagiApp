@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Fetch from "react-native-fetch";
-var serverPath = "http://192.168.11.201:3000";
+var serverPath = "http://192.168.1.104:3000";
 export function getPosts(location, accessToken, refreshToken) {
     return fetch(serverPath + "/post", {
         method: "GET",
