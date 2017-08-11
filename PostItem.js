@@ -29,7 +29,17 @@ class PostItem extends Component {
                     {this.props.label}
                 </Text>
                 <View style={styles.bottomOfPost}>
-                    <TouchableOpacity onPress={() => console.log("reply")}>
+                    <TouchableOpacity
+                        onPress={() =>
+                            this.props.navigation.navigate("ReplyScreen", {
+                                label: this.props.label,
+                                accessToken: this.props.accessToken,
+                                likes: this.props.likes,
+                                id: this.props.id,
+                                isLiked: this.props.isLiked,
+                                location: this.props.location
+                            })}
+                    >
                         <Image
                             style={styles.replyImage}
                             source={require("./reply.png")}

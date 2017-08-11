@@ -29,6 +29,7 @@ import SignupScreen from "./screens/Signup/signup";
 import reducer from "./reducer";
 import NormalPosts from "./NormalPosts";
 import HotPosts from "./HotPosts";
+import ReplyPage from "./ReplyPage";
 import { logout } from "./actions";
 const store = createStore(reducer, applyMiddleware(thunk));
 const MainScreenNavigator = TabNavigator(
@@ -118,7 +119,8 @@ const setup = () => {
                         SignUpPage: { screen: SignupScreen },
                         MainScreen: { screen: MainScreenNavigator },
                         SendPostPage: { screen: SendPostPage },
-                        LoginScreen: { screen: LoginScreen }
+                        LoginScreen: { screen: LoginScreen },
+                        ReplyScreen: { screen: ReplyPage }
                     });
                     this.forceUpdate();
                 }
