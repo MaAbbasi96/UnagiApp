@@ -61,6 +61,7 @@ class PostItem extends Component {
                                 likes: this.state.likes,
                                 id: this.props.id,
                                 isLiked: this.state.isLiked,
+                                date: this.props.date,
                                 location: this.props.location
                             })}
                     >

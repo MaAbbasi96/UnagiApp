@@ -139,6 +139,7 @@ export default class ReplyScreen extends Component {
                         }
                         notConnected={true}
                         disableReply={true}
+                        date={this.props.navigation.state.params.date}
                     />
                 </View>
                 <View style={styles.postsList}>
@@ -169,6 +170,7 @@ export default class ReplyScreen extends Component {
                                 }
                                 navigation={this.props.navigation}
                                 notConnected={true}
+                                date={item.date}
                             />}
                     />
                     <View style={styles.textInputView}>
