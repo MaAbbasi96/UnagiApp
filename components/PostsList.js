@@ -1,17 +1,5 @@
 import React, { Component } from "react";
-import {
-    AppRegistry,
-    StyleSheet,
-    Text,
-    View,
-    TextInput,
-    Button,
-    ScrollView,
-    TouchableOpacity,
-    Image,
-    RefreshControl,
-    FlatList
-} from "react-native";
+import { StyleSheet, View, FlatList } from "react-native";
 import PostItem from "./PostItem";
 
 export default class PostsList extends Component {

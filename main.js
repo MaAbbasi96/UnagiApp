@@ -7,30 +7,25 @@ import {
     StackNavigator,
     NavigationActions
 } from "react-navigation";
-import SendPostPage from "./SendPostPage";
 import {
     AppRegistry,
     StyleSheet,
-    Text,
     View,
-    TextInput,
     Button,
-    ScrollView,
     TouchableOpacity,
     Image,
-    RefreshControl,
     FlatList,
-    ListView,
     Alert,
     AsyncStorage
 } from "react-native";
-import LoginScreen from "./screens/Login/login";
-import SignupScreen from "./screens/Signup/signup";
-import reducer from "./reducer";
-import NormalPosts from "./NormalPosts";
-import HotPosts from "./HotPosts";
-import ReplyPage from "./ReplyPage";
+import LoginScreen from "./components/LoginScreen";
+import SignupScreen from "./components/SignupScreen";
+import NormalPosts from "./components/NormalPosts";
+import HotPosts from "./components/HotPosts";
+import ReplyScreen from "./components/ReplyScreen";
+import SendPostScreen from "./components/SendPostScreen";
 import { logout } from "./actions";
+import reducer from "./reducer";
 const store = createStore(reducer, applyMiddleware(thunk));
 const MainScreenNavigator = TabNavigator(
     {
@@ -118,9 +113,9 @@ const setup = () => {
                         },
                         SignUpPage: { screen: SignupScreen },
                         MainScreen: { screen: MainScreenNavigator },
-                        SendPostPage: { screen: SendPostPage },
+                        SendPostScreen: { screen: SendPostScreen },
                         LoginScreen: { screen: LoginScreen },
-                        ReplyScreen: { screen: ReplyPage }
+                        ReplyScreen: { screen: ReplyScreen }
                     });
                     this.forceUpdate();
                 }

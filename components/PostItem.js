@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
-import { likePost } from "./actions";
+import { likePost } from "../actions";
 import { connect } from "react-redux";
 class PostItem extends Component {
     componentWillMount() {
@@ -53,7 +53,7 @@ class PostItem extends Component {
                         {!this.props.disableReply &&
                             <Image
                                 style={styles.replyImage}
-                                source={require("./images/reply.png")}
+                                source={require("../images/reply.png")}
                             />}
                     </TouchableOpacity>
                     <Text style={styles.replies}>
@@ -64,8 +64,8 @@ class PostItem extends Component {
                             style={styles.LikeImage}
                             source={
                                 this.state.isLiked
-                                    ? require("./images/LikeImage.png")
-                                    : require("./images/UnLikeImage.png")
+                                    ? require("../images/LikeImage.png")
+                                    : require("../images/UnLikeImage.png")
                             }
                         />
                     </TouchableOpacity>

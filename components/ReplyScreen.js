@@ -8,7 +8,7 @@ import {
     FlatList,
     Button
 } from "react-native";
-var Network = require("./network");
+var Network = require("../network");
 import PostItem from "./PostItem";
 import PostsList from "./PostsList";
 
@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
 });
 var charLimit = 160;
 
-export default class ReplyPage extends Component {
+export default class ReplyScreen extends Component {
     componentWillMount() {
         this.setState({ text: "", refreshing: false });
         this.setState({ charLimit: charLimit });

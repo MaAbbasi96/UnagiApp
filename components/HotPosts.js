@@ -1,16 +1,5 @@
 import React, { Component } from "react";
-import {
-    AppRegistry,
-    StyleSheet,
-    Text,
-    View,
-    TextInput,
-    Button,
-    ScrollView,
-    TouchableOpacity,
-    Image,
-    RefreshControl
-} from "react-native";
+import { StyleSheet, View, Image } from "react-native";
 import { connect } from "react-redux";
 import {
     getAndSaveUniqueID,
@@ -18,7 +7,7 @@ import {
     getAndSaveOldHotPosts,
     updatePost,
     likePost
-} from "./actions";
+} from "../actions";
 import ActionButton from "react-native-action-button";
 import PostsList from "./PostsList";
 const styles = StyleSheet.create({
@@ -60,11 +49,11 @@ class HotPosts extends Component {
                     icon={
                         <Image
                             style={styles.img}
-                            source={require("./images/actionButtonImage.png")}
+                            source={require("../images/actionButtonImage.png")}
                         />
                     }
                     onPress={() =>
-                        navigate("SendPostPage", {
+                        navigate("SendPostScreen", {
                             accessToken: this.props.storeState.accessToken,
                             refreshToken: this.props.storeState.refreshToken,
                             location: this.props.storeState.location
