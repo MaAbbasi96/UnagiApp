@@ -67,19 +67,33 @@ var charLimit = 160;
 
 export default class ReplyPage extends Component {
     componentWillMount() {
-        this.setState({ text: "" });
+        this.setState({ text: "", refreshing: false });
+        this.getReplies();
+        this.props.navigation.setParams({
+            charLimit: 160
+        });
+    }
+    getReplies() {
+        this.setState({ refreshing: true });
         Network.getReplies(
             this.props.navigation.state.params.id,
             this.props.navigation.state.params.accessToken,
             this.props.navigation.state.params.location
         ).then(response => {
             this.setState({ items: response.posts });
-        });
-        this.props.navigation.setParams({
-            charLimit: 160
+            this.setState({ refreshing: false });
         });
     }
-    componentWillReceiveProps(props) {}
+    getOldReplies() {
+        Network.getOldReplies(
+            this.props.navigation.state.params.id,
+            this.props.navigation.state.params.accessToken,
+            this.props.navigation.state.params.location,
+            this.state.items[this.state.items.length - 1]._id
+        ).then(response => {
+            this.setState({ items: this.state.items.concat(response.posts) });
+        });
+    }
     sendReply() {
         console.log(this.state.text);
         Network.sendReply(
@@ -136,8 +150,9 @@ export default class ReplyPage extends Component {
                         data={this.state.items}
                         keyExtractor={item => Math.random()}
                         onEndReachedThreshold={0.5}
-                        onEndReached={() =>
-                            console.log("EEEEEENNNNNNDDDDD rreached")}
+                        onEndReached={() => this.getOldReplies()}
+                        refreshing={this.state.refreshing}
+                        onRefresh={() => this.getReplies()}
                         renderItem={({ item }) =>
                             <PostItem
                                 id={item._id}
@@ -167,7 +182,7 @@ export default class ReplyPage extends Component {
                         />
                         <Button
                             title={"Send"}
-                            onPress={() => console.log(this.state.items)}
+                            onPress={() => this.sendReply()}
                         />
                     </View>
                 </View>

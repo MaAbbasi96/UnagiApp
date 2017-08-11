@@ -56,6 +56,9 @@ class PostItem extends Component {
                                 source={require("./reply.png")}
                             />}
                     </TouchableOpacity>
+                    <Text style={styles.replies}>
+                        {this.props.replies}
+                    </Text>
                     <TouchableOpacity onPress={() => this.likeChanged()}>
                         <Image
                             style={styles.LikeImage}
@@ -114,6 +117,11 @@ const styles = StyleSheet.create({
         fontSize: 13,
         flex: 1,
         marginLeft: 10,
+        marginTop: 5
+    },
+    replies: {
+        fontSize: 13,
+        marginRight: 10,
         marginTop: 5
     }
 });

@@ -270,6 +270,30 @@ export function getReplies(postID, accessToken, location) {
             console.log(err);
         });
 }
+export function getOldReplies(postID, accessToken, location, lastpost) {
+    return fetch(serverPath + "/post/" + postID, {
+        method: "GET",
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            type: "token",
+            accesstoken: accessToken,
+            location: JSON.stringify(location),
+            lastpost: lastpost
+        }
+    })
+        .then(function(res) {
+            return res.json();
+        })
+        .then(function(res) {
+            return new Promise((resolve, reject) => {
+                resolve(res);
+            });
+        })
+        .catch(err => {
+            console.log(err);
+        });
+}
 export function sendReply(postID, text, accessToken, location) {
     return fetch(serverPath + "/post/" + postID + "/reply", {
         method: "POST",
