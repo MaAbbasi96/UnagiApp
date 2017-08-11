@@ -58,7 +58,10 @@ class HotPosts extends Component {
                 <ActionButton
                     buttonColor="rgb(170,170,170)"
                     icon={
-                        <Image style={styles.img} source={require("./i.png")} />
+                        <Image
+                            style={styles.img}
+                            source={require("./images/actionButtonImage.png")}
+                        />
                     }
                     onPress={() =>
                         navigate("SendPostPage", {

@@ -53,7 +53,7 @@ class PostItem extends Component {
                         {!this.props.disableReply &&
                             <Image
                                 style={styles.replyImage}
-                                source={require("./reply.png")}
+                                source={require("./images/reply.png")}
                             />}
                     </TouchableOpacity>
                     <Text style={styles.replies}>
@@ -64,8 +64,8 @@ class PostItem extends Component {
                             style={styles.LikeImage}
                             source={
                                 this.state.isLiked
-                                    ? require("./LikeImage.png")
-                                    : require("./UnLikeImage.png")
+                                    ? require("./images/LikeImage.png")
+                                    : require("./images/UnLikeImage.png")
                             }
                         />
                     </TouchableOpacity>

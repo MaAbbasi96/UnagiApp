@@ -96,7 +96,7 @@ MainScreenNavigator.navigationOptions = props => {
                             marginRight: 10
                         })
                     }
-                    source={require("./logout.png")}
+                    source={require("./images/logout.png")}
                 />
             </TouchableOpacity>
         )

@@ -96,14 +96,14 @@ export default class SendPostPage extends Component {
                         >
                             <Image
                                 style={styles.sendImage}
-                                source={require("./sendEnable.png")}
+                                source={require("./images/sendEnable.png")}
                             />
                         </TouchableOpacity>}
                     {(limit < 0 || limit === 160) &&
                         <TouchableOpacity disabled={true}>
                             <Image
                                 style={styles.sendImage}
-                                source={require("./sendDisable.png")}
+                                source={require("./images/sendDisable.png")}
                             />
                         </TouchableOpacity>}
                 </View>

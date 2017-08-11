@@ -21,11 +21,11 @@ import {
 import { signup } from "../../actions";
 import { connect } from "react-redux";
 
-const background = require("./signup_bg.png");
-const backIcon = require("./back.png");
-const personIcon = require("./signup_person.png");
-const lockIcon = require("./signup_lock.png");
-const emailIcon = require("./signup_email.png");
+const background = require("../../images/signup_bg.png");
+const backIcon = require("../../images/signup_back.png");
+const personIcon = require("../../images/signup_person.png");
+const lockIcon = require("../../images/signup_lock.png");
+const emailIcon = require("../../images/signup_email.png");
 var animating = false;
 
 class SignupScreen extends Component {
