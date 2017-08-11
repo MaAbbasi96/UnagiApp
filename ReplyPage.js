@@ -19,9 +19,11 @@ const styles = StyleSheet.create({
         backgroundColor: "#DCEDC8"
     },
     mainPostContainer: {
-        flex: 1,
-        flexDirection: "row",
-        backgroundColor: "#DCEDC8"
+        flex: 0.5,
+        flexDirection: "column",
+        backgroundColor: "#DCEDC8",
+        // backgroundColor: "#000",
+        height: 100
     },
     sendImage: {
         height: 35,
@@ -31,14 +33,13 @@ const styles = StyleSheet.create({
     textInput: {
         flex: 1,
         flexDirection: "row",
-        backgroundColor: "#fff",
+        backgroundColor: "#8f9b81",
         color: "black",
         marginRight: 10,
         marginLeft: 10,
         //textAlignVertical: "top",
         fontFamily: "IRAN_Sans",
         fontSize: 15
-        //height: "100%"
     },
     headerRight: {
         flexDirection: "row",
@@ -60,7 +61,7 @@ const styles = StyleSheet.create({
     },
     textInputView: {
         flexDirection: "row",
-        backgroundColor: "#fff"
+        backgroundColor: "#8f9b81"
     }
 });
 var charLimit = 160;
@@ -68,10 +69,8 @@ var charLimit = 160;
 export default class ReplyPage extends Component {
     componentWillMount() {
         this.setState({ text: "", refreshing: false });
+        this.setState({ charLimit: charLimit });
         this.getReplies();
-        this.props.navigation.setParams({
-            charLimit: 160
-        });
     }
     getReplies() {
         this.setState({ refreshing: true });
@@ -95,20 +94,17 @@ export default class ReplyPage extends Component {
         });
     }
     sendReply() {
-        console.log(this.state.text);
         Network.sendReply(
             this.props.navigation.state.params.id,
             this.state.text,
             this.props.navigation.state.params.accessToken,
             this.props.navigation.state.params.location
-        );
-        this.setState({ text: "" });
+        ).then(() => {
+            this.setState({ text: "" });
+            this.getReplies();
+        });
     }
     static navigationOptions = props => {
-        var limit = 160;
-        if (props.navigation.state.params) {
-            limit = props.navigation.state.params.charLimit;
-        }
         return {
             title: "پاسخ دادن",
             headerStyle: {
@@ -159,6 +155,7 @@ export default class ReplyPage extends Component {
                                 label={item.text}
                                 isLiked={item.isLiked}
                                 likes={item.likes}
+                                replies={item.replies}
                                 location={
                                     this.props.navigation.state.params.location
                                 }
@@ -177,12 +174,34 @@ export default class ReplyPage extends Component {
                     <View style={styles.textInputView}>
                         <TextInput
                             value={this.state.text}
-                            style={styles.textInput}
-                            onChangeText={text => this.setState({ text: text })}
+                            onChangeText={text => {
+                                this.setState({
+                                    text: text,
+                                    charLimit: charLimit - text.length
+                                });
+                            }}
+                            onContentSizeChange={event => {
+                                const height =
+                                    event.nativeEvent.contentSize.height;
+                                this.setState({ height });
+                            }}
+                            underlineColorAndroid="transparent"
+                            multiline={true}
+                            style={[
+                                styles.textInput,
+                                { height: Math.max(20, this.state.height) }
+                            ]}
                         />
                         <Button
-                            title={"Send"}
+                            title={"پاسخ"}
                             onPress={() => this.sendReply()}
+                            color="#458415"
+                            disabled={
+                                this.state.charLimit > 0 &&
+                                this.state.charLimit != 160
+                                    ? false
+                                    : true
+                            }
                         />
                     </View>
                 </View>

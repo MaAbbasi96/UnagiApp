@@ -53,6 +53,7 @@ class HotPosts extends Component {
                     location={this.props.storeState.location}
                     refreshToken={this.props.storeState.refreshToken}
                     accessToken={this.props.storeState.accessToken}
+                    navigation={this.props.navigation}
                 />
                 <ActionButton
                     buttonColor="rgb(170,170,170)"

@@ -80,6 +80,7 @@ class PostItem extends Component {
 
 const styles = StyleSheet.create({
     postItem: {
+        flex: 1,
         marginLeft: 5,
         marginRight: 5,
         marginTop: 10,
