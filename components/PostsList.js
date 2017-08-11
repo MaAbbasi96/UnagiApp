@@ -44,6 +44,7 @@ export default class PostsList extends Component {
                             accessToken={this.props.accessToken}
                             refreshToken={this.props.refreshToken}
                             navigation={this.props.navigation}
+                            date={item.date}
                         />}
                     refreshing={this.state.refreshing}
                     onRefresh={() => this._onRefresh()}

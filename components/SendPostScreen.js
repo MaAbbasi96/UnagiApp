@@ -1,6 +1,14 @@
 import React, { Component } from "react";
 import { addPost } from "../network";
-import { StyleSheet, Text, View, TextInput, Button, Image } from "react-native";
+import {
+    StyleSheet,
+    Text,
+    View,
+    TextInput,
+    Button,
+    Image,
+    TouchableOpacity
+} from "react-native";
 const styles = StyleSheet.create({
     container: {
         flex: 1,

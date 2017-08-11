@@ -13,6 +13,20 @@ class PostItem extends Component {
             this.setState({ likes: props.likes });
         }
     }
+    postTime() {
+        var prevTime = new Date(this.props.date);
+        var thisTime = new Date(); // now
+        var time = Math.floor((thisTime.getTime() - prevTime.getTime()) / 1000);
+        if (time < 60) return time + " ثانیه پیش";
+        time = Math.floor(time / 60);
+        if (time < 60) return time + " دقیقه پیش";
+        time = Math.floor(time / 60);
+        if (time < 24) return time + " ساعت پیش";
+        time = Math.floor(time / 24);
+        if (time < 7) return time + " روز پیش";
+        time = Math.floor(time / 7);
+        return time + " هفته پیش";
+    }
 
     likeChanged() {
         this.props.likePost(
@@ -72,6 +86,9 @@ class PostItem extends Component {
                     <Text style={styles.Likes}>
                         {this.state.likes}
                     </Text>
+                    <Text style={styles.date}>
+                        {this.postTime()}
+                    </Text>
                 </View>
             </View>
         );
@@ -84,14 +101,18 @@ const styles = StyleSheet.create({
         marginLeft: 5,
         marginRight: 5,
         marginTop: 10,
-        padding: 5,
+        padding: 20,
+        paddingTop: 15,
+        paddingBottom: 10,
         backgroundColor: "#ffffff",
         flexDirection: "column",
-        elevation: 4
+        elevation: 4,
+        borderTopWidth: 2,
+        borderTopColor: "#709e3a"
     },
     postContent: {
         flex: 1,
-        marginRight: 16,
+        marginBottom: 5,
         fontFamily: "IRAN_Sans",
         color: "#212121"
     },
@@ -124,6 +145,9 @@ const styles = StyleSheet.create({
         fontSize: 13,
         marginRight: 10,
         marginTop: 5
+    },
+    date: {
+        color: "#aaa"
     }
 });
 mapStateToProps = state => {
