@@ -68,13 +68,11 @@ var charLimit = 160;
 export default class ReplyPage extends Component {
     componentWillMount() {
         this.setState({ text: "" });
-        console.log("PROPS RECEIVED ROGER THAT");
         Network.getReplies(
             this.props.navigation.state.params.id,
             this.props.navigation.state.params.accessToken,
             this.props.navigation.state.params.location
         ).then(response => {
-            console.log("RESPONSE", response);
             this.setState({ items: response.posts });
         });
         this.props.navigation.setParams({
@@ -90,7 +88,6 @@ export default class ReplyPage extends Component {
             this.props.navigation.state.params.accessToken,
             this.props.navigation.state.params.location
         );
-        // Network.sendReply(postID, text, accessToken, location);
         this.setState({ text: "" });
     }
     static navigationOptions = props => {
@@ -130,6 +127,8 @@ export default class ReplyPage extends Component {
                         navigation={
                             this.props.navigation.state.params.navigation
                         }
+                        notConnected={true}
+                        disableReply={true}
                     />
                 </View>
                 <View style={styles.postsList}>
@@ -145,10 +144,19 @@ export default class ReplyPage extends Component {
                                 label={item.text}
                                 isLiked={item.isLiked}
                                 likes={item.likes}
-                                location={this.props.location}
-                                accessToken={this.props.accessToken}
-                                refreshToken={this.props.refreshToken}
+                                location={
+                                    this.props.navigation.state.params.location
+                                }
+                                accessToken={
+                                    this.props.navigation.state.params
+                                        .accessToken
+                                }
+                                refreshToken={
+                                    this.props.navigation.state.params
+                                        .refreshToken
+                                }
                                 navigation={this.props.navigation}
+                                notConnected={true}
                             />}
                     />
                     <View style={styles.textInputView}>
@@ -159,20 +167,9 @@ export default class ReplyPage extends Component {
                         />
                         <Button
                             title={"Send"}
-                            onPress={() => this.sendReply()}
+                            onPress={() => console.log(this.state.items)}
                         />
                     </View>
-                    {/* <PostsList
-                        items={this.state.items}
-                        location={this.props.navigation.state.params.location}
-                        refreshToken={
-                            this.props.navigation.state.params.refreshToken
-                        }
-                        accessToken={
-                            this.props.navigation.state.params.accessToken
-                        }
-                        navigation={this.props.navigation}
-                    /> */}
                 </View>
                 <PostsList />
             </View>

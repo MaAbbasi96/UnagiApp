@@ -8,8 +8,10 @@ class PostItem extends Component {
         this.setState({ likes: this.props.likes });
     }
     componentWillReceiveProps(props) {
-        this.setState({ isLiked: props.isLiked });
-        this.setState({ likes: props.likes });
+        if (!this.props.notConnected) {
+            this.setState({ isLiked: props.isLiked });
+            this.setState({ likes: props.likes });
+        }
     }
 
     likeChanged() {
@@ -18,9 +20,17 @@ class PostItem extends Component {
             this.props.refreshToken,
             this.props.location,
             this.props.id,
-            !this.props.isLiked,
+            !this.state.isLiked,
             this.props.likes
         );
+        if (this.props.notConnected) {
+            this.setState({ isLiked: !this.state.isLiked });
+            this.setState({
+                likes: this.state.isLiked
+                    ? this.state.likes - 1
+                    : this.state.likes + 1
+            });
+        }
     }
     render() {
         return (
@@ -34,16 +44,17 @@ class PostItem extends Component {
                             this.props.navigation.navigate("ReplyScreen", {
                                 label: this.props.label,
                                 accessToken: this.props.accessToken,
-                                likes: this.props.likes,
+                                likes: this.state.likes,
                                 id: this.props.id,
-                                isLiked: this.props.isLiked,
+                                isLiked: this.state.isLiked,
                                 location: this.props.location
                             })}
                     >
-                        <Image
-                            style={styles.replyImage}
-                            source={require("./reply.png")}
-                        />
+                        {!this.props.disableReply &&
+                            <Image
+                                style={styles.replyImage}
+                                source={require("./reply.png")}
+                            />}
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => this.likeChanged()}>
                         <Image
