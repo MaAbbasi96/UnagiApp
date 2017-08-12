@@ -27,9 +27,12 @@ const backIcon = require("../images/signup_back.png");
 const personIcon = require("../images/signup_person.png");
 const lockIcon = require("../images/signup_lock.png");
 const emailIcon = require("../images/signup_email.png");
-var animating = false;
 
 class SignupScreen extends Component {
+    constructor() {
+        super();
+        this.state = { animating: false };
+    }
     static navigationOptions = {
         title: "اوناگی",
         headerStyle: {
@@ -41,7 +44,6 @@ class SignupScreen extends Component {
         }
     };
     componentWillReceiveProps(props) {
-        animating = false;
         if (props.storeState) {
             if (props.storeState.signupStatus) {
                 const resetAction = NavigationActions.reset({
@@ -61,8 +63,8 @@ class SignupScreen extends Component {
                 );
                 return;
             }
-            if (props.storeState.signUpwaiting) {
-                animating = props.storeState.signupWaiting;
+            if (props.storeState.signupWaiting) {
+                this.setState({ animating: true });
                 return;
             }
             if (
@@ -82,7 +84,8 @@ class SignupScreen extends Component {
                         <View style={styles.headerTitleView}>
                             <Text style={styles.titleViewText}>ثبت نام</Text>
                         </View>
-                        <ActivityIndicator animating={animating} size="small" />
+                        {this.state.animating &&
+                            <ActivityIndicator animating={true} size="small" />}
 
                         <View style={styles.inputsContainer}>
                             <View style={styles.inputContainer}>

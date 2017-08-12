@@ -29,8 +29,11 @@ const mark = require("../images/login1_mark.png");
 const lockIcon = require("../images/login1_lock.png");
 const personIcon = require("../images/login1_person.png");
 var pass, user;
-var animating = false;
 class LoginScreen extends Component {
+    constructor() {
+        super();
+        this.state = { animating: false };
+    }
     static navigationOptions = {
         title: "اوناگی",
         headerStyle: {
@@ -43,7 +46,6 @@ class LoginScreen extends Component {
         headerLeft: null
     };
     componentWillReceiveProps(props) {
-        animating = false;
         if (props.storeState) {
             if (props.storeState.loginStatus) {
                 const resetAction = NavigationActions.reset({
@@ -64,7 +66,8 @@ class LoginScreen extends Component {
                 return;
             }
             if (props.storeState.loginWaiting) {
-                animating = props.storeState.loginWaiting;
+                console.log("loginWaiting");
+                this.setState({ animating: true });
                 return;
             }
             if (
@@ -90,7 +93,12 @@ class LoginScreen extends Component {
                                 resizeMode="contain"
                             />
                         </View>
-                        <ActivityIndicator animating={animating} size="small" />
+                        {this.state.animating &&
+                            <ActivityIndicator
+                                animating={this.state.animating}
+                                size="small"
+                            />}
+
                         <View style={styles.wrapper}>
                             <View style={styles.inputWrap}>
                                 <View style={styles.iconWrap}>
