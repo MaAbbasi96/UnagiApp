@@ -1,5 +1,13 @@
 import React, { Component } from "react";
-import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
+import {
+    View,
+    Text,
+    StyleSheet,
+    Image,
+    TouchableOpacity,
+    Share,
+    Button
+} from "react-native";
 import { likePost } from "../actions";
 import { connect } from "react-redux";
 class PostItem extends Component {
@@ -12,6 +20,21 @@ class PostItem extends Component {
             this.setState({ isLiked: props.isLiked });
             this.setState({ likes: props.likes });
         }
+    }
+    share() {
+        Share.share(
+            {
+                message: this.props.label
+            },
+            {
+                // Android only:
+                dialogTitle: "منتشر کنید",
+                // iOS only:
+                excludedActivityTypes: [
+                    "com.apple.UIKit.activity.PostToTwitter"
+                ]
+            }
+        );
     }
     postTime() {
         var prevTime = new Date(this.props.date);
@@ -54,6 +77,15 @@ class PostItem extends Component {
                 </Text>
                 <View style={styles.bottomOfPost}>
                     <TouchableOpacity
+                        style={styles.shareButton}
+                        onPress={() => this.share()}
+                    >
+                        <Image
+                            style={styles.shareImage}
+                            source={require("../images/share.png")}
+                        />
+                    </TouchableOpacity>
+                    <TouchableOpacity
                         onPress={() =>
                             this.props.navigation.navigate("ReplyScreen", {
                                 label: this.props.label,
@@ -76,7 +108,7 @@ class PostItem extends Component {
                     </Text>
                     <TouchableOpacity onPress={() => this.likeChanged()}>
                         <Image
-                            style={styles.LikeImage}
+                            style={styles.likeImage}
                             source={
                                 this.state.isLiked
                                     ? require("../images/LikeImage.png")
@@ -117,7 +149,7 @@ const styles = StyleSheet.create({
         fontFamily: "IRAN_Sans",
         color: "#212121"
     },
-    LikeImage: {
+    likeImage: {
         flex: 1,
         marginLeft: 5,
         marginTop: 5,
@@ -149,6 +181,20 @@ const styles = StyleSheet.create({
     },
     date: {
         color: "#aaa"
+    },
+    shareImage: {
+        flex: 1,
+        // marginLeft: 5,
+        // marginTop: 5,
+        // marginRight: 15,
+        height: 40,
+        width: 22
+    },
+    shareButton: {
+        // flex: 1,
+        height: 22,
+        width: 30,
+        marginRight: 5
     }
 });
 mapStateToProps = state => {
