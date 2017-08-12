@@ -1,21 +1,7 @@
 import React, { Component } from "react";
 import Icon from "react-native-vector-icons/Ionicons";
 import ActionButton from "react-native-action-button";
-import {
-    AppRegistry,
-    StyleSheet,
-    Text,
-    View,
-    TextInput,
-    Button,
-    ScrollView,
-    TouchableOpacity,
-    Image,
-    RefreshControl,
-    FlatList,
-    ListView,
-    AsyncStorage
-} from "react-native";
+import { StyleSheet, View, Image, FlatList, AsyncStorage } from "react-native";
 import { connect } from "react-redux";
 import {
     getAndSaveUniqueID,
@@ -24,27 +10,26 @@ import {
     updatePost,
     likePost,
     loginWithToken
-} from "./actions";
-import SendPostPage from "./SendPostPage";
+} from "../actions";
+import SendPostScreen from "./SendPostScreen";
 import PostItem from "./PostItem";
 import PostsList from "./PostsList";
 
-var Network = require("./network");
-var Helpers = require("./helpers");
+var Network = require("../network");
+var Helpers = require("../helpers");
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
         flexDirection: "column",
-        backgroundColor: "#DCEDC8"
+        backgroundColor: "#DCEDC8",
+        padding: 5
     },
     img: {
         height: 60,
         width: 60
     }
 });
-let myLocation; //= { latitude: 35.7293756, longitude: 51.42246219 };
-
 class NormalPosts extends Component {
     componentDidMount() {
         if (!this.props.storeState) {
@@ -79,14 +64,18 @@ class NormalPosts extends Component {
                     location={this.props.storeState.location}
                     refreshToken={this.props.storeState.refreshToken}
                     accessToken={this.props.storeState.accessToken}
+                    navigation={this.props.navigation}
                 />
                 <ActionButton
                     buttonColor="rgb(170,170,170)"
                     icon={
-                        <Image style={styles.img} source={require("./i.png")} />
+                        <Image
+                            style={styles.img}
+                            source={require("../images/actionButtonImage.png")}
+                        />
                     }
                     onPress={() =>
-                        navigate("SendPostPage", {
+                        navigate("SendPostScreen", {
                             accessToken: this.props.storeState.accessToken,
                             refreshToken: this.props.storeState.refreshToken,
                             location: this.props.storeState.location

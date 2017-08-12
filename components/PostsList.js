@@ -1,17 +1,5 @@
 import React, { Component } from "react";
-import {
-    AppRegistry,
-    StyleSheet,
-    Text,
-    View,
-    TextInput,
-    Button,
-    ScrollView,
-    TouchableOpacity,
-    Image,
-    RefreshControl,
-    FlatList
-} from "react-native";
+import { StyleSheet, View, FlatList } from "react-native";
 import PostItem from "./PostItem";
 
 export default class PostsList extends Component {
@@ -51,9 +39,12 @@ export default class PostsList extends Component {
                             label={item.text}
                             isLiked={item.isLiked}
                             likes={item.likes}
+                            replies={item.replies}
                             location={this.props.location}
                             accessToken={this.props.accessToken}
                             refreshToken={this.props.refreshToken}
+                            navigation={this.props.navigation}
+                            date={item.date}
                         />}
                     refreshing={this.state.refreshing}
                     onRefresh={() => this._onRefresh()}

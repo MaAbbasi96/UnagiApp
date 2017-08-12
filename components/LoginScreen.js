@@ -5,7 +5,6 @@ import {
 } from "react-navigation";
 import React, { Component } from "react";
 import {
-    AppRegistry,
     StyleSheet,
     Text,
     View,
@@ -25,10 +24,10 @@ var Network = require("../network");
 
 const { width, height } = Dimensions.get("window");
 
-const background = require("../../images/login1_bg.png");
-const mark = require("../../images/login1_mark.png");
-const lockIcon = require("../../images/login1_lock.png");
-const personIcon = require("../../images/login1_person.png");
+const background = require("../images/login1_bg.png");
+const mark = require("../images/login1_mark.png");
+const lockIcon = require("../images/login1_lock.png");
+const personIcon = require("../images/login1_person.png");
 var pass, user;
 var animating = false;
 class LoginScreen extends Component {
@@ -138,10 +137,17 @@ class LoginScreen extends Component {
                             <TouchableOpacity
                                 activeOpacity={0.5}
                                 onPress={() => {
-                                    this.props.login(
-                                        this.state.username,
-                                        this.state.password
-                                    );
+                                    if (this.state) {
+                                        if (
+                                            this.state.username &&
+                                            this.state.password
+                                        ) {
+                                            this.props.login(
+                                                this.state.username,
+                                                this.state.password
+                                            );
+                                        }
+                                    }
                                 }}
                             >
                                 <View style={styles.button}>

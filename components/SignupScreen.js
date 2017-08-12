@@ -18,14 +18,14 @@ import {
     ScrollView
 } from "react-native";
 // import { signup } from "../../network";
-import { signup } from "../../actions";
+import { signup } from "../actions";
 import { connect } from "react-redux";
 
-const background = require("../../images/signup_bg.png");
-const backIcon = require("../../images/signup_back.png");
-const personIcon = require("../../images/signup_person.png");
-const lockIcon = require("../../images/signup_lock.png");
-const emailIcon = require("../../images/signup_email.png");
+const background = require("../images/signup_bg.png");
+const backIcon = require("../images/signup_back.png");
+const personIcon = require("../images/signup_person.png");
+const lockIcon = require("../images/signup_lock.png");
+const emailIcon = require("../images/signup_email.png");
 var animating = false;
 
 class SignupScreen extends Component {
@@ -167,20 +167,27 @@ class SignupScreen extends Component {
                             <TouchableOpacity
                                 activeOpacity={0.5}
                                 onPress={() => {
-                                    if (
-                                        this.state.password !=
-                                        this.state.repeatPassword
-                                    ) {
-                                        Alert.alert(
-                                            null,
-                                            "رمز عبور و تکرار آن تطابق ندارند"
-                                        );
-                                        return;
+                                    if (this.state) {
+                                        if (
+                                            this.state.username &&
+                                            this.state.password
+                                        ) {
+                                            if (
+                                                this.state.password !=
+                                                this.state.repeatPassword
+                                            ) {
+                                                Alert.alert(
+                                                    null,
+                                                    "رمز عبور و تکرار آن تطابق ندارند"
+                                                );
+                                                return;
+                                            }
+                                            this.props.signup(
+                                                this.state.username,
+                                                this.state.password
+                                            );
+                                        }
                                     }
-                                    this.props.signup(
-                                        this.state.username,
-                                        this.state.password
-                                    );
                                 }}
                             >
                                 <View style={styles.signup}>

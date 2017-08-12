@@ -1,15 +1,13 @@
 import React, { Component } from "react";
-import { addPost } from "./network";
+import { addPost } from "../network";
 import {
-    AppRegistry,
     StyleSheet,
     Text,
     View,
     TextInput,
     Button,
-    ScrollView,
-    TouchableOpacity,
-    Image
+    Image,
+    TouchableOpacity
 } from "react-native";
 const styles = StyleSheet.create({
     container: {
@@ -50,7 +48,7 @@ const styles = StyleSheet.create({
 });
 var charLimit = 160;
 
-export default class SendPostPage extends Component {
+export default class SendPostScreen extends Component {
     componentWillMount() {
         this.props.navigation.setParams({
             charLimit: 160
@@ -96,14 +94,14 @@ export default class SendPostPage extends Component {
                         >
                             <Image
                                 style={styles.sendImage}
-                                source={require("./sendEnable.png")}
+                                source={require("../images/sendEnable.png")}
                             />
                         </TouchableOpacity>}
                     {(limit < 0 || limit === 160) &&
                         <TouchableOpacity disabled={true}>
                             <Image
                                 style={styles.sendImage}
-                                source={require("./sendDisable.png")}
+                                source={require("../images/sendDisable.png")}
                             />
                         </TouchableOpacity>}
                 </View>

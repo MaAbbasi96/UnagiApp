@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Fetch from "react-native-fetch";
-var serverPath = "http://192.168.11.201:3000";
+var serverPath = "http://172.30.49.91:3000";
 export function getPosts(location, accessToken, refreshToken) {
     return fetch(serverPath + "/post", {
         method: "GET",
@@ -242,6 +242,79 @@ export function logout(accessToken, refreshToken) {
             return new Promise((resolve, reject) => {
                 resolve(res);
             });
+        })
+        .catch(err => {
+            console.log(err);
+        });
+}
+export function getReplies(postID, accessToken, location) {
+    return fetch(serverPath + "/post/" + postID, {
+        method: "GET",
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            type: "token",
+            accesstoken: accessToken,
+            location: JSON.stringify(location)
+        }
+    })
+        .then(function(res) {
+            return res.json();
+        })
+        .then(function(res) {
+            return new Promise((resolve, reject) => {
+                resolve(res);
+            });
+        })
+        .catch(err => {
+            console.log(err);
+        });
+}
+export function getOldReplies(postID, accessToken, location, lastpost) {
+    return fetch(serverPath + "/post/" + postID, {
+        method: "GET",
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            type: "token",
+            accesstoken: accessToken,
+            location: JSON.stringify(location),
+            lastpost: lastpost
+        }
+    })
+        .then(function(res) {
+            return res.json();
+        })
+        .then(function(res) {
+            return new Promise((resolve, reject) => {
+                resolve(res);
+            });
+        })
+        .catch(err => {
+            console.log(err);
+        });
+}
+export function sendReply(postID, text, accessToken, location) {
+    return fetch(serverPath + "/post/" + postID + "/reply", {
+        method: "POST",
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            accesstoken: accessToken,
+            // refreshtoken: refreshToken,
+            location: JSON.stringify(location)
+        },
+        body: JSON.stringify({
+            text
+        })
+    })
+        .then(function(res) {
+            // console.log("Response" , res);
+            return;
+        })
+        .then(function(res) {
+            // func();
+            return;
         })
         .catch(err => {
             console.log(err);
