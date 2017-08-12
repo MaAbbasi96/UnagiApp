@@ -1,5 +1,11 @@
 import React, { Component } from "react";
-import { StyleSheet, View, FlatList } from "react-native";
+import {
+    StyleSheet,
+    View,
+    FlatList,
+    Text,
+    TouchableOpacity
+} from "react-native";
 import PostItem from "./PostItem";
 
 export default class PostsList extends Component {
@@ -20,6 +26,26 @@ export default class PostsList extends Component {
         });
     };
     render() {
+        if (!this.props.items || this.props.items.length == 0) {
+            return (
+                <TouchableOpacity
+                    style={styles.emptyTouchable}
+                    onPress={() => this._onRefresh()}
+                >
+                    <View
+                        style={{
+                            flexDirection: "row",
+                            alignItems: "center",
+                            justifyContent: "center"
+                        }}
+                    >
+                        <Text style={styles.emptyText}>
+                            {"پستی یافت نشد.برای تلاش دوباره صفحه را لمس کنید."}
+                        </Text>
+                    </View>
+                </TouchableOpacity>
+            );
+        }
         return (
             <View>
                 <FlatList
@@ -53,3 +79,10 @@ export default class PostsList extends Component {
         );
     }
 }
+const styles = StyleSheet.create({
+    emptyTouchable: {
+        flex: 1,
+        alignItems: "center",
+        justifyContent: "center"
+    }
+});

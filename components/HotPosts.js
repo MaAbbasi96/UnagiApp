@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StyleSheet, View, Image } from "react-native";
+import { StyleSheet, View, Image, Text } from "react-native";
 import { connect } from "react-redux";
 import {
     getAndSaveUniqueID,
@@ -31,7 +31,9 @@ class HotPosts extends Component {
             );
     }
     render() {
-        if (!this.props.storeState) return null;
+        if (!this.props.storeState) {
+            return null;
+        }
         const { navigate } = this.props.navigation;
         return (
             <View style={styles.container}>

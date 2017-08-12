@@ -40,7 +40,8 @@ class PostItem extends Component {
         var prevTime = new Date(this.props.date);
         var thisTime = new Date(); // now
         var time = Math.floor((thisTime.getTime() - prevTime.getTime()) / 1000);
-        if (time < 60) return time + 5 + " ثانیه پیش";
+        time += 5;
+        if (time < 60) return time + " ثانیه پیش";
         time = Math.floor(time / 60);
         if (time < 60) return time + " دقیقه پیش";
         time = Math.floor(time / 60);
