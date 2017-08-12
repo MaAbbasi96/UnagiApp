@@ -26,7 +26,10 @@ export default class PostsList extends Component {
         });
     };
     render() {
-        if (!this.props.items || this.props.items.length == 0) {
+        if (
+            (!this.props.items || this.props.items.length == 0) &&
+            this.props.mainScreen
+        ) {
             return (
                 <TouchableOpacity
                     style={styles.emptyTouchable}
