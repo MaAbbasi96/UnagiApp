@@ -137,16 +137,17 @@ class LoginScreen extends Component {
                             <TouchableOpacity
                                 activeOpacity={0.5}
                                 onPress={() => {
-                                    if (this.state)
+                                    if (this.state) {
                                         if (
                                             this.state.username &&
-                                            this.state.passowrd
+                                            this.state.password
                                         ) {
                                             this.props.login(
                                                 this.state.username,
                                                 this.state.password
                                             );
                                         }
+                                    }
                                 }}
                             >
                                 <View style={styles.button}>
