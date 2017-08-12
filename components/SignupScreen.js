@@ -167,20 +167,27 @@ class SignupScreen extends Component {
                             <TouchableOpacity
                                 activeOpacity={0.5}
                                 onPress={() => {
-                                    if (
-                                        this.state.password !=
-                                        this.state.repeatPassword
-                                    ) {
-                                        Alert.alert(
-                                            null,
-                                            "رمز عبور و تکرار آن تطابق ندارند"
-                                        );
-                                        return;
+                                    if (this.state) {
+                                        if (
+                                            this.state.username &&
+                                            this.state.password
+                                        ) {
+                                            if (
+                                                this.state.password !=
+                                                this.state.repeatPassword
+                                            ) {
+                                                Alert.alert(
+                                                    null,
+                                                    "رمز عبور و تکرار آن تطابق ندارند"
+                                                );
+                                                return;
+                                            }
+                                            this.props.signup(
+                                                this.state.username,
+                                                this.state.password
+                                            );
+                                        }
                                     }
-                                    this.props.signup(
-                                        this.state.username,
-                                        this.state.password
-                                    );
                                 }}
                             >
                                 <View style={styles.signup}>
