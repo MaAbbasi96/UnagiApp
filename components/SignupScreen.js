@@ -20,6 +20,7 @@ import {
 // import { signup } from "../../network";
 import { signup } from "../actions";
 import { connect } from "react-redux";
+var Validator = require("email-validator");
 
 const background = require("../images/signup_bg.png");
 const backIcon = require("../images/signup_back.png");
@@ -170,7 +171,8 @@ class SignupScreen extends Component {
                                     if (this.state) {
                                         if (
                                             this.state.username &&
-                                            this.state.password
+                                            this.state.password &&
+                                            this.state.email
                                         ) {
                                             if (
                                                 this.state.password !=
@@ -182,6 +184,18 @@ class SignupScreen extends Component {
                                                 );
                                                 return;
                                             }
+                                            if (
+                                                !Validator.validate(
+                                                    this.state.email
+                                                )
+                                            ) {
+                                                Alert.alert(
+                                                    null,
+                                                    "ایمیل اشتباه"
+                                                );
+                                                return;
+                                            }
+
                                             this.props.signup(
                                                 this.state.username,
                                                 this.state.password
