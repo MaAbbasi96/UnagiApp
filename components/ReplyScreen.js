@@ -84,17 +84,19 @@ export default class ReplyScreen extends Component {
         });
     }
     getOldReplies() {
-        if (this.state.items.length > 0) {
-            Network.getOldReplies(
-                this.props.navigation.state.params.id,
-                this.props.navigation.state.params.accessToken,
-                this.props.navigation.state.params.location,
-                this.state.items[this.state.items.length - 1]._id
-            ).then(response => {
-                this.setState({
-                    items: this.state.items.concat(response.posts)
+        if (this.state.items) {
+            if (this.state.items.length > 0) {
+                Network.getOldReplies(
+                    this.props.navigation.state.params.id,
+                    this.props.navigation.state.params.accessToken,
+                    this.props.navigation.state.params.location,
+                    this.state.items[this.state.items.length - 1]._id
+                ).then(response => {
+                    this.setState({
+                        items: this.state.items.concat(response.posts)
+                    });
                 });
-            });
+            }
         }
     }
     sendReply() {
