@@ -78,15 +78,6 @@ class PostItem extends Component {
                 </Text>
                 <View style={styles.bottomOfPost}>
                     <TouchableOpacity
-                        style={styles.shareButton}
-                        onPress={() => this.share()}
-                    >
-                        <Image
-                            style={styles.shareImage}
-                            source={require("../images/share.png")}
-                        />
-                    </TouchableOpacity>
-                    <TouchableOpacity
                         onPress={() =>
                             this.props.navigation.navigate("ReplyScreen", {
                                 label: this.props.label,
@@ -120,6 +111,15 @@ class PostItem extends Component {
                     <Text style={styles.Likes}>
                         {this.state.likes}
                     </Text>
+                    <TouchableOpacity
+                        style={styles.shareButton}
+                        onPress={() => this.share()}
+                    >
+                        <Image
+                            style={styles.shareImage}
+                            source={require("../images/share.png")}
+                        />
+                    </TouchableOpacity>
                     <Text style={styles.date}>
                         {this.postTime()}
                     </Text>

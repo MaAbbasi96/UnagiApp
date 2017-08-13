@@ -16,8 +16,8 @@ const styles = StyleSheet.create({
         backgroundColor: "#DCEDC8"
     },
     sendImage: {
-        height: 35,
-        width: 35,
+        height: 25,
+        width: 25,
         marginRight: 30
     },
     textInput: {
