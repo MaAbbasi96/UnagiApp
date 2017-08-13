@@ -125,7 +125,18 @@ class PostItem extends Component {
                     </Text>
                 </View>
                 {this.props.repliedTo &&
-                    <TouchableOpacity onPress={() => console.log("sdfg")}>
+                    <TouchableOpacity
+                        onPress={() =>
+                            this.props.navigation.navigate("ReplyScreen", {
+                                label: this.props.label,
+                                accessToken: this.props.accessToken,
+                                likes: this.state.likes,
+                                id: this.props.repliedTo,
+                                isLiked: this.state.isLiked,
+                                date: this.props.date,
+                                location: this.props.location
+                            })}
+                    >
                         <Text>
                             {"در پاسخ به این پست"}
                         </Text>

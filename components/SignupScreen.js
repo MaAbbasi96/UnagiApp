@@ -79,41 +79,6 @@ class SignupScreen extends Component {
                 }
             }
         }
-
-        // if (props.storeState) {
-        //     if (props.storeState.signupNetworkError) {
-        //         Alert.alert(null, "مشکل در ارتباط با سرور");
-        //         if (props.storeState.signupStatus) {
-        //             const resetAction = NavigationActions.reset({
-        //                 index: 0,
-        //                 actions: [
-        //                     NavigationActions.navigate({
-        //                         routeName: "MainScreen"
-        //                     })
-        //                 ]
-        //             });
-        //             this.props.navigation.dispatch(resetAction);
-        //             AsyncStorage.setItem(
-        //                 "refreshToken",
-        //                 props.storeState.refreshToken
-        //             );
-        //             AsyncStorage.setItem(
-        //                 "accessToken",
-        //                 props.storeState.accessToken
-        //             );
-        //             return;
-        //         } else if (props.storeState.signupWaiting) {
-        //             this.setState({ animating: true });
-        //             return;
-        //         } else if (
-        //             !props.storeState.signupStatus &&
-        //             !props.storeState.signupWaiting
-        //         ) {
-        //             Alert.alert(null, ".این نام‌کاربری قبلاً گرفته شده است");
-        //             this.setState({ animating: false });
-        //         }
-        //     }
-        // }
     }
     render() {
         const { navigate } = this.props.navigation;

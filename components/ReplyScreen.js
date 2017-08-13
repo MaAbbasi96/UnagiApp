@@ -79,8 +79,11 @@ export default class ReplyScreen extends Component {
             this.props.navigation.state.params.accessToken,
             this.props.navigation.state.params.location
         ).then(response => {
-            this.setState({ items: response.posts });
-            this.setState({ refreshing: false });
+            this.setState({
+                item: response.post,
+                items: response.posts,
+                refreshing: false
+            });
         });
     }
     getOldReplies() {
@@ -124,15 +127,16 @@ export default class ReplyScreen extends Component {
         };
     };
     render() {
-        if (!this.state) return null;
+        if (!this.state.item) return null;
         return (
             <View style={styles.container}>
                 <View style={styles.mainPostContainer}>
                     <PostItem
-                        id={this.props.navigation.state.params.id}
-                        label={this.props.navigation.state.params.label}
-                        isLiked={this.props.navigation.state.params.isLiked}
-                        likes={this.props.navigation.state.params.likes}
+                        id={this.state.item._id}
+                        label={this.state.item.text}
+                        isLiked={this.state.item.isLiked}
+                        likes={this.state.item.likes}
+                        repliedTo={this.state.item.repliedTo}
                         location={this.props.navigation.state.params.location}
                         accessToken={
                             this.props.navigation.state.params.accessToken
@@ -145,7 +149,8 @@ export default class ReplyScreen extends Component {
                         }
                         notConnected={true}
                         disableReply={true}
-                        date={this.props.navigation.state.params.date}
+                        date={this.state.item.date}
+                        navigation={this.props.navigation}
                     />
                 </View>
                 <View style={styles.postsList}>
@@ -182,6 +187,7 @@ export default class ReplyScreen extends Component {
                     <View style={styles.textInputView}>
                         <TextInput
                             value={this.state.text}
+                            autoFocus={true}
                             onChangeText={text => {
                                 this.setState({
                                     text: text,

@@ -81,41 +81,6 @@ class LoginScreen extends Component {
                 }
             }
         }
-        // if (props.storeState) {
-        //     if (props.storeState.loginNetworkError) {
-        //         Alert.alert(null, "مشکل در ارتباط با سرور");
-        //     } else if (props.storeState.loginStatus) {
-        //         const resetAction = NavigationActions.reset({
-        //             index: 0,
-        //             actions: [
-        //                 NavigationActions.navigate({ routeName: "MainScreen" })
-        //             ]
-        //         });
-        //         this.props.navigation.dispatch(resetAction);
-        //         AsyncStorage.setItem(
-        //             "refreshToken",
-        //             props.storeState.refreshToken
-        //         );
-        //         AsyncStorage.setItem(
-        //             "accessToken",
-        //             props.storeState.accessToken
-        //         );
-        //         return;
-        //     } else if (props.storeState.loginWaiting) {
-        //         console.log("loginWaiting");
-        //         this.setState({ animating: true });
-        //         return;
-        //     } else if (
-        //         !props.storeState.loginStatus &&
-        //         !props.storeState.loginWaiting &&
-        //         !props.storeState.signupWaiting &&
-        //         !props.storeState.signupNetworkError
-        //     ) {
-        //         Alert.alert(null, "کلمه عبور یا نام‌کاربری اشتباه است");
-        //         this.setState({ animating: false });
-        //         return;
-        //     }
-        // }
     }
     render() {
         const { navigate } = this.props.navigation;
