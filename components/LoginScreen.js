@@ -31,6 +31,10 @@ const EyehIcon = require("../images/eyeh.png");
 var hidden;
 var animating = false;
 class LoginScreen extends Component {
+    constructor() {
+        super();
+        this.state = { animating: false };
+    }
     static navigationOptions = {
         title: "اوناگی",
         headerStyle: {
@@ -49,7 +53,6 @@ class LoginScreen extends Component {
         };
     }
     componentWillReceiveProps(props) {
-        animating = false;
         if (props.storeState) {
             if (props.storeState.loginStatus) {
                 const resetAction = NavigationActions.reset({
@@ -70,7 +73,8 @@ class LoginScreen extends Component {
                 return;
             }
             if (props.storeState.loginWaiting) {
-                animating = props.storeState.loginWaiting;
+                console.log("loginWaiting");
+                this.setState({ animating: true });
                 return;
             }
             if (
@@ -95,7 +99,8 @@ class LoginScreen extends Component {
                         />
                         <Text style={styles.title}>به اوناگی خوش آمدید</Text>
                     </View>
-                    <ActivityIndicator animating={animating} size="small" />
+                    {this.state.animating &&
+                    <ActivityIndicator animating={animating} size="small" />}
                     <View style={styles.wrapper}>
                         <View style={styles.inputWrap}>
                             <View style={styles.iconWrap}>
