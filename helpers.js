@@ -37,9 +37,11 @@ const PersianMap = ["۱", "۲", "۳", "۴", "۵", "۶", "۷", "۸", "۹", "۰"];
 const LatinMap = [/1/g, /2/g, /3/g, /4/g, /5/g, /6/g, /7/g, /8/g, /9/g, /0/g];
 
 export function PersianNum(str) {
-    str = str.toString();
-    for (let i = 0; i < 10; i++) {
-        str = str.replace(LatinMap[i], PersianMap[i]);
+    if (str !== undefined) {
+        str = str.toString();
+        for (let i = 0; i < 10; i++) {
+            str = str.replace(LatinMap[i], PersianMap[i]);
+        }
     }
     return str;
 }
