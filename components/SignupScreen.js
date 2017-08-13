@@ -42,7 +42,8 @@ class SignupScreen extends Component {
         headerTitleStyle: {
             color: "#fff",
             fontFamily: "IRAN_Sans"
-        }
+        },
+        headerTintColor: "white"
     };
     componentWillReceiveProps(props) {
         if (props.storeState) {
