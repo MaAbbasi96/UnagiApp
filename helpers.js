@@ -43,3 +43,10 @@ export function PersianNum(str) {
     }
     return str;
 }
+
+export function RandomRGB() {
+    var o = Math.round,
+        r = Math.random,
+        s = 255;
+    return "rgb(" + o(r() * s) + "," + o(r() * s) + "," + o(r() * s) + ")";
+}

@@ -66,7 +66,7 @@ class NormalPosts extends Component {
                     mainScreen={true}
                 />
                 <ActionButton
-                    buttonColor="rgb(170,170,170)"
+                    buttonColor={Helpers.RandomRGB()}
                     icon={<IconM name="create" color="white" size={30} />}
                     onPress={() =>
                         navigate("SendPostScreen", {

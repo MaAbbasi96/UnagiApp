@@ -12,6 +12,7 @@ import ActionButton from "react-native-action-button";
 import PostsList from "./PostsList";
 
 import IconM from "react-native-vector-icons/MaterialIcons";
+var Helpers = require("../helpers");
 
 const styles = StyleSheet.create({
     container: {
@@ -47,7 +48,7 @@ class HotPosts extends Component {
                     mainScreen={true}
                 />
                 <ActionButton
-                    buttonColor="rgb(170,170,170)"
+                    buttonColor={Helpers.RandomRGB()}
                     icon={<IconM name="create" color="white" size={30} />}
                     onPress={() =>
                         navigate("SendPostScreen", {
