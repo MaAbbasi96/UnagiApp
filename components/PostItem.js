@@ -13,6 +13,7 @@ import { connect } from "react-redux";
 
 import IconI from "react-native-vector-icons/Ionicons";
 
+var Helpers = require("../helpers");
 class PostItem extends Component {
     componentWillMount() {
         this.setState({ isLiked: this.props.isLiked });
@@ -107,7 +108,7 @@ class PostItem extends Component {
                             />}
                     </TouchableOpacity>
                     <Text style={styles.replies}>
-                        {this.props.replies}
+                        {Helpers.PersianNum(this.props.replies)}
                     </Text>
                     <TouchableOpacity onPress={() => this.likeChanged()}>
                         {!this.state.isLiked &&
@@ -126,7 +127,7 @@ class PostItem extends Component {
                             />}
                     </TouchableOpacity>
                     <Text style={styles.Likes}>
-                        {this.state.likes}
+                        {Helpers.PersianNum(this.state.likes)}
                     </Text>
                     <TouchableOpacity
                         style={styles.shareButton}
@@ -140,7 +141,7 @@ class PostItem extends Component {
                         />
                     </TouchableOpacity>
                     <Text style={styles.date}>
-                        {this.postTime()}
+                        {Helpers.PersianNum(this.postTime())}
                     </Text>
                 </View>
             </View>
@@ -193,12 +194,14 @@ const styles = StyleSheet.create({
         height: 30
     },
     Likes: {
+        fontFamily: "IRAN_Sans",
         fontSize: 13,
         flex: 1,
         marginLeft: 10,
         marginTop: 5
     },
     replies: {
+        fontFamily: "IRAN_Sans",
         fontSize: 13,
         marginRight: 10,
         marginTop: 5

@@ -12,6 +12,8 @@ import {
 
 import IconM from "react-native-vector-icons/MaterialIcons";
 
+var Helpers = require("../helpers");
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -43,13 +45,19 @@ const styles = StyleSheet.create({
     },
     charLimit: {
         marginRight: 10,
+        marginTop: 4.5,
         color: "#FFF",
-        fontSize: 19
+        fontSize: 19,
+        fontFamily: "IRAN_Sans",
+        fontWeight: "bold"
     },
     charLimitRed: {
         marginRight: 10,
+        marginTop: 4.5,
         color: "red",
-        fontSize: 19
+        fontSize: 19,
+        fontFamily: "IRAN_Sans",
+        fontWeight: "bold"
     }
 });
 var charLimit = 160;
@@ -79,11 +87,11 @@ export default class SendPostScreen extends Component {
                 <View style={styles.headerRight}>
                     {limit >= 0 &&
                         <Text style={styles.charLimit}>
-                            {" "}{limit}{" "}
+                            {" "}{Helpers.PersianNum(limit)}{" "}
                         </Text>}
                     {limit < 0 &&
                         <Text style={styles.charLimitRed}>
-                            {" "}{limit}{" "}
+                            {" "}{Helpers.PersianNum(limit)}{" "}
                         </Text>}
                     {limit >= 0 &&
                         limit !== 160 &&
