@@ -93,15 +93,17 @@ export default class SendPostScreen extends Component {
                             }}
                         >
                             <Image
+                                opacity={1}
                                 style={styles.sendImage}
-                                source={require("../images/sendEnable.png")}
+                                source={require("../images/send.png")}
                             />
                         </TouchableOpacity>}
                     {(limit < 0 || limit === 160) &&
                         <TouchableOpacity disabled={true}>
                             <Image
+                                opacity={0.4}
                                 style={styles.sendImage}
-                                source={require("../images/sendDisable.png")}
+                                source={require("../images/send.png")}
                             />
                         </TouchableOpacity>}
                 </View>
