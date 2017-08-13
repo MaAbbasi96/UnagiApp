@@ -4,7 +4,8 @@ import {
     View,
     FlatList,
     Text,
-    TouchableOpacity
+    TouchableOpacity,
+    RefreshControl
 } from "react-native";
 import PostItem from "./PostItem";
 
@@ -75,8 +76,14 @@ export default class PostsList extends Component {
                             navigation={this.props.navigation}
                             date={item.date}
                         />}
-                    refreshing={this.state.refreshing}
-                    onRefresh={() => this._onRefresh()}
+                    refreshControl={
+                        <RefreshControl
+                            refreshing={this.state.refreshing}
+                            onRefresh={() => this._onRefresh()}
+                            colors={["white"]}
+                            progressBackgroundColor="#8BC34A"
+                        />
+                    }
                 />
             </View>
         );
