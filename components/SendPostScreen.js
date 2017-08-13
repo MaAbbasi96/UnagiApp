@@ -113,6 +113,7 @@ export default class SendPostScreen extends Component {
             <View style={styles.container}>
                 <TextInput
                     style={styles.textInput}
+                    autoFocus={true}
                     {...this.props}
                     editable={true}
                     multiline={true}
