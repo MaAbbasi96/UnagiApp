@@ -11,12 +11,12 @@ import {
     Image,
     Dimensions,
     TextInput,
-    Button,
     TouchableOpacity,
     ActivityIndicator,
     AsyncStorage,
     Alert,
-    ScrollView
+    TouchableHighlight,
+    KeyboardAvoidingView
 } from "react-native";
 import { connect } from "react-redux";
 import { login } from "../actions";
@@ -24,11 +24,11 @@ var Network = require("../network");
 
 const { width, height } = Dimensions.get("window");
 
-const background = require("../images/login1_bg.png");
-const mark = require("../images/login1_mark.png");
-const lockIcon = require("../images/login1_lock.png");
+const logo = require("../images/login1_mark.png");
 const personIcon = require("../images/login1_person.png");
-var pass, user;
+const EyeIcon = require("../images/eye.png");
+const EyehIcon = require("../images/eyeh.png");
+var hidden;
 var animating = false;
 class LoginScreen extends Component {
     static navigationOptions = {
@@ -42,6 +42,12 @@ class LoginScreen extends Component {
         },
         headerLeft: null
     };
+    constructor(props) {
+        super(props);
+        this.state = {
+            hidden: true
+        };
+    }
     componentWillReceiveProps(props) {
         animating = false;
         if (props.storeState) {
@@ -79,103 +85,118 @@ class LoginScreen extends Component {
     render() {
         const { navigate } = this.props.navigation;
         return (
-            <ScrollView>
+            <KeyboardAvoidingView behavior="padding" style={styles.background}>
                 <View style={styles.container}>
-                    {/* <Image source={background} style={styles.background} resizeMode="cover"> */}
-                    <View style={styles.background}>
-                        <View style={styles.markWrap}>
-                            <Image
-                                source={mark}
-                                style={styles.mark}
-                                resizeMode="contain"
+                    <View style={styles.logoWrap}>
+                        <Image
+                            source={logo}
+                            style={styles.logo}
+                            resizeMode="contain"
+                        />
+                        <Text style={styles.title}>به اوناگی خوش آمدید</Text>
+                    </View>
+                    <ActivityIndicator animating={animating} size="small" />
+                    <View style={styles.wrapper}>
+                        <View style={styles.inputWrap}>
+                            <View style={styles.iconWrap}>
+                                <Image
+                                    source={personIcon}
+                                    style={styles.icon}
+                                    resizeMode="contain"
+                                />
+                            </View>
+                            <TextInput
+                                placeholder=" حساب کاربری"
+                                placeholderTextColor="#FFF"
+                                underlineColorAndroid="transparent"
+                                style={styles.input}
+                                returnKeyType="next"
+                                onSubmitEditing={() =>
+                                    this.passwordInput.focus()}
+                                keyboardType="email-address"
+                                onChangeText={username =>
+                                    this.setState({ username })}
                             />
                         </View>
-                        <ActivityIndicator animating={animating} size="small" />
-                        <View style={styles.wrapper}>
-                            <View style={styles.inputWrap}>
-                                <View style={styles.iconWrap}>
+                        <View style={styles.inputWrap}>
+                            <View style={styles.iconWrap}>
+                                <TouchableHighlight
+                                    onPress={() =>
+                                        this.setState({
+                                            hidden: !this.state.hidden
+                                        })}
+                                >
                                     <Image
-                                        source={personIcon}
+                                        source={
+                                            this.state.hidden
+                                                ? EyeIcon
+                                                : EyehIcon
+                                        }
                                         style={styles.icon}
                                         resizeMode="contain"
                                     />
-                                </View>
-                                <TextInput
-                                    placeholder="حساب کاربری"
-                                    placeholderTextColor="#FFF"
-                                    underlineColorAndroid="transparent"
-                                    style={styles.input}
-                                    onChangeText={username =>
-                                        this.setState({ username })}
-                                />
+                                </TouchableHighlight>
                             </View>
-                            <View style={styles.inputWrap}>
-                                <View style={styles.iconWrap}>
-                                    <Image
-                                        source={lockIcon}
-                                        style={styles.icon}
-                                        resizeMode="contain"
-                                    />
-                                </View>
-                                <TextInput
-                                    placeholderTextColor="#FFF"
-                                    placeholder="رمزعبور "
-                                    underlineColorAndroid="transparent"
-                                    style={styles.input}
-                                    secureTextEntry
-                                    onChangeText={password =>
-                                        this.setState({ password })}
-                                />
+                            <TextInput
+                                placeholderTextColor="#FFF"
+                                placeholder="رمزعبور "
+                                underlineColorAndroid="transparent"
+                                style={styles.input}
+                                secureTextEntry={this.state.hidden}
+                                autoFocus={false}
+                                returnKeyType="go"
+                                ref={input => (this.passwordInput = input)}
+                                onChangeText={password =>
+                                    this.setState({ password })}
+                            />
+                        </View>
+                        <TouchableOpacity activeOpacity={0.5}>
+                            <View>
+                                <Text style={styles.forgotPasswordText}>
+                                    رمزعبور خود را فراموش کرده‌اید؟
+                                </Text>
                             </View>
-                            <TouchableOpacity activeOpacity={0.5}>
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                            activeOpacity={0.5}
+                            onPress={() => {
+                                if (this.state) {
+                                    if (
+                                        this.state.username &&
+                                        this.state.password
+                                    ) {
+                                        this.props.login(
+                                            this.state.username,
+                                            this.state.password
+                                        );
+                                    }
+                                }
+                            }}
+                        >
+                            <View style={styles.button}>
+                                <Text style={styles.buttonText}>ورود</Text>
+                            </View>
+                        </TouchableOpacity>
+                    </View>
+                    <View style={styles.container}>
+                        <View style={styles.signupWrap}>
+                            <TouchableOpacity
+                                activeOpacity={0.5}
+                                onPress={() => navigate("SignUpPage", {})}
+                            >
                                 <View>
-                                    <Text style={styles.forgotPasswordText}>
-                                        رمزعبور خود را فراموش کرده ام؟
+                                    <Text style={styles.signupLinkText}>
+                                        ثبت نام
                                     </Text>
                                 </View>
                             </TouchableOpacity>
-                            <TouchableOpacity
-                                activeOpacity={0.5}
-                                onPress={() => {
-                                    if (this.state) {
-                                        if (
-                                            this.state.username &&
-                                            this.state.password
-                                        ) {
-                                            this.props.login(
-                                                this.state.username,
-                                                this.state.password
-                                            );
-                                        }
-                                    }
-                                }}
-                            >
-                                <View style={styles.button}>
-                                    <Text style={styles.buttonText}>ورود</Text>
-                                </View>
-                            </TouchableOpacity>
-                        </View>
-                        <View style={styles.container}>
-                            <View style={styles.signupWrap}>
-                                <TouchableOpacity
-                                    activeOpacity={0.5}
-                                    onPress={() => navigate("SignUpPage", {})}
-                                >
-                                    <View>
-                                        <Text style={styles.signupLinkText}>
-                                            ثبت نام
-                                        </Text>
-                                    </View>
-                                </TouchableOpacity>
-                                <Text style={styles.accountText}>
-                                    حساب کاربری ندارید؟
-                                </Text>
-                            </View>
+                            <Text style={styles.accountText}>
+                                حساب کاربری ندارید؟
+                            </Text>
                         </View>
                     </View>
-                    {/* </Image> */}
                 </View>
-            </ScrollView>
+            </KeyboardAvoidingView>
         );
     }
 }
@@ -183,19 +204,26 @@ const styles = StyleSheet.create({
     container: {
         flex: 1
     },
-    markWrap: {
-        flex: 1,
+    title: {
+        color: "rgba(255,255,255,0.7)",
+        marginTop: 10
+    },
+    logoWrap: {
+        alignItems: "center",
+        flexGrow: 1,
+        justifyContent: "center",
         paddingVertical: 30
     },
-    mark: {
-        width: null,
-        height: null,
+    logo: {
+        width: 100,
+        height: 100,
         flex: 1
     },
     background: {
         backgroundColor: "#212121",
         width,
-        height
+        height,
+        padding: 10
     },
     wrapper: {
         paddingVertical: 30
@@ -205,6 +233,7 @@ const styles = StyleSheet.create({
         marginVertical: 10,
         height: 55,
         borderBottomWidth: 2,
+        padding: 2,
         borderBottomColor: "#8BC34A"
     },
     iconWrap: {
@@ -217,6 +246,7 @@ const styles = StyleSheet.create({
         width: 20
     },
     input: {
+        height: 40,
         flex: 1,
         paddingHorizontal: 10,
         paddingVertical: 5,
@@ -231,7 +261,7 @@ const styles = StyleSheet.create({
         paddingVertical: 20,
         alignItems: "center",
         justifyContent: "center",
-        marginTop: 30
+        marginTop: 20
     },
     buttonText: {
         color: "#FFF",
