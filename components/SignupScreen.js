@@ -22,13 +22,12 @@ import {
 // import { signup } from "../../network";
 import { signup } from "../actions";
 import { connect } from "react-redux";
+
+import IconM from "react-native-vector-icons/MaterialIcons";
+
 var Validator = require("email-validator");
 
 const { width, height } = Dimensions.get("window");
-const personIcon = require("../images/signup_person.png");
-const lockIcon = require("../images/signup_lock.png");
-
-const emailIcon = require("../images/signup_email.png");
 
 class SignupScreen extends Component {
     constructor() {
@@ -98,10 +97,10 @@ class SignupScreen extends Component {
                     <View style={styles.inputsContainer}>
                         <View style={styles.inputContainer}>
                             <View style={styles.iconContainer}>
-                                <Image
-                                    source={personIcon}
-                                    style={styles.inputIcon}
-                                    resizeMode="contain"
+                                <IconM
+                                    name="person-outline"
+                                    color="white"
+                                    size={25}
                                 />
                             </View>
                             <TextInput
@@ -118,10 +117,10 @@ class SignupScreen extends Component {
 
                         <View style={styles.inputContainer}>
                             <View style={styles.iconContainer}>
-                                <Image
-                                    source={emailIcon}
-                                    style={styles.inputIcon}
-                                    resizeMode="contain"
+                                <IconM
+                                    name="mail-outline"
+                                    color="white"
+                                    size={25}
                                 />
                             </View>
                             <TextInput
@@ -140,10 +139,10 @@ class SignupScreen extends Component {
 
                         <View style={styles.inputContainer}>
                             <View style={styles.iconContainer}>
-                                <Image
-                                    source={lockIcon}
-                                    style={styles.inputIcon}
-                                    resizeMode="contain"
+                                <IconM
+                                    name="lock-outline"
+                                    color="white"
+                                    size={25}
                                 />
                             </View>
                             <TextInput
@@ -163,10 +162,10 @@ class SignupScreen extends Component {
 
                         <View style={styles.inputContainer}>
                             <View style={styles.iconContainer}>
-                                <Image
-                                    source={lockIcon}
-                                    style={styles.inputIcon}
-                                    resizeMode="contain"
+                                <IconM
+                                    name="lock-outline"
+                                    color="white"
+                                    size={25}
                                 />
                             </View>
                             <TextInput
@@ -251,10 +250,6 @@ let styles = StyleSheet.create({
         paddingHorizontal: 15,
         justifyContent: "center",
         alignItems: "center"
-    },
-    inputIcon: {
-        width: 20,
-        height: 20
     },
     input: {
         height: 40,

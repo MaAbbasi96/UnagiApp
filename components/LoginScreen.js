@@ -20,14 +20,15 @@ import {
 } from "react-native";
 import { connect } from "react-redux";
 import { login } from "../actions";
+
+import IconI from "react-native-vector-icons/Ionicons";
+import IconM from "react-native-vector-icons/MaterialIcons";
+
 var Network = require("../network");
 
 const { width, height } = Dimensions.get("window");
 
 const logo = require("../images/login1_mark.png");
-const personIcon = require("../images/login1_person.png");
-const EyeIcon = require("../images/eye.png");
-const EyehIcon = require("../images/eyeh.png");
 var hidden;
 var animating = false;
 class LoginScreen extends Component {
@@ -99,10 +100,10 @@ class LoginScreen extends Component {
                     <View style={styles.wrapper}>
                         <View style={styles.inputWrap}>
                             <View style={styles.iconWrap}>
-                                <Image
-                                    source={personIcon}
-                                    style={styles.icon}
-                                    resizeMode="contain"
+                                <IconM
+                                    name="person-outline"
+                                    color="white"
+                                    size={25}
                                 />
                             </View>
                             <TextInput
@@ -126,14 +127,14 @@ class LoginScreen extends Component {
                                             hidden: !this.state.hidden
                                         })}
                                 >
-                                    <Image
-                                        source={
+                                    <IconI
+                                        name={
                                             this.state.hidden
-                                                ? EyeIcon
-                                                : EyehIcon
+                                                ? "md-eye"
+                                                : "md-eye-off"
                                         }
-                                        style={styles.icon}
-                                        resizeMode="contain"
+                                        color="white"
+                                        size={25}
                                     />
                                 </TouchableHighlight>
                             </View>
@@ -240,10 +241,6 @@ const styles = StyleSheet.create({
         paddingHorizontal: 10,
         alignItems: "center",
         justifyContent: "center"
-    },
-    icon: {
-        height: 20,
-        width: 20
     },
     input: {
         height: 40,

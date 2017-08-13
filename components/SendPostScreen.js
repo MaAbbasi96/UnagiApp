@@ -9,16 +9,22 @@ import {
     Image,
     TouchableOpacity
 } from "react-native";
+
+import IconM from "react-native-vector-icons/MaterialIcons";
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,
         flexDirection: "column",
         backgroundColor: "#DCEDC8"
     },
-    sendImage: {
-        height: 25,
-        width: 25,
-        marginRight: 30
+    sendButton: {
+        marginRight: 15,
+        opacity: 1
+    },
+    sendButtonDisabled: {
+        marginRight: 15,
+        opacity: 0.4
     },
     textInput: {
         backgroundColor: "#DCEDC8",
@@ -92,18 +98,20 @@ export default class SendPostScreen extends Component {
                                 props.navigation.goBack();
                             }}
                         >
-                            <Image
-                                opacity={1}
-                                style={styles.sendImage}
-                                source={require("../images/send.png")}
+                            <IconM
+                                name="send"
+                                style={styles.sendButton}
+                                color="white"
+                                size={30}
                             />
                         </TouchableOpacity>}
                     {(limit < 0 || limit === 160) &&
                         <TouchableOpacity disabled={true}>
-                            <Image
-                                opacity={0.4}
-                                style={styles.sendImage}
-                                source={require("../images/send.png")}
+                            <IconM
+                                name="send"
+                                style={styles.sendButtonDisabled}
+                                color="white"
+                                size={30}
                             />
                         </TouchableOpacity>}
                 </View>
