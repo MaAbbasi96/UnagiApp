@@ -46,37 +46,74 @@ class SignupScreen extends Component {
         }
     };
     componentWillReceiveProps(props) {
+        this.setState({ animating: false });
         if (props.storeState) {
-            if (props.storeState.signupStatus) {
-                const resetAction = NavigationActions.reset({
-                    index: 0,
-                    actions: [
-                        NavigationActions.navigate({ routeName: "MainScreen" })
-                    ]
-                });
-                this.props.navigation.dispatch(resetAction);
-                AsyncStorage.setItem(
-                    "refreshToken",
-                    props.storeState.refreshToken
-                );
-                AsyncStorage.setItem(
-                    "accessToken",
-                    props.storeState.accessToken
-                );
-                return;
-            }
-            if (props.storeState.signupWaiting) {
-                this.setState({ animating: true });
-                return;
-            }
-            if (
-                !props.storeState.signupStatus &&
-                !props.storeState.signupWaiting
-            ) {
-                Alert.alert(null, ".این نام‌کاربری قبلاً گرفته شده است");
-                this.setState({ animating: false });
+            if (props.storeState.inSignupScreen) {
+                if (props.storeState.signupStatus) {
+                    const resetAction = NavigationActions.reset({
+                        index: 0,
+                        actions: [
+                            NavigationActions.navigate({
+                                routeName: "MainScreen"
+                            })
+                        ]
+                    });
+                    this.props.navigation.dispatch(resetAction);
+                    AsyncStorage.setItem(
+                        "refreshToken",
+                        props.storeState.refreshToken
+                    );
+                    AsyncStorage.setItem(
+                        "accessToken",
+                        props.storeState.accessToken
+                    );
+                    return;
+                } else if (props.storeState.signupNetworkError) {
+                    Alert.alert(null, "مشکل در ارتباط با سرور");
+                } else if (props.storeState.signupWaiting) {
+                    this.setState({ animating: true });
+                    return;
+                } else {
+                    Alert.alert(null, ".این نام‌کاربری قبلاً گرفته شده است");
+                    this.setState({ animating: false });
+                }
             }
         }
+
+        // if (props.storeState) {
+        //     if (props.storeState.signupNetworkError) {
+        //         Alert.alert(null, "مشکل در ارتباط با سرور");
+        //         if (props.storeState.signupStatus) {
+        //             const resetAction = NavigationActions.reset({
+        //                 index: 0,
+        //                 actions: [
+        //                     NavigationActions.navigate({
+        //                         routeName: "MainScreen"
+        //                     })
+        //                 ]
+        //             });
+        //             this.props.navigation.dispatch(resetAction);
+        //             AsyncStorage.setItem(
+        //                 "refreshToken",
+        //                 props.storeState.refreshToken
+        //             );
+        //             AsyncStorage.setItem(
+        //                 "accessToken",
+        //                 props.storeState.accessToken
+        //             );
+        //             return;
+        //         } else if (props.storeState.signupWaiting) {
+        //             this.setState({ animating: true });
+        //             return;
+        //         } else if (
+        //             !props.storeState.signupStatus &&
+        //             !props.storeState.signupWaiting
+        //         ) {
+        //             Alert.alert(null, ".این نام‌کاربری قبلاً گرفته شده است");
+        //             this.setState({ animating: false });
+        //         }
+        //     }
+        // }
     }
     render() {
         const { navigate } = this.props.navigation;

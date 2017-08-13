@@ -17,6 +17,8 @@ export const LOGIN_DONE = "login_done";
 export const LOGIN_FAIL = "login_fail";
 export const LOGIN_WAITING = "login_waiting";
 export const LOGOUT = "logout";
+export const LOGIN_NETWORK_ERROR = "login_network_error";
+export const SIGNUP_NETWORK_ERROR = "signup_network_error";
 var Helpers = require("./helpers");
 var Network = require("./network");
 export function getPosts() {
@@ -203,6 +205,11 @@ export function signup(username, password) {
     };
 }
 export function signupResponse(response) {
+    if (!response) {
+        return {
+            type: SIGNUP_NETWORK_ERROR
+        };
+    }
     if (response.message === "ok") {
         return {
             type: SIGNUP_DONE,
@@ -236,6 +243,10 @@ export function loginWithToken(refreshToken) {
     };
 }
 export function loginResponse(response) {
+    if (!response)
+        return {
+            type: LOGIN_NETWORK_ERROR
+        };
     if (response.message === "ok")
         return {
             type: LOGIN_DONE,
@@ -254,5 +265,15 @@ export function loginWaiting() {
 export function logout() {
     return {
         type: LOGOUT
+    };
+}
+export function loginNetworkError() {
+    return {
+        type: LOGIN_NETWORK_ERROR
+    };
+}
+export function signupNetworkError() {
+    return {
+        type: SIGNUP_NETWORK_ERROR
     };
 }

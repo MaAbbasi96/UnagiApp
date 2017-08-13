@@ -124,6 +124,12 @@ class PostItem extends Component {
                         {this.postTime()}
                     </Text>
                 </View>
+                {this.props.repliedTo &&
+                    <TouchableOpacity onPress={() => console.log("sdfg")}>
+                        <Text>
+                            {"در پاسخ به این پست"}
+                        </Text>
+                    </TouchableOpacity>}
             </View>
         );
     }
