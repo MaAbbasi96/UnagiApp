@@ -15,17 +15,19 @@ import {
     Alert,
     ActivityIndicator,
     AsyncStorage,
-    ScrollView
+    Dimensions,
+    KeyboardAvoidingView,
+    Platform
 } from "react-native";
 // import { signup } from "../../network";
 import { signup } from "../actions";
 import { connect } from "react-redux";
 var Validator = require("email-validator");
 
-const background = require("../images/signup_bg.png");
-const backIcon = require("../images/signup_back.png");
+const { width, height } = Dimensions.get("window");
 const personIcon = require("../images/signup_person.png");
 const lockIcon = require("../images/signup_lock.png");
+
 const emailIcon = require("../images/signup_email.png");
 var animating = false;
 
@@ -69,209 +71,171 @@ class SignupScreen extends Component {
                 !props.storeState.signupStatus &&
                 !props.storeState.signupWaiting
             ) {
-                Alert.alert(null, "این نام‌کاربری قبلاً گرفته شده");
+                Alert.alert(null, ".این نام‌کاربری قبلاً گرفته شده است");
             }
         }
     }
     render() {
         const { navigate } = this.props.navigation;
         return (
-            <View style={styles.container}>
-                <ScrollView>
-                    <View style={[styles.container]}>
-                        <View style={styles.headerTitleView}>
-                            <Text style={styles.titleViewText}>ثبت نام</Text>
+            <KeyboardAvoidingView
+                behavior="padding"
+                keyboardVerticalOffset={Platform.select({
+                    ios: () => 0,
+                    android: () => 450
+                })()}
+                style={styles.background}
+            >
+                <View style={styles.container}>
+                    <View style={styles.headerTitleView}>
+                        <Text style={styles.titleViewText}>ثبت نام</Text>
+                    </View>
+                    <ActivityIndicator animating={animating} size="small" />
+
+                    <View style={styles.inputsContainer}>
+                        <View style={styles.inputContainer}>
+                            <View style={styles.iconContainer}>
+                                <Image
+                                    source={personIcon}
+                                    style={styles.inputIcon}
+                                    resizeMode="contain"
+                                />
+                            </View>
+                            <TextInput
+                                style={[styles.input, styles.whiteFont]}
+                                placeholder="نام کاربری"
+                                underlineColorAndroid="transparent"
+                                placeholderTextColor="#FFF"
+                                returnKeyType="next"
+                                onSubmitEditing={() => this.emailInput.focus()}
+                                onChangeText={username =>
+                                    this.setState({ username })}
+                            />
                         </View>
-                        <ActivityIndicator animating={animating} size="small" />
 
-                        <View style={styles.inputsContainer}>
-                            <View style={styles.inputContainer}>
-                                <View style={styles.iconContainer}>
-                                    <Image
-                                        source={personIcon}
-                                        style={styles.inputIcon}
-                                        resizeMode="contain"
-                                    />
-                                </View>
-                                <TextInput
-                                    style={[styles.input, styles.whiteFont]}
-                                    placeholder="نام کاربری"
-                                    underlineColorAndroid="transparent"
-                                    placeholderTextColor="#FFF"
-                                    //underlineColorAndroid="#8BC34A"
-                                    onChangeText={username =>
-                                        this.setState({ username })}
+                        <View style={styles.inputContainer}>
+                            <View style={styles.iconContainer}>
+                                <Image
+                                    source={emailIcon}
+                                    style={styles.inputIcon}
+                                    resizeMode="contain"
                                 />
                             </View>
-
-                            <View style={styles.inputContainer}>
-                                <View style={styles.iconContainer}>
-                                    <Image
-                                        source={emailIcon}
-                                        style={styles.inputIcon}
-                                        resizeMode="contain"
-                                    />
-                                </View>
-                                <TextInput
-                                    style={[styles.input, styles.whiteFont]}
-                                    placeholder="ایمیل"
-                                    underlineColorAndroid="transparent"
-                                    placeholderTextColor="#FFF"
-                                    onChangeText={email =>
-                                        this.setState({ email })}
-                                />
-                            </View>
-
-                            <View style={styles.inputContainer}>
-                                <View style={styles.iconContainer}>
-                                    <Image
-                                        source={lockIcon}
-                                        style={styles.inputIcon}
-                                        resizeMode="contain"
-                                    />
-                                </View>
-                                <TextInput
-                                    secureTextEntry={true}
-                                    style={[styles.input, styles.whiteFont]}
-                                    placeholder="گذرواژه"
-                                    underlineColorAndroid="transparent"
-                                    placeholderTextColor="#FFF"
-                                    onChangeText={password =>
-                                        this.setState({ password })}
-                                />
-                            </View>
-
-                            <View style={styles.inputContainer}>
-                                <View style={styles.iconContainer}>
-                                    <Image
-                                        source={lockIcon}
-                                        style={styles.inputIcon}
-                                        resizeMode="contain"
-                                    />
-                                </View>
-                                <TextInput
-                                    secureTextEntry={true}
-                                    style={[styles.input, styles.whiteFont]}
-                                    placeholder="تکرار گذرواژه"
-                                    underlineColorAndroid="transparent"
-                                    placeholderTextColor="#FFF"
-                                    onChangeText={repeatPassword =>
-                                        this.setState({ repeatPassword })}
-                                />
-                            </View>
-                            <Text />
-                            <Text />
-                            <Text />
-                            <View />
+                            <TextInput
+                                style={[styles.input, styles.whiteFont]}
+                                placeholder="ایمیل"
+                                underlineColorAndroid="transparent"
+                                placeholderTextColor="#FFF"
+                                ref={input => (this.emailInput = input)}
+                                returnKeyType="next"
+                                onSubmitEditing={() =>
+                                    this.passwordInput.focus()}
+                                keyboardType="email-address"
+                                onChangeText={email => this.setState({ email })}
+                            />
                         </View>
-                        <View style={styles.footerContainer}>
-                            <TouchableOpacity
-                                activeOpacity={0.5}
-                                onPress={() => {
-                                    if (this.state) {
-                                        if (
-                                            this.state.username &&
-                                            this.state.password &&
-                                            this.state.email
-                                        ) {
-                                            if (
-                                                this.state.password !=
-                                                this.state.repeatPassword
-                                            ) {
-                                                Alert.alert(
-                                                    null,
-                                                    "رمز عبور و تکرار آن تطابق ندارند"
-                                                );
-                                                return;
-                                            }
-                                            if (
-                                                !Validator.validate(
-                                                    this.state.email
-                                                )
-                                            ) {
-                                                Alert.alert(
-                                                    null,
-                                                    "ایمیل اشتباه"
-                                                );
-                                                return;
-                                            }
 
-                                            this.props.signup(
-                                                this.state.username,
-                                                this.state.password
-                                            );
-                                        }
-                                    }
-                                }}
-                            >
-                                <View style={styles.signup}>
-                                    <Text style={styles.buttonText}>تایید</Text>
-                                </View>
-                            </TouchableOpacity>
-                            <View />
-                            {/* <View style={styles.loginWrap}> */}
-                            {/* <TouchableOpacity
-                activeOpacity={0.5}
-                onPress={() => navigate("LoginPage", {})}
-              >
-                <View>
-                  <Text style={styles.signupLinkText}>ورود</Text>
-                </View>
-              </TouchableOpacity>
-              <Text style={styles.whiteFont}>دارای حساب کاربری هستید؟</Text> */}
-                            {/* </View> */}
+                        <View style={styles.inputContainer}>
+                            <View style={styles.iconContainer}>
+                                <Image
+                                    source={lockIcon}
+                                    style={styles.inputIcon}
+                                    resizeMode="contain"
+                                />
+                            </View>
+                            <TextInput
+                                secureTextEntry={true}
+                                style={[styles.input, styles.whiteFont]}
+                                placeholder="گذرواژه"
+                                underlineColorAndroid="transparent"
+                                placeholderTextColor="#FFF"
+                                ref={input => (this.passwordInput = input)}
+                                returnKeyType="next"
+                                onSubmitEditing={() =>
+                                    this.repeatPasswordInput.focus()}
+                                onChangeText={password =>
+                                    this.setState({ password })}
+                            />
+                        </View>
+
+                        <View style={styles.inputContainer}>
+                            <View style={styles.iconContainer}>
+                                <Image
+                                    source={lockIcon}
+                                    style={styles.inputIcon}
+                                    resizeMode="contain"
+                                />
+                            </View>
+                            <TextInput
+                                secureTextEntry={true}
+                                style={[styles.input, styles.whiteFont]}
+                                placeholder="تکرار گذرواژه"
+                                underlineColorAndroid="transparent"
+                                placeholderTextColor="#FFF"
+                                ref={input =>
+                                    (this.repeatPasswordInput = input)}
+                                returnKeyType="go"
+                                onChangeText={repeatPassword =>
+                                    this.setState({ repeatPassword })}
+                            />
                         </View>
                     </View>
-                </ScrollView>
-            </View>
+                    <View style={styles.footerContainer}>
+                        <TouchableOpacity
+                            activeOpacity={0.5}
+                            onPress={() => {
+                                if (
+                                    this.state.password !=
+                                    this.state.repeatPassword
+                                ) {
+                                    Alert.alert(
+                                        null,
+                                        "رمز عبور و تکرار آن تطابق ندارند"
+                                    );
+                                    return;
+                                }
+                                this.props.signup(
+                                    this.state.username,
+                                    this.state.password
+                                );
+                            }}
+                        >
+                            <View style={styles.button}>
+                                <Text style={styles.buttonText}>تایید</Text>
+                            </View>
+                        </TouchableOpacity>
+                        <View />
+                    </View>
+                </View>
+            </KeyboardAvoidingView>
         );
     }
 }
 let styles = StyleSheet.create({
     container: {
+        flex: 1
+    },
+    background: {
         backgroundColor: "#212121",
-        flex: 1
+        width,
+        height,
+        padding: 10
     },
-    // bg: {
-    //     paddingTop: 40,
-    //     width: null,
-    //     height: null
-    // },
-    headerContainer: {
-        flex: 1
-    },
-
     inputsContainer: {
         flex: 3,
         marginTop: 50
     },
     footerContainer: {
-        flex: 1
+        flex: 2
     },
-    headerIconView: {
-        marginRight: 10,
-        backgroundColor: "transparent"
-    },
-    headerBackButtonView: {
-        width: 25,
-        height: 25
-    },
-    backButtonIcon: {
-        width: 25,
-        height: 25
-    },
+
     headerTitleView: {
-        backgroundColor: "transparent",
-        marginTop: 30,
-        marginLeft: 25,
+        marginTop: 20,
         alignItems: "center"
     },
     titleViewText: {
         fontSize: 40,
         color: "#8BC34A"
-    },
-    inputs: {
-        paddingVertical: 20
     },
     inputContainer: {
         borderWidth: 2,
@@ -279,12 +243,6 @@ let styles = StyleSheet.create({
         borderColor: "transparent",
         flexDirection: "row",
         height: 55
-    },
-    loginWrap: {
-        backgroundColor: "transparent",
-        flexDirection: "row",
-        alignItems: "center",
-        justifyContent: "center"
     },
     iconContainer: {
         paddingHorizontal: 15,
@@ -296,40 +254,30 @@ let styles = StyleSheet.create({
         height: 20
     },
     input: {
+        height: 40,
         flex: 1,
         paddingHorizontal: 10,
         paddingVertical: 5,
-        marginBottom: 20,
         fontSize: 15,
         fontWeight: "bold",
-        color: "#FF3366",
-        textAlign: "right"
+        color: "#FFF",
+        textAlign: "right",
+        marginBottom: 20
     },
-    signup: {
+    button: {
         backgroundColor: "#689F38",
         paddingVertical: 20,
         alignItems: "center",
-        justifyContent: "center",
-        marginBottom: 15
+        justifyContent: "center"
+        // marginBottom: 20
     },
-    signin: {
-        justifyContent: "center",
-        alignItems: "center",
-        backgroundColor: "transparent"
-    },
-    greyFont: {
-        color: "#D8D8D8"
-    },
+
     whiteFont: {
         color: "#FFF"
     },
     buttonText: {
         color: "#FFF",
         fontSize: 18
-    },
-    signupLinkText: {
-        color: "#FFF",
-        marginRight: 5
     }
 });
 mapStateToProps = state => {
