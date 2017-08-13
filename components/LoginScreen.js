@@ -34,6 +34,9 @@ class LoginScreen extends Component {
     constructor() {
         super();
         this.state = { animating: false };
+        this.state = {
+            hidden: true
+        };
     }
     static navigationOptions = {
         title: "اوناگی",
@@ -46,12 +49,6 @@ class LoginScreen extends Component {
         },
         headerLeft: null
     };
-    constructor(props) {
-        super(props);
-        this.state = {
-            hidden: true
-        };
-    }
     componentWillReceiveProps(props) {
         if (props.storeState) {
             if (props.storeState.loginStatus) {
@@ -100,7 +97,10 @@ class LoginScreen extends Component {
                         <Text style={styles.title}>به اوناگی خوش آمدید</Text>
                     </View>
                     {this.state.animating &&
-                    <ActivityIndicator animating={animating} size="small" />}
+                        <ActivityIndicator
+                            animating={animating}
+                            size="small"
+                        />}
                     <View style={styles.wrapper}>
                         <View style={styles.inputWrap}>
                             <View style={styles.iconWrap}>
