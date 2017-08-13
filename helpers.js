@@ -46,9 +46,8 @@ export function PersianNum(str) {
     return str;
 }
 
-export function RandomRGB() {
-    var o = Math.round,
-        r = Math.random,
-        s = 255;
-    return "rgb(" + o(r() * s) + "," + o(r() * s) + "," + o(r() * s) + ")";
+const Colors = ["silver", "#8BC34A", "red", "deepskyblue", "gold", "teal"];
+export function RandomColor() {
+    let color = Colors[parseInt(Math.random() * Colors.length)];
+    return color;
 }

@@ -48,7 +48,7 @@ class HotPosts extends Component {
                     mainScreen={true}
                 />
                 <ActionButton
-                    buttonColor={Helpers.RandomRGB()}
+                    buttonColor={Helpers.RandomColor()}
                     icon={<IconM name="create" color="white" size={30} />}
                     onPress={() =>
                         navigate("SendPostScreen", {
