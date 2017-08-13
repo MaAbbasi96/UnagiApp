@@ -76,6 +76,12 @@ class PostItem extends Component {
                 <Text style={styles.postContent}>
                     {this.props.label}
                 </Text>
+                <View
+                    style={{
+                        borderBottomColor: 'rgb(226, 226, 226)',
+                        borderBottomWidth: 2,
+                    }}
+                    />
                 <View style={styles.bottomOfPost}>
                     <TouchableOpacity
                         onPress={() =>
@@ -162,12 +168,13 @@ const styles = StyleSheet.create({
         marginRight: 5,
         marginTop: 5,
         height: 22,
-        width: 22
+        width: 20
     },
     bottomOfPost: {
         flexDirection: "row",
         justifyContent: "center",
-        alignItems: "center"
+        alignItems: "center",
+        height : 25
     },
     Likes: {
         fontSize: 13,
