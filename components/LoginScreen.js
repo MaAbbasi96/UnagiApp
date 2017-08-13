@@ -108,7 +108,7 @@ class LoginScreen extends Component {
                             </View>
                             <TextInput
                                 placeholder=" حساب کاربری"
-                                placeholderTextColor="#FFF"
+                                placeholderTextColor="#757575"
                                 underlineColorAndroid="transparent"
                                 style={styles.input}
                                 returnKeyType="next"
@@ -139,7 +139,7 @@ class LoginScreen extends Component {
                                 </TouchableHighlight>
                             </View>
                             <TextInput
-                                placeholderTextColor="#FFF"
+                                placeholderTextColor="#757575"
                                 placeholder="رمزعبور "
                                 underlineColorAndroid="transparent"
                                 style={styles.input}
@@ -207,7 +207,10 @@ const styles = StyleSheet.create({
     },
     title: {
         color: "rgba(255,255,255,0.7)",
-        marginTop: 10
+        marginTop: 10,
+        fontFamily: "IRAN_Sans",
+        fontWeight: "bold",
+        fontSize: 19
     },
     logoWrap: {
         alignItems: "center",
@@ -248,6 +251,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 10,
         paddingVertical: 5,
         fontSize: 15,
+        fontFamily: "IRAN_Sans",
         fontWeight: "bold",
         color: "#FFF",
         textAlign: "right",
@@ -262,15 +266,18 @@ const styles = StyleSheet.create({
     },
     buttonText: {
         color: "#FFF",
-        fontSize: 18
+        fontSize: 18,
+        fontFamily: "IRAN_Sans",
+        fontWeight: "bold"
     },
     forgotPasswordText: {
-        color: "#D8D8D8",
+        color: "white",
         backgroundColor: "transparent",
         textAlign: "left",
         paddingLeft: 15,
         fontSize: 15,
-        fontWeight: "bold"
+        fontWeight: "bold",
+        fontFamily: "IRAN_Sans"
     },
     signupWrap: {
         backgroundColor: "transparent",
@@ -279,13 +286,17 @@ const styles = StyleSheet.create({
         justifyContent: "center"
     },
     accountText: {
-        color: "#D8D8D8",
+        color: "#757575",
         fontSize: 15,
-        fontWeight: "bold"
+        fontWeight: "bold",
+        fontFamily: "IRAN_Sans"
     },
     signupLinkText: {
         color: "#FFF",
-        marginRight: 5
+        marginRight: 5,
+        fontWeight: "bold",
+        fontFamily: "IRAN_Sans",
+        fontSize: 15
     }
 });
 mapStateToProps = state => {

@@ -108,7 +108,7 @@ class SignupScreen extends Component {
                                 style={[styles.input, styles.whiteFont]}
                                 placeholder="نام کاربری"
                                 underlineColorAndroid="transparent"
-                                placeholderTextColor="#FFF"
+                                placeholderTextColor="#757575"
                                 returnKeyType="next"
                                 onSubmitEditing={() => this.emailInput.focus()}
                                 onChangeText={username =>
@@ -128,7 +128,7 @@ class SignupScreen extends Component {
                                 style={[styles.input, styles.whiteFont]}
                                 placeholder="ایمیل"
                                 underlineColorAndroid="transparent"
-                                placeholderTextColor="#FFF"
+                                placeholderTextColor="#757575"
                                 ref={input => (this.emailInput = input)}
                                 returnKeyType="next"
                                 onSubmitEditing={() =>
@@ -151,7 +151,7 @@ class SignupScreen extends Component {
                                 style={[styles.input, styles.whiteFont]}
                                 placeholder="گذرواژه"
                                 underlineColorAndroid="transparent"
-                                placeholderTextColor="#FFF"
+                                placeholderTextColor="#757575"
                                 ref={input => (this.passwordInput = input)}
                                 returnKeyType="next"
                                 onSubmitEditing={() =>
@@ -174,7 +174,7 @@ class SignupScreen extends Component {
                                 style={[styles.input, styles.whiteFont]}
                                 placeholder="تکرار گذرواژه"
                                 underlineColorAndroid="transparent"
-                                placeholderTextColor="#FFF"
+                                placeholderTextColor="#757575"
                                 ref={input =>
                                     (this.repeatPasswordInput = input)}
                                 returnKeyType="go"
@@ -237,8 +237,9 @@ let styles = StyleSheet.create({
         alignItems: "center"
     },
     titleViewText: {
+        color: "#8BC34A",
         fontSize: 40,
-        color: "#8BC34A"
+        fontFamily: "IRAN_Sans"
     },
     inputContainer: {
         borderWidth: 2,
@@ -259,6 +260,7 @@ let styles = StyleSheet.create({
         paddingVertical: 5,
         fontSize: 15,
         fontWeight: "bold",
+        fontFamily: "IRAN_Sans",
         color: "#FFF",
         textAlign: "right",
         marginBottom: 20
@@ -276,7 +278,9 @@ let styles = StyleSheet.create({
     },
     buttonText: {
         color: "#FFF",
-        fontSize: 18
+        fontSize: 18,
+        fontWeight: "bold",
+        fontFamily: "IRAN_Sans"
     }
 });
 mapStateToProps = state => {

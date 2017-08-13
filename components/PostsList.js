@@ -94,5 +94,9 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: "center",
         justifyContent: "center"
+    },
+    emptyText: {
+        fontFamily: "IRAN_Sans",
+        fontSize: 15
     }
 });

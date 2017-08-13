@@ -205,7 +205,9 @@ const styles = StyleSheet.create({
     },
     date: {
         color: "#aaa",
-        marginTop: 5
+        marginTop: 5,
+        fontFamily: "IRAN_Sans",
+        fontSize: 13
     },
     shareIcon: {
         flex: 1,

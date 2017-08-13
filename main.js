@@ -39,6 +39,11 @@ const MainScreenNavigator = TabNavigator(
         tabBarOptions: {
             style: {
                 backgroundColor: "#8BC34A"
+            },
+            labelStyle: {
+                fontFamily: "IRAN_Sans",
+                fontSize: 18,
+                fontWeight: "bold"
             }
         }
     }
