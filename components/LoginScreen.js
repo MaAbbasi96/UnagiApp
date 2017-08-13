@@ -33,10 +33,7 @@ var animating = false;
 class LoginScreen extends Component {
     constructor() {
         super();
-        this.state = { animating: false };
-        this.state = {
-            hidden: true
-        };
+        this.state = { animating: false, hidden: true };
     }
     static navigationOptions = {
         title: "اوناگی",
@@ -79,6 +76,7 @@ class LoginScreen extends Component {
                 !props.storeState.signupWaiting
             ) {
                 Alert.alert(null, "کلمه عبور یا نام‌کاربری اشتباه است");
+                this.setState({ animating: false });
                 return;
             }
         }
@@ -97,10 +95,7 @@ class LoginScreen extends Component {
                         <Text style={styles.title}>به اوناگی خوش آمدید</Text>
                     </View>
                     {this.state.animating &&
-                        <ActivityIndicator
-                            animating={animating}
-                            size="small"
-                        />}
+                        <ActivityIndicator animating={true} size="small" />}
                     <View style={styles.wrapper}>
                         <View style={styles.inputWrap}>
                             <View style={styles.iconWrap}>

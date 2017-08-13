@@ -74,6 +74,7 @@ class SignupScreen extends Component {
                 !props.storeState.signupWaiting
             ) {
                 Alert.alert(null, ".این نام‌کاربری قبلاً گرفته شده است");
+                this.setState({ animating: false });
             }
         }
     }
@@ -93,10 +94,7 @@ class SignupScreen extends Component {
                         <Text style={styles.titleViewText}>ثبت نام</Text>
                     </View>
                     {this.state.animating &&
-                        <ActivityIndicator
-                            animating={animating}
-                            size="small"
-                        />}
+                        <ActivityIndicator animating={true} size="small" />}
                     <View style={styles.inputsContainer}>
                         <View style={styles.inputContainer}>
                             <View style={styles.iconContainer}>
