@@ -9,16 +9,24 @@ import {
     Image,
     TouchableOpacity
 } from "react-native";
+
+import IconM from "react-native-vector-icons/MaterialIcons";
+
+var Helpers = require("../helpers");
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,
         flexDirection: "column",
         backgroundColor: "#DCEDC8"
     },
-    sendImage: {
-        height: 25,
-        width: 25,
-        marginRight: 30
+    sendButton: {
+        marginRight: 15,
+        opacity: 1
+    },
+    sendButtonDisabled: {
+        marginRight: 15,
+        opacity: 0.4
     },
     textInput: {
         backgroundColor: "#DCEDC8",
@@ -37,13 +45,19 @@ const styles = StyleSheet.create({
     },
     charLimit: {
         marginRight: 10,
+        marginTop: 4.5,
         color: "#FFF",
-        fontSize: 19
+        fontSize: 19,
+        fontFamily: "IRAN_Sans",
+        fontWeight: "bold"
     },
     charLimitRed: {
         marginRight: 10,
+        marginTop: 4.5,
         color: "red",
-        fontSize: 19
+        fontSize: 19,
+        fontFamily: "IRAN_Sans",
+        fontWeight: "bold"
     }
 });
 var charLimit = 160;
@@ -73,11 +87,11 @@ export default class SendPostScreen extends Component {
                 <View style={styles.headerRight}>
                     {limit >= 0 &&
                         <Text style={styles.charLimit}>
-                            {" "}{limit}{" "}
+                            {" "}{Helpers.PersianNum(limit)}{" "}
                         </Text>}
                     {limit < 0 &&
                         <Text style={styles.charLimitRed}>
-                            {" "}{limit}{" "}
+                            {" "}{Helpers.PersianNum(limit)}{" "}
                         </Text>}
                     {limit >= 0 &&
                         limit !== 160 &&
@@ -92,16 +106,20 @@ export default class SendPostScreen extends Component {
                                 props.navigation.goBack();
                             }}
                         >
-                            <Image
-                                style={styles.sendImage}
-                                source={require("../images/sendEnable.png")}
+                            <IconM
+                                name="send"
+                                style={styles.sendButton}
+                                color="white"
+                                size={30}
                             />
                         </TouchableOpacity>}
                     {(limit < 0 || limit === 160) &&
                         <TouchableOpacity disabled={true}>
-                            <Image
-                                style={styles.sendImage}
-                                source={require("../images/sendDisable.png")}
+                            <IconM
+                                name="send"
+                                style={styles.sendButtonDisabled}
+                                color="white"
+                                size={30}
                             />
                         </TouchableOpacity>}
                 </View>

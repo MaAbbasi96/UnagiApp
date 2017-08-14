@@ -20,14 +20,15 @@ import {
 } from "react-native";
 import { connect } from "react-redux";
 import { login } from "../actions";
+
+import IconI from "react-native-vector-icons/Ionicons";
+import IconM from "react-native-vector-icons/MaterialIcons";
+
 var Network = require("../network");
 
 const { width, height } = Dimensions.get("window");
 
 const logo = require("../images/login1_mark.png");
-const personIcon = require("../images/login1_person.png");
-const EyeIcon = require("../images/eye.png");
-const EyehIcon = require("../images/eyeh.png");
 var hidden;
 var animating = false;
 class LoginScreen extends Component {
@@ -100,15 +101,15 @@ class LoginScreen extends Component {
                     <View style={styles.wrapper}>
                         <View style={styles.inputWrap}>
                             <View style={styles.iconWrap}>
-                                <Image
-                                    source={personIcon}
-                                    style={styles.icon}
-                                    resizeMode="contain"
+                                <IconM
+                                    name="person-outline"
+                                    color="white"
+                                    size={25}
                                 />
                             </View>
                             <TextInput
                                 placeholder=" حساب کاربری"
-                                placeholderTextColor="#FFF"
+                                placeholderTextColor="#757575"
                                 underlineColorAndroid="transparent"
                                 style={styles.input}
                                 returnKeyType="next"
@@ -127,19 +128,19 @@ class LoginScreen extends Component {
                                             hidden: !this.state.hidden
                                         })}
                                 >
-                                    <Image
-                                        source={
+                                    <IconI
+                                        name={
                                             this.state.hidden
-                                                ? EyeIcon
-                                                : EyehIcon
+                                                ? "md-eye"
+                                                : "md-eye-off"
                                         }
-                                        style={styles.icon}
-                                        resizeMode="contain"
+                                        color="white"
+                                        size={25}
                                     />
                                 </TouchableHighlight>
                             </View>
                             <TextInput
-                                placeholderTextColor="#FFF"
+                                placeholderTextColor="#757575"
                                 placeholder="رمزعبور "
                                 underlineColorAndroid="transparent"
                                 style={styles.input}
@@ -207,7 +208,10 @@ const styles = StyleSheet.create({
     },
     title: {
         color: "rgba(255,255,255,0.7)",
-        marginTop: 10
+        marginTop: 10,
+        fontFamily: "IRAN_Sans",
+        fontWeight: "bold",
+        fontSize: 19
     },
     logoWrap: {
         alignItems: "center",
@@ -242,16 +246,13 @@ const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "center"
     },
-    icon: {
-        height: 20,
-        width: 20
-    },
     input: {
         height: 40,
         flex: 1,
         paddingHorizontal: 10,
         paddingVertical: 5,
         fontSize: 15,
+        fontFamily: "IRAN_Sans",
         fontWeight: "bold",
         color: "#FFF",
         textAlign: "right",
@@ -266,15 +267,18 @@ const styles = StyleSheet.create({
     },
     buttonText: {
         color: "#FFF",
-        fontSize: 18
+        fontSize: 18,
+        fontFamily: "IRAN_Sans",
+        fontWeight: "bold"
     },
     forgotPasswordText: {
-        color: "#D8D8D8",
+        color: "white",
         backgroundColor: "transparent",
         textAlign: "left",
         paddingLeft: 15,
         fontSize: 15,
-        fontWeight: "bold"
+        fontWeight: "bold",
+        fontFamily: "IRAN_Sans"
     },
     signupWrap: {
         backgroundColor: "transparent",
@@ -283,13 +287,17 @@ const styles = StyleSheet.create({
         justifyContent: "center"
     },
     accountText: {
-        color: "#D8D8D8",
+        color: "#757575",
         fontSize: 15,
-        fontWeight: "bold"
+        fontWeight: "bold",
+        fontFamily: "IRAN_Sans"
     },
     signupLinkText: {
         color: "#FFF",
-        marginRight: 5
+        marginRight: 5,
+        fontWeight: "bold",
+        fontFamily: "IRAN_Sans",
+        fontSize: 15
     }
 });
 mapStateToProps = state => {

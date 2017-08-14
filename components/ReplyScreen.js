@@ -6,11 +6,14 @@ import {
     TextInput,
     TouchableOpacity,
     FlatList,
-    Button
+    Button,
+    Keyboard
 } from "react-native";
 var Network = require("../network");
 import PostItem from "./PostItem";
 import PostsList from "./PostsList";
+
+import IconM from "react-native-vector-icons/MaterialIcons";
 
 const styles = StyleSheet.create({
     container: {
@@ -30,17 +33,6 @@ const styles = StyleSheet.create({
         width: 35,
         marginRight: 30
     },
-    textInput: {
-        flex: 1,
-        flexDirection: "row",
-        backgroundColor: "#8f9b81",
-        color: "black",
-        marginRight: 10,
-        marginLeft: 10,
-        //textAlignVertical: "top",
-        fontFamily: "IRAN_Sans",
-        fontSize: 15
-    },
     headerRight: {
         flexDirection: "row",
         justifyContent: "center",
@@ -57,11 +49,41 @@ const styles = StyleSheet.create({
         fontSize: 19
     },
     postsList: {
-        flex: 1
+        flex: 1,
+        marginTop: 10
+    },
+    textInput: {
+        flex: 1,
+        flexDirection: "row",
+        backgroundColor: "white",
+        color: "black",
+        marginTop: 5,
+        marginBottom: 5,
+        marginRight: 10,
+        marginLeft: 10,
+        paddingLeft: 20,
+        paddingRight: 20,
+        borderWidth: 1,
+        borderColor: "grey",
+        borderRadius: 30,
+        fontFamily: "IRAN_Sans",
+        fontSize: 15
     },
     textInputView: {
         flexDirection: "row",
-        backgroundColor: "#8f9b81"
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: "#f2f2f2",
+        borderTopWidth: 1,
+        borderColor: "grey"
+    },
+    sendButton: {
+        marginRight: 10,
+        opacity: 1
+    },
+    sendButtonDisabled: {
+        marginRight: 10,
+        opacity: 0.4
     }
 });
 var charLimit = 160;
@@ -229,20 +251,37 @@ export default class ReplyScreen extends Component {
                             multiline={true}
                             style={[
                                 styles.textInput,
-                                { height: Math.max(20, this.state.height) }
+                                { height: Math.min(175, this.state.height) }
                             ]}
                         />
-                        <Button
-                            title={"پاسخ"}
-                            onPress={() => this.sendReply()}
-                            color="#458415"
-                            disabled={
-                                this.state.charLimit > 0 &&
-                                this.state.charLimit != 160
-                                    ? false
-                                    : true
-                            }
-                        />
+
+                        {this.state.charLimit > 0 &&
+                            this.state.charLimit !== 160 &&
+                            <TouchableOpacity
+                                onPress={() => {
+                                    Keyboard.dismiss();
+                                    this.sendReply();
+                                }}
+                            >
+                                <IconM
+                                    name="send"
+                                    style={styles.sendButton}
+                                    color="grey"
+                                    size={30}
+                                />
+                            </TouchableOpacity>}
+                        {!(
+                            this.state.charLimit > 0 &&
+                            this.state.charLimit !== 160
+                        ) &&
+                            <TouchableOpacity disabled={true}>
+                                <IconM
+                                    name="send"
+                                    style={styles.sendButtonDisabled}
+                                    color="grey"
+                                    size={30}
+                                />
+                            </TouchableOpacity>}
                     </View>
                 </View>
                 <PostsList />

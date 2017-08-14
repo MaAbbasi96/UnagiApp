@@ -10,6 +10,10 @@ import {
 } from "react-native";
 import { likePost } from "../actions";
 import { connect } from "react-redux";
+
+import IconI from "react-native-vector-icons/Ionicons";
+
+var Helpers = require("../helpers");
 class PostItem extends Component {
     componentWillMount() {
         this.setState({ isLiked: this.props.isLiked });
@@ -76,6 +80,12 @@ class PostItem extends Component {
                 <Text style={styles.postContent}>
                     {this.props.label}
                 </Text>
+                <View
+                    style={{
+                        borderBottomColor: "rgb(226, 226, 226)",
+                        borderBottomWidth: 2
+                    }}
+                />
                 <View style={styles.bottomOfPost}>
                     <TouchableOpacity
                         onPress={() => {
@@ -92,38 +102,48 @@ class PostItem extends Component {
                         }}
                     >
                         {!this.props.disableReply &&
-                            <Image
-                                style={styles.replyImage}
-                                source={require("../images/reply.png")}
+                            <IconI
+                                name="ios-chatbubbles-outline"
+                                color="grey"
+                                style={styles.replyIcon}
+                                size={28}
                             />}
                     </TouchableOpacity>
                     <Text style={styles.replies}>
-                        {this.props.replies}
+                        {Helpers.PersianNum(this.props.replies)}
                     </Text>
                     <TouchableOpacity onPress={() => this.likeChanged()}>
-                        <Image
-                            style={styles.likeImage}
-                            source={
-                                this.state.isLiked
-                                    ? require("../images/LikeImage.png")
-                                    : require("../images/UnLikeImage.png")
-                            }
-                        />
+                        {!this.state.isLiked &&
+                            <IconI
+                                name="ios-heart-outline"
+                                color="grey"
+                                style={styles.likeIcon}
+                                size={28}
+                            />}
+                        {this.state.isLiked &&
+                            <IconI
+                                name="ios-heart"
+                                color="red"
+                                style={styles.likedIcon}
+                                size={28}
+                            />}
                     </TouchableOpacity>
                     <Text style={styles.Likes}>
-                        {this.state.likes}
+                        {Helpers.PersianNum(this.state.likes)}
                     </Text>
                     <TouchableOpacity
                         style={styles.shareButton}
                         onPress={() => this.share()}
                     >
-                        <Image
-                            style={styles.shareImage}
-                            source={require("../images/share.png")}
+                        <IconI
+                            name="ios-share-outline"
+                            style={styles.shareIcon}
+                            size={28}
+                            color="grey"
                         />
                     </TouchableOpacity>
                     <Text style={styles.date}>
-                        {this.postTime()}
+                        {Helpers.PersianNum(this.postTime())}
                     </Text>
                 </View>
                 {this.props.repliedTo &&
@@ -170,52 +190,56 @@ const styles = StyleSheet.create({
         fontFamily: "IRAN_Sans",
         color: "#212121"
     },
-    likeImage: {
+    likeIcon: {
+        flex: 1,
+        opacity: 0.6,
+        marginLeft: 5,
+        marginTop: 5
+    },
+    likedIcon: {
         flex: 1,
         marginLeft: 5,
-        marginTop: 5,
-        height: 22,
-        width: 22
+        marginTop: 5
     },
-    replyImage: {
+    replyIcon: {
         flex: 1,
         marginRight: 5,
         marginTop: 5,
-        height: 22,
-        width: 22
+        opacity: 0.6
     },
     bottomOfPost: {
         flexDirection: "row",
         justifyContent: "center",
-        alignItems: "center"
+        alignItems: "center",
+        height: 30
     },
     Likes: {
+        fontFamily: "IRAN_Sans",
         fontSize: 13,
         flex: 1,
         marginLeft: 10,
         marginTop: 5
     },
     replies: {
+        fontFamily: "IRAN_Sans",
         fontSize: 13,
         marginRight: 10,
         marginTop: 5
     },
     date: {
-        color: "#aaa"
+        color: "#aaa",
+        marginTop: 5,
+        fontFamily: "IRAN_Sans",
+        fontSize: 13
     },
-    shareImage: {
+    shareIcon: {
         flex: 1,
-        // marginLeft: 5,
-        // marginTop: 5,
-        // marginRight: 15,
-        height: 40,
-        width: 22
+        opacity: 0.6,
+        marginTop: 5
     },
     shareButton: {
-        // flex: 1,
-        height: 22,
-        width: 30,
-        marginRight: 5
+        //flex: 1,
+        marginRight: 12
     }
 });
 mapStateToProps = state => {

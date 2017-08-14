@@ -15,6 +15,8 @@ import SendPostScreen from "./SendPostScreen";
 import PostItem from "./PostItem";
 import PostsList from "./PostsList";
 
+import IconM from "react-native-vector-icons/MaterialIcons";
+
 var Network = require("../network");
 var Helpers = require("../helpers");
 
@@ -24,10 +26,6 @@ const styles = StyleSheet.create({
         flexDirection: "column",
         backgroundColor: "#DCEDC8",
         padding: 5
-    },
-    img: {
-        height: 60,
-        width: 60
     }
 });
 class NormalPosts extends Component {
@@ -68,13 +66,8 @@ class NormalPosts extends Component {
                     mainScreen={true}
                 />
                 <ActionButton
-                    buttonColor="rgb(170,170,170)"
-                    icon={
-                        <Image
-                            style={styles.img}
-                            source={require("../images/actionButtonImage.png")}
-                        />
-                    }
+                    buttonColor={Helpers.RandomColor()}
+                    icon={<IconM name="create" color="white" size={30} />}
                     onPress={() =>
                         navigate("SendPostScreen", {
                             accessToken: this.props.storeState.accessToken,
