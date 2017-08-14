@@ -78,7 +78,7 @@ class PostItem extends Component {
                 </Text>
                 <View style={styles.bottomOfPost}>
                     <TouchableOpacity
-                        onPress={() =>
+                        onPress={() => {
                             this.props.navigation.navigate("ReplyScreen", {
                                 label: this.props.label,
                                 accessToken: this.props.accessToken,
@@ -86,8 +86,10 @@ class PostItem extends Component {
                                 id: this.props.id,
                                 isLiked: this.state.isLiked,
                                 date: this.props.date,
-                                location: this.props.location
-                            })}
+                                location: this.props.location,
+                                cbs: this.props.cbs
+                            });
+                        }}
                     >
                         {!this.props.disableReply &&
                             <Image
@@ -126,7 +128,7 @@ class PostItem extends Component {
                 </View>
                 {this.props.repliedTo &&
                     <TouchableOpacity
-                        onPress={() =>
+                        onPress={() => {
                             this.props.navigation.navigate("ReplyScreen", {
                                 label: this.props.label,
                                 accessToken: this.props.accessToken,
@@ -135,7 +137,8 @@ class PostItem extends Component {
                                 isLiked: this.state.isLiked,
                                 date: this.props.date,
                                 location: this.props.location
-                            })}
+                            });
+                        }}
                     >
                         <Text>
                             {"در پاسخ به این پست"}

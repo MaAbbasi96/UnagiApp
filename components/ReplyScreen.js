@@ -67,10 +67,31 @@ const styles = StyleSheet.create({
 var charLimit = 160;
 
 export default class ReplyScreen extends Component {
+    constructor() {
+        super();
+        this.getReplies = this.getReplies.bind(this);
+        this.cb = this.cb.bind(this);
+    }
     componentWillMount() {
         this.setState({ text: "", refreshing: false });
         this.setState({ charLimit: charLimit });
         this.getReplies();
+        if (!this.props.navigation.state.params.cbs)
+            this.props.navigation.setParams({
+                cbs: [this.cb]
+            });
+    }
+    cb() {
+        this.getReplies();
+    }
+    componentWillUnmount() {
+        if (this.props.navigation.state.params.cbs) {
+            this.props.navigation.state.params.cbs.pop();
+            if (this.props.navigation.state.params.cbs.length !== 0)
+                this.props.navigation.state.params.cbs[
+                    this.props.navigation.state.params.cbs.length - 1
+                ]();
+        }
     }
     getReplies() {
         this.setState({ refreshing: true });
@@ -79,6 +100,7 @@ export default class ReplyScreen extends Component {
             this.props.navigation.state.params.accessToken,
             this.props.navigation.state.params.location
         ).then(response => {
+            console.log("RESPONSE", response.post.isLiked);
             this.setState({
                 item: response.post,
                 items: response.posts,
@@ -128,6 +150,7 @@ export default class ReplyScreen extends Component {
     };
     render() {
         if (!this.state.item) return null;
+        if (!this.props.navigation.state.params.cbs) return null;
         return (
             <View style={styles.container}>
                 <View style={styles.mainPostContainer}>
@@ -182,6 +205,9 @@ export default class ReplyScreen extends Component {
                                 navigation={this.props.navigation}
                                 notConnected={true}
                                 date={item.date}
+                                cbs={this.props.navigation.state.params.cbs.concat(
+                                    this.cb
+                                )}
                             />}
                     />
                     <View style={styles.textInputView}>
