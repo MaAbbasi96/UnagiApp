@@ -160,7 +160,7 @@ class PostItem extends Component {
                             });
                         }}
                     >
-                        <Text>
+                        <Text style={styles.date}>
                             {"در پاسخ به این پست"}
                         </Text>
                     </TouchableOpacity>}
