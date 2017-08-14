@@ -22,6 +22,7 @@ import LoginScreen from "./components/LoginScreen";
 import SignupScreen from "./components/SignupScreen";
 import NormalPosts from "./components/NormalPosts";
 import HotPosts from "./components/HotPosts";
+import MyPosts from "./components/MyPosts";
 import ReplyScreen from "./components/ReplyScreen";
 import SendPostScreen from "./components/SendPostScreen";
 import { logout } from "./actions";
@@ -33,7 +34,8 @@ const store = createStore(reducer, applyMiddleware(thunk));
 const MainScreenNavigator = TabNavigator(
     {
         جدیدترین: { screen: NormalPosts },
-        داغ‌ترین: { screen: HotPosts }
+        داغ‌ترین: { screen: HotPosts },
+        "پست‌های من": { screen: MyPosts }
     },
     {
         tabBarOptions: {

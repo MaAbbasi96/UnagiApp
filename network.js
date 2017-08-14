@@ -197,6 +197,55 @@ export function getHotPosts(location, accessToken, refreshToken) {
             console.log(err);
         });
 }
+export function getMyPosts(accessToken, refreshToken) {
+    location = { latitude: 1, longitude: 1 };
+    return fetch(serverPath + "/user/post", {
+        method: "POST",
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            location: JSON.stringify(location),
+            accesstoken: accessToken,
+            refreshtoken: refreshToken
+        }
+    })
+        .then(function(res) {
+            return res.json();
+        })
+        .then(function(res) {
+            return new Promise((resolve, reject) => {
+                resolve(res.posts);
+            });
+        })
+        .catch(err => {
+            console.log(err);
+        });
+}
+export function getOldMyPosts(accessToken, refreshToken, lastpost) {
+    location = { latitude: 1, longitude: 1 };
+    return fetch(serverPath + "/user/post", {
+        method: "POST",
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            location: JSON.stringify(location),
+            accesstoken: accessToken,
+            refreshtoken: refreshToken,
+            lastpost: lastpost
+        }
+    })
+        .then(function(res) {
+            return res.json();
+        })
+        .then(function(res) {
+            return new Promise((resolve, reject) => {
+                resolve(res.posts);
+            });
+        })
+        .catch(err => {
+            console.log(err);
+        });
+}
 export function getOldHotPosts(accessToken, refreshToken, location, lastpost) {
     return fetch(serverPath + "/post/hot", {
         method: "GET",

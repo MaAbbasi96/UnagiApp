@@ -153,11 +153,11 @@ class LoginScreen extends Component {
                             />
                         </View>
                         <TouchableOpacity activeOpacity={0.5}>
-                            <View>
+                            {/* <View>
                                 <Text style={styles.forgotPasswordText}>
                                     رمزعبور خود را فراموش کرده‌اید؟
                                 </Text>
-                            </View>
+                            </View> */}
                         </TouchableOpacity>
                         <TouchableOpacity
                             activeOpacity={0.5}

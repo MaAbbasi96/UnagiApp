@@ -42,12 +42,20 @@ const reducer = (state, action) => {
     if (action.type === "save_hot_posts") {
         return { ...state, hotItems: action.posts };
     }
+    if (action.type === "save_my_posts") {
+        return { ...state, myItems: action.posts };
+    }
+    if (action.type === "save_old_my_posts") {
+        var newItems = state.myItems.concat(action.posts);
+        return { ...state, myItems: newItems };
+    }
     if (action.type === "signup_waiting") {
         return {
             ...state,
             signupWaiting: true,
             inSignupScreen: true,
-            inLoginScreen: false
+            inLoginScreen: false,
+            signupNetworkError: false
         };
     }
     if (action.type === "signup_fail") {
@@ -55,7 +63,8 @@ const reducer = (state, action) => {
             ...state,
             signupWaiting: false,
             signupStatus: false,
-            inSignupScreen: true
+            inSignupScreen: true,
+            signupNetworkError: false
         };
     }
     if (action.type === "signup_done") {
@@ -108,16 +117,29 @@ const reducer = (state, action) => {
                 postsArray[i].likes = action.updatedPostLikes;
             }
         }
-        if (!state.hotItems) return { ...state, items: postsArray };
-        state = { ...state, items: postsArray };
-        var postsArray = Array.prototype.slice.call(state.hotItems);
-        for (var i = 0; i < postsArray.length; i++) {
-            if (postsArray[i]._id === action.updatedPostID) {
-                postsArray[i].isLiked = action.likeStatus;
-                postsArray[i].likes = action.updatedPostLikes;
+        if (!state.hotItems) state = { ...state, items: postsArray };
+        else {
+            state = { ...state, items: postsArray };
+            var postsArray = Array.prototype.slice.call(state.hotItems);
+            for (var i = 0; i < postsArray.length; i++) {
+                if (postsArray[i]._id === action.updatedPostID) {
+                    postsArray[i].isLiked = action.likeStatus;
+                    postsArray[i].likes = action.updatedPostLikes;
+                }
+            }
+            state = { ...state, hotItems: postsArray };
+        }
+        if (!state.myItems) return state;
+        else {
+            var postsArray = Array.prototype.slice.call(state.myItems);
+            for (var i = 0; i < postsArray.length; i++) {
+                if (postsArray[i]._id === action.updatedPostID) {
+                    postsArray[i].isLiked = action.likeStatus;
+                    postsArray[i].likes = action.updatedPostLikes;
+                }
             }
         }
-        return { ...state, hotItems: postsArray };
+        return state;
     }
     if (action.type === "logout") {
         AsyncStorage.clear();
