@@ -43,15 +43,19 @@ const reducer = (state, action) => {
         return { ...state, hotItems: action.posts };
     }
     if (action.type === "signup_waiting") {
-        return { ...state, signupWaiting: true };
+        return {
+            ...state,
+            signupWaiting: true,
+            inSignupScreen: true,
+            inLoginScreen: false
+        };
     }
     if (action.type === "signup_fail") {
         return {
             ...state,
             signupWaiting: false,
             signupStatus: false,
-            loginStatus: false,
-            loginWaiting: false
+            inSignupScreen: true
         };
     }
     if (action.type === "signup_done") {
@@ -61,6 +65,7 @@ const reducer = (state, action) => {
             ...state,
             signupWaiting: false,
             signupStatus: true,
+            inSignupScreen: true,
             refreshToken: action.response.refreshtoken,
             accessToken: action.response.accesstoken
         };
@@ -69,18 +74,17 @@ const reducer = (state, action) => {
         return {
             ...state,
             loginWaiting: true,
-            signupWaiting: false,
-            signupStatus: false,
-            loginStatus: false
+            loginStatus: false,
+            loginNetworkError: false,
+            inLoginScreen: true
         };
     }
     if (action.type === "login_fail") {
         return {
             ...state,
-            signupWaiting: false,
-            signupStatus: false,
             loginStatus: false,
-            loginWaiting: false
+            loginWaiting: false,
+            loginNetworkError: false
         };
     }
     if (action.type === "login_done") {
@@ -90,6 +94,8 @@ const reducer = (state, action) => {
             ...state,
             loginWaiting: false,
             loginStatus: true,
+            loginNetworkError: false,
+            inLoginScreen: true,
             refreshToken: action.response.refreshtoken,
             accessToken: action.response.accesstoken
         };
@@ -120,7 +126,27 @@ const reducer = (state, action) => {
             loginWaiting: false,
             loginStatus: false,
             signupWaiting: false,
-            signupStatus: false
+            signupStatus: false,
+            loginNetworkError: false,
+            signupNetworkError: false
+        };
+    }
+    if (action.type === "login_network_error") {
+        return {
+            ...state,
+            loginWaiting: false,
+            loginStatus: false,
+            loginNetworkError: true,
+            inLoginScreen: true
+        };
+    }
+    if (action.type === "signup_network_error") {
+        return {
+            ...state,
+            signupWaiting: false,
+            signupStatus: false,
+            signupNetworkError: true,
+            inSignupScreen: true
         };
     }
 };

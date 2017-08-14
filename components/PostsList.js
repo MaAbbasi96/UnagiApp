@@ -4,7 +4,8 @@ import {
     View,
     FlatList,
     Text,
-    TouchableOpacity
+    TouchableOpacity,
+    RefreshControl
 } from "react-native";
 import PostItem from "./PostItem";
 
@@ -74,9 +75,16 @@ export default class PostsList extends Component {
                             refreshToken={this.props.refreshToken}
                             navigation={this.props.navigation}
                             date={item.date}
+                            repliedTo={item.repliedTo}
                         />}
-                    refreshing={this.state.refreshing}
-                    onRefresh={() => this._onRefresh()}
+                    refreshControl={
+                        <RefreshControl
+                            refreshing={this.state.refreshing}
+                            onRefresh={() => this._onRefresh()}
+                            colors={["white"]}
+                            progressBackgroundColor="#8BC34A"
+                        />
+                    }
                 />
             </View>
         );
@@ -87,5 +95,9 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: "center",
         justifyContent: "center"
+    },
+    emptyText: {
+        fontFamily: "IRAN_Sans",
+        fontSize: 15
     }
 });

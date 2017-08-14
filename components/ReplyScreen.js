@@ -6,11 +6,14 @@ import {
     TextInput,
     TouchableOpacity,
     FlatList,
-    Button
+    Button,
+    Keyboard
 } from "react-native";
 var Network = require("../network");
 import PostItem from "./PostItem";
 import PostsList from "./PostsList";
+
+import IconM from "react-native-vector-icons/MaterialIcons";
 
 const styles = StyleSheet.create({
     container: {
@@ -30,17 +33,6 @@ const styles = StyleSheet.create({
         width: 35,
         marginRight: 30
     },
-    textInput: {
-        flex: 1,
-        flexDirection: "row",
-        backgroundColor: "#8f9b81",
-        color: "black",
-        marginRight: 10,
-        marginLeft: 10,
-        //textAlignVertical: "top",
-        fontFamily: "IRAN_Sans",
-        fontSize: 15
-    },
     headerRight: {
         flexDirection: "row",
         justifyContent: "center",
@@ -57,20 +49,71 @@ const styles = StyleSheet.create({
         fontSize: 19
     },
     postsList: {
-        flex: 1
+        flex: 1,
+        marginTop: 10
+    },
+    textInput: {
+        flex: 1,
+        flexDirection: "row",
+        backgroundColor: "white",
+        color: "black",
+        marginTop: 5,
+        marginBottom: 5,
+        marginRight: 10,
+        marginLeft: 10,
+        paddingLeft: 20,
+        paddingRight: 20,
+        borderWidth: 1,
+        borderColor: "grey",
+        borderRadius: 30,
+        fontFamily: "IRAN_Sans",
+        fontSize: 15
     },
     textInputView: {
         flexDirection: "row",
-        backgroundColor: "#8f9b81"
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: "#f2f2f2",
+        borderTopWidth: 1,
+        borderColor: "grey"
+    },
+    sendButton: {
+        marginRight: 10,
+        opacity: 1
+    },
+    sendButtonDisabled: {
+        marginRight: 10,
+        opacity: 0.4
     }
 });
 var charLimit = 160;
 
 export default class ReplyScreen extends Component {
+    constructor() {
+        super();
+        this.getReplies = this.getReplies.bind(this);
+        this.cb = this.cb.bind(this);
+    }
     componentWillMount() {
         this.setState({ text: "", refreshing: false });
         this.setState({ charLimit: charLimit });
         this.getReplies();
+        if (!this.props.navigation.state.params.cbs)
+            this.props.navigation.setParams({
+                cbs: [this.cb]
+            });
+    }
+    cb() {
+        this.getReplies();
+    }
+    componentWillUnmount() {
+        if (this.props.navigation.state.params.cbs) {
+            this.props.navigation.state.params.cbs.pop();
+            if (this.props.navigation.state.params.cbs.length !== 0)
+                this.props.navigation.state.params.cbs[
+                    this.props.navigation.state.params.cbs.length - 1
+                ]();
+        }
     }
     getReplies() {
         this.setState({ refreshing: true });
@@ -79,8 +122,12 @@ export default class ReplyScreen extends Component {
             this.props.navigation.state.params.accessToken,
             this.props.navigation.state.params.location
         ).then(response => {
-            this.setState({ items: response.posts });
-            this.setState({ refreshing: false });
+            console.log("RESPONSE", response.post.isLiked);
+            this.setState({
+                item: response.post,
+                items: response.posts,
+                refreshing: false
+            });
         });
     }
     getOldReplies() {
@@ -124,15 +171,17 @@ export default class ReplyScreen extends Component {
         };
     };
     render() {
-        if (!this.state) return null;
+        if (!this.state.item) return null;
+        if (!this.props.navigation.state.params.cbs) return null;
         return (
             <View style={styles.container}>
                 <View style={styles.mainPostContainer}>
                     <PostItem
-                        id={this.props.navigation.state.params.id}
-                        label={this.props.navigation.state.params.label}
-                        isLiked={this.props.navigation.state.params.isLiked}
-                        likes={this.props.navigation.state.params.likes}
+                        id={this.state.item._id}
+                        label={this.state.item.text}
+                        isLiked={this.state.item.isLiked}
+                        likes={this.state.item.likes}
+                        repliedTo={this.state.item.repliedTo}
                         location={this.props.navigation.state.params.location}
                         accessToken={
                             this.props.navigation.state.params.accessToken
@@ -145,7 +194,8 @@ export default class ReplyScreen extends Component {
                         }
                         notConnected={true}
                         disableReply={true}
-                        date={this.props.navigation.state.params.date}
+                        date={this.state.item.date}
+                        navigation={this.props.navigation}
                     />
                 </View>
                 <View style={styles.postsList}>
@@ -177,11 +227,15 @@ export default class ReplyScreen extends Component {
                                 navigation={this.props.navigation}
                                 notConnected={true}
                                 date={item.date}
+                                cbs={this.props.navigation.state.params.cbs.concat(
+                                    this.cb
+                                )}
                             />}
                     />
                     <View style={styles.textInputView}>
                         <TextInput
                             value={this.state.text}
+                            autoFocus={true}
                             onChangeText={text => {
                                 this.setState({
                                     text: text,
@@ -197,20 +251,37 @@ export default class ReplyScreen extends Component {
                             multiline={true}
                             style={[
                                 styles.textInput,
-                                { height: Math.max(20, this.state.height) }
+                                { height: Math.min(175, this.state.height) }
                             ]}
                         />
-                        <Button
-                            title={"پاسخ"}
-                            onPress={() => this.sendReply()}
-                            color="#458415"
-                            disabled={
-                                this.state.charLimit > 0 &&
-                                this.state.charLimit != 160
-                                    ? false
-                                    : true
-                            }
-                        />
+
+                        {this.state.charLimit > 0 &&
+                            this.state.charLimit !== 160 &&
+                            <TouchableOpacity
+                                onPress={() => {
+                                    Keyboard.dismiss();
+                                    this.sendReply();
+                                }}
+                            >
+                                <IconM
+                                    name="send"
+                                    style={styles.sendButton}
+                                    color="grey"
+                                    size={30}
+                                />
+                            </TouchableOpacity>}
+                        {!(
+                            this.state.charLimit > 0 &&
+                            this.state.charLimit !== 160
+                        ) &&
+                            <TouchableOpacity disabled={true}>
+                                <IconM
+                                    name="send"
+                                    style={styles.sendButtonDisabled}
+                                    color="grey"
+                                    size={30}
+                                />
+                            </TouchableOpacity>}
                     </View>
                 </View>
                 <PostsList />

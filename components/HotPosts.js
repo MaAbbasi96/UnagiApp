@@ -10,15 +10,15 @@ import {
 } from "../actions";
 import ActionButton from "react-native-action-button";
 import PostsList from "./PostsList";
+
+import IconM from "react-native-vector-icons/MaterialIcons";
+var Helpers = require("../helpers");
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,
         flexDirection: "column",
         backgroundColor: "#DCEDC8"
-    },
-    img: {
-        height: 60,
-        width: 60
     }
 });
 var myLocation = { latitude: 35.7293756, longitude: 51.42246219 };
@@ -48,13 +48,8 @@ class HotPosts extends Component {
                     mainScreen={true}
                 />
                 <ActionButton
-                    buttonColor="rgb(170,170,170)"
-                    icon={
-                        <Image
-                            style={styles.img}
-                            source={require("../images/actionButtonImage.png")}
-                        />
-                    }
+                    buttonColor={Helpers.RandomColor()}
+                    icon={<IconM name="create" color="white" size={30} />}
                     onPress={() =>
                         navigate("SendPostScreen", {
                             accessToken: this.props.storeState.accessToken,

@@ -22,13 +22,12 @@ import {
 // import { signup } from "../../network";
 import { signup } from "../actions";
 import { connect } from "react-redux";
+
+import IconM from "react-native-vector-icons/MaterialIcons";
+
 var Validator = require("email-validator");
 
 const { width, height } = Dimensions.get("window");
-const personIcon = require("../images/signup_person.png");
-const lockIcon = require("../images/signup_lock.png");
-
-const emailIcon = require("../images/signup_email.png");
 
 class SignupScreen extends Component {
     constructor() {
@@ -43,38 +42,41 @@ class SignupScreen extends Component {
         headerTitleStyle: {
             color: "#fff",
             fontFamily: "IRAN_Sans"
-        }
+        },
+        headerTintColor: "white"
     };
     componentWillReceiveProps(props) {
+        this.setState({ animating: false });
         if (props.storeState) {
-            if (props.storeState.signupStatus) {
-                const resetAction = NavigationActions.reset({
-                    index: 0,
-                    actions: [
-                        NavigationActions.navigate({ routeName: "MainScreen" })
-                    ]
-                });
-                this.props.navigation.dispatch(resetAction);
-                AsyncStorage.setItem(
-                    "refreshToken",
-                    props.storeState.refreshToken
-                );
-                AsyncStorage.setItem(
-                    "accessToken",
-                    props.storeState.accessToken
-                );
-                return;
-            }
-            if (props.storeState.signupWaiting) {
-                this.setState({ animating: true });
-                return;
-            }
-            if (
-                !props.storeState.signupStatus &&
-                !props.storeState.signupWaiting
-            ) {
-                Alert.alert(null, ".این نام‌کاربری قبلاً گرفته شده است");
-                this.setState({ animating: false });
+            if (props.storeState.inSignupScreen) {
+                if (props.storeState.signupStatus) {
+                    const resetAction = NavigationActions.reset({
+                        index: 0,
+                        actions: [
+                            NavigationActions.navigate({
+                                routeName: "MainScreen"
+                            })
+                        ]
+                    });
+                    this.props.navigation.dispatch(resetAction);
+                    AsyncStorage.setItem(
+                        "refreshToken",
+                        props.storeState.refreshToken
+                    );
+                    AsyncStorage.setItem(
+                        "accessToken",
+                        props.storeState.accessToken
+                    );
+                    return;
+                } else if (props.storeState.signupNetworkError) {
+                    Alert.alert(null, "مشکل در ارتباط با سرور");
+                } else if (props.storeState.signupWaiting) {
+                    this.setState({ animating: true });
+                    return;
+                } else {
+                    Alert.alert(null, ".این نام‌کاربری قبلاً گرفته شده است");
+                    this.setState({ animating: false });
+                }
             }
         }
     }
@@ -98,17 +100,17 @@ class SignupScreen extends Component {
                     <View style={styles.inputsContainer}>
                         <View style={styles.inputContainer}>
                             <View style={styles.iconContainer}>
-                                <Image
-                                    source={personIcon}
-                                    style={styles.inputIcon}
-                                    resizeMode="contain"
+                                <IconM
+                                    name="person-outline"
+                                    color="white"
+                                    size={25}
                                 />
                             </View>
                             <TextInput
                                 style={[styles.input, styles.whiteFont]}
                                 placeholder="نام کاربری"
                                 underlineColorAndroid="transparent"
-                                placeholderTextColor="#FFF"
+                                placeholderTextColor="#757575"
                                 returnKeyType="next"
                                 onSubmitEditing={() => this.emailInput.focus()}
                                 onChangeText={username =>
@@ -118,17 +120,17 @@ class SignupScreen extends Component {
 
                         <View style={styles.inputContainer}>
                             <View style={styles.iconContainer}>
-                                <Image
-                                    source={emailIcon}
-                                    style={styles.inputIcon}
-                                    resizeMode="contain"
+                                <IconM
+                                    name="mail-outline"
+                                    color="white"
+                                    size={25}
                                 />
                             </View>
                             <TextInput
                                 style={[styles.input, styles.whiteFont]}
                                 placeholder="ایمیل"
                                 underlineColorAndroid="transparent"
-                                placeholderTextColor="#FFF"
+                                placeholderTextColor="#757575"
                                 ref={input => (this.emailInput = input)}
                                 returnKeyType="next"
                                 onSubmitEditing={() =>
@@ -140,10 +142,10 @@ class SignupScreen extends Component {
 
                         <View style={styles.inputContainer}>
                             <View style={styles.iconContainer}>
-                                <Image
-                                    source={lockIcon}
-                                    style={styles.inputIcon}
-                                    resizeMode="contain"
+                                <IconM
+                                    name="lock-outline"
+                                    color="white"
+                                    size={25}
                                 />
                             </View>
                             <TextInput
@@ -151,7 +153,7 @@ class SignupScreen extends Component {
                                 style={[styles.input, styles.whiteFont]}
                                 placeholder="گذرواژه"
                                 underlineColorAndroid="transparent"
-                                placeholderTextColor="#FFF"
+                                placeholderTextColor="#757575"
                                 ref={input => (this.passwordInput = input)}
                                 returnKeyType="next"
                                 onSubmitEditing={() =>
@@ -163,10 +165,10 @@ class SignupScreen extends Component {
 
                         <View style={styles.inputContainer}>
                             <View style={styles.iconContainer}>
-                                <Image
-                                    source={lockIcon}
-                                    style={styles.inputIcon}
-                                    resizeMode="contain"
+                                <IconM
+                                    name="lock-outline"
+                                    color="white"
+                                    size={25}
                                 />
                             </View>
                             <TextInput
@@ -174,7 +176,7 @@ class SignupScreen extends Component {
                                 style={[styles.input, styles.whiteFont]}
                                 placeholder="تکرار گذرواژه"
                                 underlineColorAndroid="transparent"
-                                placeholderTextColor="#FFF"
+                                placeholderTextColor="#757575"
                                 ref={input =>
                                     (this.repeatPasswordInput = input)}
                                 returnKeyType="go"
@@ -237,8 +239,9 @@ let styles = StyleSheet.create({
         alignItems: "center"
     },
     titleViewText: {
+        color: "#8BC34A",
         fontSize: 40,
-        color: "#8BC34A"
+        fontFamily: "IRAN_Sans"
     },
     inputContainer: {
         borderWidth: 2,
@@ -252,10 +255,6 @@ let styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center"
     },
-    inputIcon: {
-        width: 20,
-        height: 20
-    },
     input: {
         height: 40,
         flex: 1,
@@ -263,6 +262,7 @@ let styles = StyleSheet.create({
         paddingVertical: 5,
         fontSize: 15,
         fontWeight: "bold",
+        fontFamily: "IRAN_Sans",
         color: "#FFF",
         textAlign: "right",
         marginBottom: 20
@@ -280,7 +280,9 @@ let styles = StyleSheet.create({
     },
     buttonText: {
         color: "#FFF",
-        fontSize: 18
+        fontSize: 18,
+        fontWeight: "bold",
+        fontFamily: "IRAN_Sans"
     }
 });
 mapStateToProps = state => {

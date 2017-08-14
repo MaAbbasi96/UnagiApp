@@ -26,6 +26,9 @@ import ReplyScreen from "./components/ReplyScreen";
 import SendPostScreen from "./components/SendPostScreen";
 import { logout } from "./actions";
 import reducer from "./reducer";
+
+import IconEnt from "react-native-vector-icons/Entypo";
+
 const store = createStore(reducer, applyMiddleware(thunk));
 const MainScreenNavigator = TabNavigator(
     {
@@ -36,6 +39,11 @@ const MainScreenNavigator = TabNavigator(
         tabBarOptions: {
             style: {
                 backgroundColor: "#8BC34A"
+            },
+            labelStyle: {
+                fontFamily: "IRAN_Sans",
+                fontSize: 18,
+                fontWeight: "bold"
             }
         }
     }
@@ -83,15 +91,11 @@ MainScreenNavigator.navigationOptions = props => {
                     );
                 }}
             >
-                <Image
-                    style={
-                        (styleslogout = {
-                            height: 25,
-                            width: 25,
-                            marginRight: 10
-                        })
-                    }
-                    source={require("./images/logout.png")}
+                <IconEnt
+                    name="log-out"
+                    size={30}
+                    color="white"
+                    style={(stylesLogout = { marginRight: 15 })}
                 />
             </TouchableOpacity>
         )
