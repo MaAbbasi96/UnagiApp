@@ -32,7 +32,7 @@ const { width, height } = Dimensions.get("window");
 class SignupScreen extends Component {
     constructor() {
         super();
-        this.state = { animating: false };
+        this.state = { animating: false, isSignupDisabled: false };
     }
     static navigationOptions = {
         title: "اوناگی",
@@ -189,20 +189,30 @@ class SignupScreen extends Component {
                         <TouchableOpacity
                             activeOpacity={0.5}
                             onPress={() => {
-                                if (
-                                    this.state.password !=
-                                    this.state.repeatPassword
-                                ) {
-                                    Alert.alert(
-                                        null,
-                                        "رمز عبور و تکرار آن تطابق ندارند"
+                                if (!this.state.isSignupDisabled) {
+                                    this.setState({ isSignupDisabled: true });
+                                    if (
+                                        this.state.password !=
+                                        this.state.repeatPassword
+                                    ) {
+                                        Alert.alert(
+                                            null,
+                                            "رمز عبور و تکرار آن تطابق ندارند"
+                                        );
+                                        return;
+                                    }
+                                    this.props.signup(
+                                        this.state.username,
+                                        this.state.password
                                     );
-                                    return;
+                                    setTimeout(
+                                        () =>
+                                            this.setState({
+                                                isSignupDisabled: false
+                                            }),
+                                        1000
+                                    );
                                 }
-                                this.props.signup(
-                                    this.state.username,
-                                    this.state.password
-                                );
                             }}
                         >
                             <View style={styles.button}>

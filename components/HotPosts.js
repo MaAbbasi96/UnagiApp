@@ -23,6 +23,10 @@ const styles = StyleSheet.create({
 });
 var myLocation = { latitude: 35.7293756, longitude: 51.42246219 };
 class HotPosts extends Component {
+    constructor() {
+        super();
+        this.state = { isFabDisabled: false };
+    }
     componentDidMount() {
         if (this.props.storeState)
             this.props.getAndSaveHotPosts(
@@ -50,12 +54,21 @@ class HotPosts extends Component {
                 <ActionButton
                     buttonColor={Helpers.RandomColor()}
                     icon={<IconM name="create" color="white" size={30} />}
-                    onPress={() =>
-                        navigate("SendPostScreen", {
-                            accessToken: this.props.storeState.accessToken,
-                            refreshToken: this.props.storeState.refreshToken,
-                            location: this.props.storeState.location
-                        })}
+                    onPress={() => {
+                        if (!this.state.isFabDisabled) {
+                            this.setState({ isFabDisabled: true });
+                            navigate("SendPostScreen", {
+                                accessToken: this.props.storeState.accessToken,
+                                refreshToken: this.props.storeState
+                                    .refreshToken,
+                                location: this.props.storeState.location
+                            });
+                            setTimeout(
+                                () => this.setState({ isFabDisabled: false }),
+                                1000
+                            );
+                        }
+                    }}
                 />
             </View>
         );

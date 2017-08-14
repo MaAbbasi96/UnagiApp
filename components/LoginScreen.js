@@ -34,7 +34,12 @@ var animating = false;
 class LoginScreen extends Component {
     constructor() {
         super();
-        this.state = { animating: false, hidden: true };
+        this.state = {
+            animating: false,
+            hidden: true,
+            isSignupDisabled: false,
+            isLoginDisabled: false
+        };
     }
     static navigationOptions = {
         title: "اوناگی",
@@ -162,16 +167,28 @@ class LoginScreen extends Component {
                         <TouchableOpacity
                             activeOpacity={0.5}
                             onPress={() => {
-                                if (this.state) {
-                                    if (
-                                        this.state.username &&
-                                        this.state.password
-                                    ) {
-                                        this.props.login(
-                                            this.state.username,
+                                if (!this.state.isLoginDisabled) {
+                                    this.setState({
+                                        isLoginDisabled: true
+                                    });
+                                    if (this.state) {
+                                        if (
+                                            this.state.username &&
                                             this.state.password
-                                        );
+                                        ) {
+                                            this.props.login(
+                                                this.state.username,
+                                                this.state.password
+                                            );
+                                        }
                                     }
+                                    setTimeout(
+                                        () =>
+                                            this.setState({
+                                                isLoginDisabled: false
+                                            }),
+                                        1000
+                                    );
                                 }
                             }}
                         >
@@ -184,7 +201,21 @@ class LoginScreen extends Component {
                         <View style={styles.signupWrap}>
                             <TouchableOpacity
                                 activeOpacity={0.5}
-                                onPress={() => navigate("SignUpPage", {})}
+                                onPress={() => {
+                                    if (!this.state.isSignupDisabled) {
+                                        this.setState({
+                                            isSignupDisabled: true
+                                        });
+                                        navigate("SignUpPage", {});
+                                        setTimeout(
+                                            () =>
+                                                this.setState({
+                                                    isSignupDisabled: false
+                                                }),
+                                            1000
+                                        );
+                                    }
+                                }}
                             >
                                 <View>
                                     <Text style={styles.signupLinkText}>

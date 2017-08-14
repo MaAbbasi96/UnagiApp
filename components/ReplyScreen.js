@@ -153,7 +153,10 @@ export default class ReplyScreen extends Component {
             this.props.navigation.state.params.accessToken,
             this.props.navigation.state.params.location
         ).then(() => {
-            this.setState({ text: "" });
+            this.setState({
+                text: "",
+                charLimit: charLimit
+            });
             this.getReplies();
         });
     }

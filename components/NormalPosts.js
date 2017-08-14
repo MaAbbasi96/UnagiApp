@@ -29,6 +29,10 @@ const styles = StyleSheet.create({
     }
 });
 class NormalPosts extends Component {
+    constructor() {
+        super();
+        this.state = { isFabDisabled: false };
+    }
     componentDidMount() {
         if (!this.props.storeState) {
             AsyncStorage.getItem("refreshToken", (err, refreshToken) => {
@@ -68,12 +72,21 @@ class NormalPosts extends Component {
                 <ActionButton
                     buttonColor={Helpers.RandomColor()}
                     icon={<IconM name="create" color="white" size={30} />}
-                    onPress={() =>
-                        navigate("SendPostScreen", {
-                            accessToken: this.props.storeState.accessToken,
-                            refreshToken: this.props.storeState.refreshToken,
-                            location: this.props.storeState.location
-                        })}
+                    onPress={() => {
+                        if (!this.state.isFabDisabled) {
+                            this.setState({ isFabDisabled: true });
+                            navigate("SendPostScreen", {
+                                accessToken: this.props.storeState.accessToken,
+                                refreshToken: this.props.storeState
+                                    .refreshToken,
+                                location: this.props.storeState.location
+                            });
+                            setTimeout(
+                                () => this.setState({ isFabDisabled: false }),
+                                1000
+                            );
+                        }
+                    }}
                 />
             </View>
         );
