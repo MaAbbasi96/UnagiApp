@@ -35,6 +35,35 @@ class SignupScreen extends Component {
         super();
         this.state = { animating: false };
     }
+    validate(username, password, email) {
+        if (this.state.password != this.state.repeatPassword) {
+            Alert.alert(null, "رمز عبور و تکرار آن تطابق ندارند");
+            return false;
+        }
+        if (!Helpers.ValidateUsername(this.state.username)) {
+            Alert.alert(
+                null,
+                "نام کاربری باید حداقل  6 کاراکتر و شامل حروف انگلیسی باشد"
+            );
+            return false;
+        }
+        if (!Helpers.ValidatePassword(this.state.password)) {
+            Alert.alert(
+                null,
+                "گذرواژه باید حداقل 6 کاراکتر وشامل حروف انگلیسی و اعداد باشد"
+            );
+            return false;
+        }
+        if (!Helpers.ValidateEmail(this.state.email)) {
+            Alert.alert(null, "ایمیل صحیح نیست");
+            return false;
+        }
+        if (this.state.username == this.state.password) {
+            Alert.alert(null, "نام کاربری و گذرواژه نباید مطابق هم باشند");
+            return false;
+        }
+        return true;
+    }
     static navigationOptions = {
         title: "اوناگی",
         headerStyle: {
@@ -191,47 +220,16 @@ class SignupScreen extends Component {
                             activeOpacity={0.5}
                             onPress={() => {
                                 if (
-                                    this.state.password !=
-                                    this.state.repeatPassword
-                                ) {
-                                    Alert.alert(
-                                        null,
-                                        "رمز عبور و تکرار آن تطابق ندارند"
+                                    this.validate(
+                                        this.state.username,
+                                        this.state.password,
+                                        this.state.email
+                                    )
+                                )
+                                    this.props.signup(
+                                        this.state.username,
+                                        this.state.password
                                     );
-                                    return;
-                                }
-                                if(!Helpers.ValidateUsername(this.state.username)){
-                                    Alert.alert(
-                                        null,
-                                        "نام کاربری حداقل 6 کاراکتر و شامل حروف انگلیسی و اعداد میباشد"
-                                    );
-                                    return;
-                                }
-                                if(!Helpers.ValidatePassword(this.state.password)){
-                                    Alert.alert(
-                                        null,
-                                        "گذرواژه حداقل 6 کاراکتر وشامل حروف انگلیسی و اعداد میباشد"
-                                    );
-                                    return;
-                                }
-                                if(!Helpers.ValidateEmail(this.state.email)){
-                                    Alert.alert(
-                                        null,
-                                        "ایمیل صحیح نمیباشد"
-                                    );
-                                    return;
-                                }
-                                if(this.state.username == this.state.password){
-                                    Alert.alert(
-                                        null,
-                                        "نام کاربری و گذر واژه نباید مطابق هم باشند"
-                                    );  
-                                    return;
-                                }
-                                this.props.signup(
-                                    this.state.username,
-                                    this.state.password
-                                );
                             }}
                         >
                             <View style={styles.button}>
