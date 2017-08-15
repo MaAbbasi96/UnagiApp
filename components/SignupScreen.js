@@ -20,6 +20,7 @@ import {
     Platform
 } from "react-native";
 // import { signup } from "../../network";
+var Helpers = require("../helpers");
 import { signup } from "../actions";
 import { connect } from "react-redux";
 
@@ -197,6 +198,34 @@ class SignupScreen extends Component {
                                         null,
                                         "رمز عبور و تکرار آن تطابق ندارند"
                                     );
+                                    return;
+                                }
+                                if(!Helpers.ValidateUsername(this.state.username)){
+                                    Alert.alert(
+                                        null,
+                                        "نام کاربری حداقل 6 کاراکتر و شامل حروف انگلیسی و اعداد میباشد"
+                                    );
+                                    return;
+                                }
+                                if(!Helpers.ValidatePassword(this.state.password)){
+                                    Alert.alert(
+                                        null,
+                                        "گذرواژه حداقل 6 کاراکتر وشامل حروف انگلیسی و اعداد میباشد"
+                                    );
+                                    return;
+                                }
+                                if(!Helpers.ValidateEmail(this.state.email)){
+                                    Alert.alert(
+                                        null,
+                                        "ایمیل صحیح نمیباشد"
+                                    );
+                                    return;
+                                }
+                                if(this.state.username == this.state.password){
+                                    Alert.alert(
+                                        null,
+                                        "نام کاربری و گذر واژه نباید مطابق هم باشند"
+                                    );  
                                     return;
                                 }
                                 this.props.signup(
