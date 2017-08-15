@@ -20,6 +20,7 @@ import {
     Platform
 } from "react-native";
 // import { signup } from "../../network";
+var Helpers = require("../helpers");
 import { signup } from "../actions";
 import { connect } from "react-redux";
 
@@ -32,7 +33,36 @@ const { width, height } = Dimensions.get("window");
 class SignupScreen extends Component {
     constructor() {
         super();
-        this.state = { animating: false };
+        this.state = { animating: false, isSignupDisabled: false };
+    }
+    validate(username, password, email) {
+        if (this.state.password != this.state.repeatPassword) {
+            Alert.alert(null, "رمز عبور و تکرار آن تطابق ندارند");
+            return false;
+        }
+        if (!Helpers.ValidateUsername(this.state.username)) {
+            Alert.alert(
+                null,
+                "نام کاربری باید حداقل  6 کاراکتر و شامل حروف انگلیسی باشد"
+            );
+            return false;
+        }
+        if (!Helpers.ValidatePassword(this.state.password)) {
+            Alert.alert(
+                null,
+                "گذرواژه باید حداقل 6 کاراکتر وشامل حروف انگلیسی و اعداد باشد"
+            );
+            return false;
+        }
+        if (!Helpers.ValidateEmail(this.state.email)) {
+            Alert.alert(null, "ایمیل صحیح نیست");
+            return false;
+        }
+        if (this.state.username == this.state.password) {
+            Alert.alert(null, "نام کاربری و گذرواژه نباید مطابق هم باشند");
+            return false;
+        }
+        return true;
     }
     static navigationOptions = {
         title: "اوناگی",
@@ -187,25 +217,38 @@ class SignupScreen extends Component {
                     </View>
                     <View style={styles.footerContainer}>
                         <TouchableOpacity
-                            activeOpacity={0.5}
+                            disabled={
+                                !(
+                                    this.state.username &&
+                                    this.state.password &&
+                                    this.state.password &&
+                                    this.state.repeatPassword
+                                )
+                            }
                             onPress={() => {
                                 if (
-                                    this.state.password !=
-                                    this.state.repeatPassword
-                                ) {
-                                    Alert.alert(
-                                        null,
-                                        "رمز عبور و تکرار آن تطابق ندارند"
+                                    this.validate(
+                                        this.state.username,
+                                        this.state.password,
+                                        this.state.email
+                                    )
+                                )
+                                    this.props.signup(
+                                        this.state.username,
+                                        this.state.password
                                     );
-                                    return;
-                                }
-                                this.props.signup(
-                                    this.state.username,
-                                    this.state.password
-                                );
                             }}
                         >
-                            <View style={styles.button}>
+                            <View
+                                style={
+                                    this.state.username &&
+                                    this.state.password &&
+                                    this.state.password &&
+                                    this.state.repeatPassword
+                                        ? styles.button
+                                        : styles.buttonDisabled
+                                }
+                            >
                                 <Text style={styles.buttonText}>تایید</Text>
                             </View>
                         </TouchableOpacity>
@@ -267,8 +310,17 @@ let styles = StyleSheet.create({
         textAlign: "right",
         marginBottom: 20
     },
+    buttonDisabled: {
+        backgroundColor: "#689F38",
+        opacity: 0.4,
+        paddingVertical: 20,
+        alignItems: "center",
+        justifyContent: "center"
+        // marginBottom: 20
+    },
     button: {
         backgroundColor: "#689F38",
+        opacity: 1,
         paddingVertical: 20,
         alignItems: "center",
         justifyContent: "center"

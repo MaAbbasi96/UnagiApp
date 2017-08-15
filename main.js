@@ -22,6 +22,7 @@ import LoginScreen from "./components/LoginScreen";
 import SignupScreen from "./components/SignupScreen";
 import NormalPosts from "./components/NormalPosts";
 import HotPosts from "./components/HotPosts";
+import MyPosts from "./components/MyPosts";
 import ReplyScreen from "./components/ReplyScreen";
 import SendPostScreen from "./components/SendPostScreen";
 import { logout } from "./actions";
@@ -33,17 +34,23 @@ const store = createStore(reducer, applyMiddleware(thunk));
 const MainScreenNavigator = TabNavigator(
     {
         جدیدترین: { screen: NormalPosts },
-        داغ‌ترین: { screen: HotPosts }
+        داغ‌ترین: { screen: HotPosts },
+        "پست‌های من": { screen: MyPosts }
     },
     {
+        tabBarPosition: "top",
+        backBehavior: "none",
         tabBarOptions: {
             style: {
                 backgroundColor: "#8BC34A"
             },
             labelStyle: {
                 fontFamily: "IRAN_Sans",
-                fontSize: 18,
+                fontSize: 16,
                 fontWeight: "bold"
+            },
+            indicatorStyle: {
+                backgroundColor: "white"
             }
         }
     }
@@ -66,7 +73,7 @@ MainScreenNavigator.navigationOptions = props => {
                         " قصد خروج از حساب کاربری را دارید؟",
                         [
                             {
-                                text: "بله",
+                                text: "خروج",
                                 onPress: () => {
                                     store.dispatch(logout());
                                     const resetAction = NavigationActions.reset(

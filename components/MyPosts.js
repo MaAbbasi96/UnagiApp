@@ -3,14 +3,13 @@ import { StyleSheet, View, Image, Text } from "react-native";
 import { connect } from "react-redux";
 import {
     getAndSaveUniqueID,
-    getAndSaveHotPosts,
-    getAndSaveOldHotPosts,
+    getAndSaveMyPosts,
+    getAndSaveOldMyPosts,
     updatePost,
     likePost
 } from "../actions";
 import ActionButton from "react-native-action-button";
 import PostsList from "./PostsList";
-
 import IconM from "react-native-vector-icons/MaterialIcons";
 var Helpers = require("../helpers");
 
@@ -22,17 +21,18 @@ const styles = StyleSheet.create({
     }
 });
 var myLocation = { latitude: 35.7293756, longitude: 51.42246219 };
-class HotPosts extends Component {
+class MyPosts extends Component {
     constructor() {
         super();
         this.state = { isFabDisabled: false, fabColor: Helpers.RandomColor() };
     }
     componentDidMount() {
-        if (this.props.storeState)
-            this.props.getAndSaveHotPosts(
+        if (this.props.storeState) {
+            this.props.getAndSaveMyPosts(
                 this.props.storeState.accessToken,
                 this.props.storeState.refreshToken
             );
+        }
     }
     render() {
         if (!this.props.storeState) {
@@ -42,9 +42,9 @@ class HotPosts extends Component {
         return (
             <View style={styles.container}>
                 <PostsList
-                    items={this.props.storeState.hotItems}
-                    getAndSavePosts={this.props.getAndSaveHotPosts}
-                    getAndSaveOldPosts={this.props.getAndSaveOldHotPosts}
+                    items={this.props.storeState.myItems}
+                    getAndSavePosts={this.props.getAndSaveMyPosts}
+                    getAndSaveOldPosts={this.props.getAndSaveOldMyPosts}
                     location={this.props.storeState.location}
                     refreshToken={this.props.storeState.refreshToken}
                     accessToken={this.props.storeState.accessToken}
@@ -82,7 +82,7 @@ mapStateToProps = state => {
 };
 export default connect(mapStateToProps, {
     getAndSaveUniqueID,
-    getAndSaveHotPosts,
-    getAndSaveOldHotPosts,
+    getAndSaveMyPosts,
+    getAndSaveOldMyPosts,
     updatePost
-})(HotPosts);
+})(MyPosts);

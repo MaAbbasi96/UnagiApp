@@ -34,7 +34,12 @@ var animating = false;
 class LoginScreen extends Component {
     constructor() {
         super();
-        this.state = { animating: false, hidden: true };
+        this.state = {
+            animating: false,
+            hidden: true,
+            isSignupDisabled: false,
+            isLoginDisabled: false
+        };
     }
     static navigationOptions = {
         title: "اوناگی",
@@ -123,9 +128,13 @@ class LoginScreen extends Component {
                         <View style={styles.inputWrap}>
                             <View style={styles.iconWrap}>
                                 <TouchableHighlight
-                                    onPress={() =>
+                                    onPressIn={() =>
                                         this.setState({
-                                            hidden: !this.state.hidden
+                                            hidden: false
+                                        })}
+                                    onPressOut={() =>
+                                        this.setState({
+                                            hidden: true
                                         })}
                                 >
                                     <IconI
@@ -153,29 +162,49 @@ class LoginScreen extends Component {
                             />
                         </View>
                         <TouchableOpacity activeOpacity={0.5}>
-                            <View>
+                            {/* <View>
                                 <Text style={styles.forgotPasswordText}>
                                     رمزعبور خود را فراموش کرده‌اید؟
                                 </Text>
-                            </View>
+                            </View> */}
                         </TouchableOpacity>
                         <TouchableOpacity
-                            activeOpacity={0.5}
+                            disabled={
+                                !(this.state.username && this.state.password)
+                            }
                             onPress={() => {
-                                if (this.state) {
-                                    if (
-                                        this.state.username &&
-                                        this.state.password
-                                    ) {
-                                        this.props.login(
-                                            this.state.username,
+                                if (!this.state.isLoginDisabled) {
+                                    this.setState({
+                                        isLoginDisabled: true
+                                    });
+                                    if (this.state) {
+                                        if (
+                                            this.state.username &&
                                             this.state.password
-                                        );
+                                        ) {
+                                            this.props.login(
+                                                this.state.username,
+                                                this.state.password
+                                            );
+                                        }
                                     }
+                                    setTimeout(
+                                        () =>
+                                            this.setState({
+                                                isLoginDisabled: false
+                                            }),
+                                        100
+                                    );
                                 }
                             }}
                         >
-                            <View style={styles.button}>
+                            <View
+                                style={
+                                    this.state.username && this.state.password
+                                        ? styles.button
+                                        : styles.buttonDisabled
+                                }
+                            >
                                 <Text style={styles.buttonText}>ورود</Text>
                             </View>
                         </TouchableOpacity>
@@ -184,7 +213,21 @@ class LoginScreen extends Component {
                         <View style={styles.signupWrap}>
                             <TouchableOpacity
                                 activeOpacity={0.5}
-                                onPress={() => navigate("SignUpPage", {})}
+                                onPress={() => {
+                                    if (!this.state.isSignupDisabled) {
+                                        this.setState({
+                                            isSignupDisabled: true
+                                        });
+                                        navigate("SignUpPage", {});
+                                        setTimeout(
+                                            () =>
+                                                this.setState({
+                                                    isSignupDisabled: false
+                                                }),
+                                            1000
+                                        );
+                                    }
+                                }}
                             >
                                 <View>
                                     <Text style={styles.signupLinkText}>
@@ -260,6 +303,15 @@ const styles = StyleSheet.create({
     },
     button: {
         backgroundColor: "#689F38",
+        opacity: 1,
+        paddingVertical: 20,
+        alignItems: "center",
+        justifyContent: "center",
+        marginTop: 20
+    },
+    buttonDisabled: {
+        backgroundColor: "#689F38",
+        opacity: 0.4,
         paddingVertical: 20,
         alignItems: "center",
         justifyContent: "center",

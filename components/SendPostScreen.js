@@ -7,7 +7,8 @@ import {
     TextInput,
     Button,
     Image,
-    TouchableOpacity
+    TouchableOpacity,
+    ToastAndroid
 } from "react-native";
 
 import IconM from "react-native-vector-icons/MaterialIcons";
@@ -102,8 +103,25 @@ export default class SendPostScreen extends Component {
                                     props.navigation.state.params.refreshToken,
                                     props.navigation.state.params.location,
                                     props.navigation.state.params.text
-                                );
-                                props.navigation.goBack();
+                                )
+                                    .then(function(res) {
+                                        return res.json();
+                                    })
+                                    .then(function(res) {
+                                        ToastAndroid.showWithGravity(
+                                            res.status == 0
+                                                ? "Post added!"
+                                                : "Could not add post!",
+                                            ToastAndroid.SHORT,
+                                            ToastAndroid.BOTTOM
+                                        );
+                                        if (res.status == 0) {
+                                            props.navigation.goBack();
+                                        }
+                                    })
+                                    .catch(err => {
+                                        console.log(err);
+                                    });
                             }}
                         >
                             <IconM

@@ -137,18 +137,7 @@ export function addPost(accessToken, refreshToken, location, text) {
         body: JSON.stringify({
             text
         })
-    })
-        .then(function(res) {
-            // console.log("Response" , res);
-            return;
-        })
-        .then(function(res) {
-            // func();
-            return;
-        })
-        .catch(err => {
-            console.log(err);
-        });
+    });
 }
 export function likePost(accessToken, refreshToken, location, postId, like) {
     var requestMethod;
@@ -183,6 +172,55 @@ export function getHotPosts(location, accessToken, refreshToken) {
             location: JSON.stringify(location),
             accesstoken: accessToken
             // refreshtoken: refreshToken
+        }
+    })
+        .then(function(res) {
+            return res.json();
+        })
+        .then(function(res) {
+            return new Promise((resolve, reject) => {
+                resolve(res.posts);
+            });
+        })
+        .catch(err => {
+            console.log(err);
+        });
+}
+export function getMyPosts(accessToken, refreshToken) {
+    location = { latitude: 1, longitude: 1 };
+    return fetch(serverPath + "/user/post", {
+        method: "GET",
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            location: JSON.stringify(location),
+            accesstoken: accessToken,
+            refreshtoken: refreshToken
+        }
+    })
+        .then(function(res) {
+            return res.json();
+        })
+        .then(function(res) {
+            return new Promise((resolve, reject) => {
+                resolve(res.posts);
+            });
+        })
+        .catch(err => {
+            console.log(err);
+        });
+}
+export function getOldMyPosts(accessToken, refreshToken, lastpost) {
+    location = { latitude: 1, longitude: 1 };
+    return fetch(serverPath + "/user/post", {
+        method: "GET",
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            location: JSON.stringify(location),
+            accesstoken: accessToken,
+            refreshtoken: refreshToken,
+            lastpost: lastpost
         }
     })
         .then(function(res) {

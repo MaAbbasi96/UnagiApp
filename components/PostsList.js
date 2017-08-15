@@ -12,19 +12,12 @@ import PostItem from "./PostItem";
 export default class PostsList extends Component {
     constructor() {
         super();
-        this.state = { refreshing: false };
     }
     _onRefresh = () => {
-        this.setState({
-            refreshing: true
-        });
         this.props.getAndSavePosts(
             this.props.accessToken,
             this.props.refreshToken
         );
-        this.setState({
-            refreshing: false
-        });
     };
     render() {
         if (
@@ -33,6 +26,8 @@ export default class PostsList extends Component {
         ) {
             return (
                 <TouchableOpacity
+                    disabled={this.props.refreshing}
+                    isP
                     style={styles.emptyTouchable}
                     onPress={() => this._onRefresh()}
                 >
@@ -43,9 +38,16 @@ export default class PostsList extends Component {
                             justifyContent: "center"
                         }}
                     >
-                        <Text style={styles.emptyText}>
-                            {"پستی یافت نشد.برای تلاش دوباره صفحه را لمس کنید."}
-                        </Text>
+                        {!this.props.refreshing &&
+                            <Text style={styles.emptyText}>
+                                {
+                                    "پستی یافت نشد.برای تلاش دوباره صفحه را لمس کنید."
+                                }
+                            </Text>}
+                        {this.props.refreshing &&
+                            <Text style={styles.emptyText}>
+                                {"در حال دریافت پست‌ها"}
+                            </Text>}
                     </View>
                 </TouchableOpacity>
             );
@@ -70,6 +72,7 @@ export default class PostsList extends Component {
                             isLiked={item.isLiked}
                             likes={item.likes}
                             replies={item.replies}
+                            fatherText={item.fatherText}
                             location={this.props.location}
                             accessToken={this.props.accessToken}
                             refreshToken={this.props.refreshToken}
@@ -79,7 +82,11 @@ export default class PostsList extends Component {
                         />}
                     refreshControl={
                         <RefreshControl
-                            refreshing={this.state.refreshing}
+                            refreshing={
+                                this.props.refreshing
+                                    ? this.props.refreshing
+                                    : false
+                            }
                             onRefresh={() => this._onRefresh()}
                             colors={["white"]}
                             progressBackgroundColor="#8BC34A"
