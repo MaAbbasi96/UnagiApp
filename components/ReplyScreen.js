@@ -12,7 +12,8 @@ import {
 var Network = require("../network");
 import PostItem from "./PostItem";
 import PostsList from "./PostsList";
-
+import { increasePostReplies } from "../actions";
+import { connect } from "react-redux";
 import IconM from "react-native-vector-icons/MaterialIcons";
 
 const styles = StyleSheet.create({
@@ -88,7 +89,7 @@ const styles = StyleSheet.create({
 });
 var charLimit = 160;
 
-export default class ReplyScreen extends Component {
+class ReplyScreen extends Component {
     constructor() {
         super();
         this.getReplies = this.getReplies.bind(this);
@@ -238,7 +239,9 @@ export default class ReplyScreen extends Component {
                     <View style={styles.textInputView}>
                         <TextInput
                             value={this.state.text}
-                            autoFocus={this.props.navigation.state.params.autoFocus}
+                            autoFocus={
+                                this.props.navigation.state.params.autoFocus
+                            }
                             onChangeText={text => {
                                 this.setState({
                                     text: text,
@@ -264,6 +267,9 @@ export default class ReplyScreen extends Component {
                                 onPress={() => {
                                     Keyboard.dismiss();
                                     this.sendReply();
+                                    this.props.increasePostReplies(
+                                        this.state.item._id
+                                    );
                                 }}
                             >
                                 <IconM
@@ -292,3 +298,11 @@ export default class ReplyScreen extends Component {
         );
     }
 }
+mapStateToProps = state => {
+    return {
+        storeState: state
+    };
+};
+export default connect(mapStateToProps, {
+    increasePostReplies
+})(ReplyScreen);

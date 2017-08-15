@@ -22,6 +22,7 @@ export const LOGOUT = "logout";
 export const LOGIN_NETWORK_ERROR = "login_network_error";
 export const SIGNUP_NETWORK_ERROR = "signup_network_error";
 export const GETTING_POSTS = "getting_posts";
+export const INCREASE_POST_REPLIES = "increase_post_replies";
 
 var Helpers = require("./helpers");
 var Network = require("./network");
@@ -210,6 +211,12 @@ export function updatePost(updatedPostID, likeStatus, likes) {
         updatedPostID: updatedPostID,
         updatedPostLikes: likeStatus ? likes + 1 : likes - 1,
         likeStatus: likeStatus
+    };
+}
+export function increasePostReplies(updatedPostID) {
+    return {
+        type: INCREASE_POST_REPLIES,
+        updatedPostID: updatedPostID
     };
 }
 export function likePost(

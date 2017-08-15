@@ -178,6 +178,35 @@ const reducer = (state, action) => {
     if (action.type === actions.GETTING_POSTS) {
         return { ...state, refreshing: true };
     }
+    if (action.type === actions.INCREASE_POST_REPLIES) {
+        var postsArray = Array.prototype.slice.call(state.items);
+        for (var i = 0; i < postsArray.length; i++) {
+            if (postsArray[i]._id === action.updatedPostID) {
+                postsArray[i].replies += 1;
+            }
+        }
+        if (!state.hotItems) state = { ...state, items: postsArray };
+        else {
+            state = { ...state, items: postsArray };
+            var postsArray = Array.prototype.slice.call(state.hotItems);
+            for (var i = 0; i < postsArray.length; i++) {
+                if (postsArray[i]._id === action.updatedPostID) {
+                    postsArray[i].replies += 1;
+                }
+            }
+            state = { ...state, hotItems: postsArray };
+        }
+        if (!state.myItems) return state;
+        else {
+            var postsArray = Array.prototype.slice.call(state.myItems);
+            for (var i = 0; i < postsArray.length; i++) {
+                if (postsArray[i]._id === action.updatedPostID) {
+                    postsArray[i].replies += 1;
+                }
+            }
+        }
+        return state;
+    }
 };
 
 export default reducer;
