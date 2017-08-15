@@ -110,8 +110,8 @@ export default class SendPostScreen extends Component {
                                     .then(function(res) {
                                         ToastAndroid.showWithGravity(
                                             res.status == 0
-                                                ? "Post added!"
-                                                : "Could not add post!",
+                                                ? "پست فرستاده شد"
+                                                : "ارسال پست با مشکل مواجه شد",
                                             ToastAndroid.SHORT,
                                             ToastAndroid.BOTTOM
                                         );

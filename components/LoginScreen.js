@@ -161,13 +161,7 @@ class LoginScreen extends Component {
                                     this.setState({ password })}
                             />
                         </View>
-                        <TouchableOpacity activeOpacity={0.5}>
-                            {/* <View>
-                                <Text style={styles.forgotPasswordText}>
-                                    رمزعبور خود را فراموش کرده‌اید؟
-                                </Text>
-                            </View> */}
-                        </TouchableOpacity>
+                        <TouchableOpacity activeOpacity={0.5} />
                         <TouchableOpacity
                             disabled={
                                 !(this.state.username && this.state.password)
@@ -247,7 +241,7 @@ class LoginScreen extends Component {
 }
 const styles = StyleSheet.create({
     container: {
-        flex: 1
+        flex: 3
     },
     title: {
         color: "rgba(255,255,255,0.7)",

@@ -50,12 +50,12 @@ class SignupScreen extends Component {
         if (!Helpers.ValidatePassword(this.state.password)) {
             Alert.alert(
                 null,
-                "گذرواژه باید حداقل 6 کاراکتر وشامل حروف انگلیسی و اعداد باشد"
+                "گذرواژه باید حداقل 6 کاراکتر و شامل حروف انگلیسی بزرگ و کوچک و اعداد باشد"
             );
             return false;
         }
         if (!Helpers.ValidateEmail(this.state.email)) {
-            Alert.alert(null, "ایمیل صحیح نیست");
+            Alert.alert(null, "ایمیل معتبر نیست");
             return false;
         }
         if (this.state.username == this.state.password) {

@@ -46,7 +46,7 @@ export default class PostsList extends Component {
                             </Text>}
                         {this.props.refreshing &&
                             <Text style={styles.emptyText}>
-                                {"در حال دریافت پست‌ها"}
+                                {"در حال دریافت پست‌ها ..."}
                             </Text>}
                     </View>
                 </TouchableOpacity>
