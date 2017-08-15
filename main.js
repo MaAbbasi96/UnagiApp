@@ -36,6 +36,8 @@ const MainScreenNavigator = TabNavigator(
         داغ‌ترین: { screen: HotPosts }
     },
     {
+        tabBarPosition: "top",
+        backBehavior: "none",
         tabBarOptions: {
             style: {
                 backgroundColor: "#8BC34A"
@@ -44,6 +46,9 @@ const MainScreenNavigator = TabNavigator(
                 fontFamily: "IRAN_Sans",
                 fontSize: 18,
                 fontWeight: "bold"
+            },
+            indicatorStyle: {
+                backgroundColor: "white"
             }
         }
     }
