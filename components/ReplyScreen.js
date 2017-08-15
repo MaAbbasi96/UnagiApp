@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
         opacity: 0.4
     }
 });
-var charLimit = 160;
+var charLimit = 161;
 
 class ReplyScreen extends Component {
     constructor() {
@@ -182,32 +182,28 @@ class ReplyScreen extends Component {
         return (
             <View style={styles.container}>
                 <View style={styles.mainPostContainer}>
-                    <ScrollView>
-                        <PostItem
-                            id={this.state.item._id}
-                            label={this.state.item.text}
-                            isLiked={this.state.item.isLiked}
-                            likes={this.state.item.likes}
-                            repliedTo={this.state.item.repliedTo}
-                            fatherText={this.state.item.fatherText}
-                            location={
-                                this.props.navigation.state.params.location
-                            }
-                            accessToken={
-                                this.props.navigation.state.params.accessToken
-                            }
-                            refreshToken={
-                                this.props.navigation.state.params.refreshToken
-                            }
-                            navigation={
-                                this.props.navigation.state.params.navigation
-                            }
-                            notConnected={true}
-                            disableReply={true}
-                            date={this.state.item.date}
-                            navigation={this.props.navigation}
-                        />
-                    </ScrollView>
+                    <PostItem
+                        id={this.state.item._id}
+                        label={this.state.item.text}
+                        isLiked={this.state.item.isLiked}
+                        likes={this.state.item.likes}
+                        repliedTo={this.state.item.repliedTo}
+                        fatherText={this.state.item.fatherText}
+                        location={this.props.navigation.state.params.location}
+                        accessToken={
+                            this.props.navigation.state.params.accessToken
+                        }
+                        refreshToken={
+                            this.props.navigation.state.params.refreshToken
+                        }
+                        navigation={
+                            this.props.navigation.state.params.navigation
+                        }
+                        notConnected={true}
+                        disableReply={true}
+                        date={this.state.item.date}
+                        navigation={this.props.navigation}
+                    />
                 </View>
                 <View style={styles.postsList}>
                     <FlatList
@@ -246,6 +242,7 @@ class ReplyScreen extends Component {
                     <View style={styles.textInputView}>
                         <TextInput
                             value={this.state.text}
+                            maxLength={160}
                             autoFocus={
                                 this.props.navigation.state.params.autoFocus
                             }

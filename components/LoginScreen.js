@@ -187,7 +187,7 @@ class LoginScreen extends Component {
                                             this.setState({
                                                 isLoginDisabled: false
                                             }),
-                                        100
+                                        500
                                     );
                                 }
                             }}
@@ -218,7 +218,7 @@ class LoginScreen extends Component {
                                                 this.setState({
                                                     isSignupDisabled: false
                                                 }),
-                                            100
+                                            1000
                                         );
                                     }
                                 }}

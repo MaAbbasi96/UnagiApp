@@ -15,6 +15,10 @@ import IconI from "react-native-vector-icons/Ionicons";
 
 var Helpers = require("../helpers");
 class PostItem extends Component {
+    constructor() {
+        super();
+        this.state = { likeDisabled: false };
+    }
     componentWillMount() {
         this.setState({ isLiked: this.props.isLiked });
         this.setState({ likes: this.props.likes });
@@ -55,23 +59,26 @@ class PostItem extends Component {
         time = Math.floor(time / 7);
         return time + " هفته پیش";
     }
-
     likeChanged() {
-        this.props.likePost(
-            this.props.accessToken,
-            this.props.refreshToken,
-            this.props.location,
-            this.props.id,
-            !this.state.isLiked,
-            this.props.likes
-        );
-        if (this.props.notConnected) {
-            this.setState({ isLiked: !this.state.isLiked });
-            this.setState({
-                likes: this.state.isLiked
-                    ? this.state.likes - 1
-                    : this.state.likes + 1
-            });
+        if (!this.state.likeDisabled) {
+            this.setState({ likeDisabled: true });
+            this.props.likePost(
+                this.props.accessToken,
+                this.props.refreshToken,
+                this.props.location,
+                this.props.id,
+                !this.state.isLiked,
+                this.props.likes
+            );
+            if (this.props.notConnected) {
+                this.setState({ isLiked: !this.state.isLiked });
+                this.setState({
+                    likes: this.state.isLiked
+                        ? this.state.likes - 1
+                        : this.state.likes + 1
+                });
+            }
+            setTimeout(() => this.setState({ likeDisabled: false }), 500);
         }
     }
     render() {
