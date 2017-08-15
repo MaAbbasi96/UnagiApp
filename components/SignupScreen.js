@@ -212,7 +212,16 @@ class SignupScreen extends Component {
                                 );
                             }}
                         >
-                            <View style={styles.button}>
+                            <View
+                                style={
+                                    this.state.username &&
+                                    this.state.password &&
+                                    this.state.password &&
+                                    this.state.repeatPassword
+                                        ? styles.button
+                                        : styles.buttonDisabled
+                                }
+                            >
                                 <Text style={styles.buttonText}>تایید</Text>
                             </View>
                         </TouchableOpacity>
@@ -274,8 +283,17 @@ let styles = StyleSheet.create({
         textAlign: "right",
         marginBottom: 20
     },
+    buttonDisabled: {
+        backgroundColor: "#689F38",
+        opacity: 0.4,
+        paddingVertical: 20,
+        alignItems: "center",
+        justifyContent: "center"
+        // marginBottom: 20
+    },
     button: {
         backgroundColor: "#689F38",
+        opacity: 1,
         paddingVertical: 20,
         alignItems: "center",
         justifyContent: "center"
