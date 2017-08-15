@@ -33,7 +33,7 @@ const { width, height } = Dimensions.get("window");
 class SignupScreen extends Component {
     constructor() {
         super();
-        this.state = { animating: false };
+        this.state = { animating: false, isSignupDisabled: false };
     }
     validate(username, password, email) {
         if (this.state.password != this.state.repeatPassword) {

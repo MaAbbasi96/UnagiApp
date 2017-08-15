@@ -38,6 +38,8 @@ const MainScreenNavigator = TabNavigator(
         "پست‌های من": { screen: MyPosts }
     },
     {
+        tabBarPosition: "top",
+        backBehavior: "none",
         tabBarOptions: {
             style: {
                 backgroundColor: "#8BC34A"
@@ -46,6 +48,9 @@ const MainScreenNavigator = TabNavigator(
                 fontFamily: "IRAN_Sans",
                 fontSize: 16,
                 fontWeight: "bold"
+            },
+            indicatorStyle: {
+                backgroundColor: "white"
             }
         }
     }
