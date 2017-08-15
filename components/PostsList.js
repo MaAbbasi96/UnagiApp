@@ -12,19 +12,12 @@ import PostItem from "./PostItem";
 export default class PostsList extends Component {
     constructor() {
         super();
-        this.state = { refreshing: false };
     }
     _onRefresh = () => {
-        this.setState({
-            refreshing: true
-        });
         this.props.getAndSavePosts(
             this.props.accessToken,
             this.props.refreshToken
         );
-        this.setState({
-            refreshing: false
-        });
     };
     render() {
         if (
@@ -79,7 +72,11 @@ export default class PostsList extends Component {
                         />}
                     refreshControl={
                         <RefreshControl
-                            refreshing={this.state.refreshing}
+                            refreshing={
+                                this.props.refreshing
+                                    ? this.props.refreshing
+                                    : false
+                            }
                             onRefresh={() => this._onRefresh()}
                             colors={["white"]}
                             progressBackgroundColor="#8BC34A"

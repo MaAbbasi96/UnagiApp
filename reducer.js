@@ -1,55 +1,56 @@
 import { addPost, getPosts, getOlderPosts, likePost } from "./network";
 import { getUniqueID } from "./helpers";
 import { AsyncStorage } from "react-native";
+import * as actions from "./actions";
 const reducer = (state, action) => {
-    if (action.type === "get_posts") {
+    if (action.type === actions.GET_POSTS) {
         getPosts(state.unique_id, myLocation).then(res => {
             return { ...state, items: res };
         });
     }
-    if (action.type === "add_post") {
+    if (action.type === actions.ADD_POST) {
         addPost(state.unique_id, myLocation, action.text).then(res => {
             return { ...state, sendPostResponse: "ok" };
         });
     }
-    if (action.type === "get_unique_id") {
+    if (action.type === actions.GET_UNIQUE_ID) {
         var uniqueID = getUniqueID();
         return { ...state, unique_id: uniqueID };
     }
-    if (action.type === "like_post") {
+    if (action.type === actions.LIKE_POST) {
         likePost(state.unique_id, myLocation, action.postID, true);
     }
-    if (action.type === "unlike_post") {
+    if (action.type === actions.UNLIKE_POST) {
         likePost(state.unique_id, myLocation, action.postID, false);
     }
-    if (action.type === "set_location") {
+    if (action.type === actions.SET_LOCATION) {
         return { ...state, location: action.location };
     }
-    if (action.type === "save_posts") {
-        return { ...state, items: action.posts };
+    if (action.type === actions.SAVE_POSTS) {
+        return { ...state, items: action.posts, refreshing: false };
     }
-    if (action.type == "save_unique_id") {
+    if (action.type == actions.SAVE_UNIQUE_ID) {
         return { ...state, unique_id: action.uniqueID };
     }
-    if (action.type === "save_old_posts") {
+    if (action.type === actions.SAVE_OLD_POSTS) {
         var newItems = state.items.concat(action.posts);
-        return { ...state, items: newItems };
+        return { ...state, items: newItems, refreshing: false };
     }
-    if (action.type === "save_old_hot_posts") {
+    if (action.type === actions.SAVE_OLD_HOT_POSTS) {
         var newItems = state.hotItems.concat(action.posts);
-        return { ...state, hotItems: newItems };
+        return { ...state, hotItems: newItems, refreshing: false };
     }
-    if (action.type === "save_hot_posts") {
-        return { ...state, hotItems: action.posts };
+    if (action.type === actions.SAVE_HOT_POSTS) {
+        return { ...state, hotItems: action.posts, refreshing: false };
     }
-    if (action.type === "save_my_posts") {
-        return { ...state, myItems: action.posts };
+    if (action.type === actions.SAVE_MY_POSTS) {
+        return { ...state, myItems: action.posts, refreshing: false };
     }
-    if (action.type === "save_old_my_posts") {
+    if (action.type === actions.SAVE_OLD_MY_POSTS) {
         var newItems = state.myItems.concat(action.posts);
-        return { ...state, myItems: newItems };
+        return { ...state, myItems: newItems, refreshing: false };
     }
-    if (action.type === "signup_waiting") {
+    if (action.type === actions.SIGNUP_WAITING) {
         return {
             ...state,
             signupWaiting: true,
@@ -58,7 +59,7 @@ const reducer = (state, action) => {
             signupNetworkError: false
         };
     }
-    if (action.type === "signup_fail") {
+    if (action.type === actions.SIGNUP_FAIL) {
         return {
             ...state,
             signupWaiting: false,
@@ -67,7 +68,7 @@ const reducer = (state, action) => {
             signupNetworkError: false
         };
     }
-    if (action.type === "signup_done") {
+    if (action.type === actions.SIGNUP_DONE) {
         AsyncStorage.setItem("refreshToken", action.response.refreshtoken);
         AsyncStorage.setItem("accessToken", action.response.accesstoken);
         return {
@@ -79,7 +80,7 @@ const reducer = (state, action) => {
             accessToken: action.response.accesstoken
         };
     }
-    if (action.type === "login_waiting") {
+    if (action.type === actions.LOGIN_WAITING) {
         return {
             ...state,
             loginWaiting: true,
@@ -88,7 +89,7 @@ const reducer = (state, action) => {
             inLoginScreen: true
         };
     }
-    if (action.type === "login_fail") {
+    if (action.type === actions.LOGIN_FAIL) {
         return {
             ...state,
             loginStatus: false,
@@ -96,7 +97,7 @@ const reducer = (state, action) => {
             loginNetworkError: false
         };
     }
-    if (action.type === "login_done") {
+    if (action.type === actions.LOGIN_DONE) {
         AsyncStorage.setItem("refreshToken", action.response.refreshtoken);
         AsyncStorage.setItem("accessToken", action.response.accesstoken);
         return {
@@ -109,7 +110,7 @@ const reducer = (state, action) => {
             accessToken: action.response.accesstoken
         };
     }
-    if (action.type === "update_post") {
+    if (action.type === actions.UPDATE_POST) {
         var postsArray = Array.prototype.slice.call(state.items);
         for (var i = 0; i < postsArray.length; i++) {
             if (postsArray[i]._id === action.updatedPostID) {
@@ -141,19 +142,22 @@ const reducer = (state, action) => {
         }
         return state;
     }
-    if (action.type === "logout") {
+    if (action.type === actions.LOGOUT) {
         AsyncStorage.clear();
-        return {
-            ...state,
-            loginWaiting: false,
-            loginStatus: false,
-            signupWaiting: false,
-            signupStatus: false,
-            loginNetworkError: false,
-            signupNetworkError: false
-        };
+        return {};
+        // return {
+        //     ...state,
+        //     inLoginScreen: false,
+        //     inSignupScreen: false,
+        //     loginWaiting: false,
+        //     loginStatus: false,
+        //     signupWaiting: false,
+        //     signupStatus: false,
+        //     loginNetworkError: false,
+        //     signupNetworkError: false
+        // };
     }
-    if (action.type === "login_network_error") {
+    if (action.type === actions.LOGIN_NETWORK_ERROR) {
         return {
             ...state,
             loginWaiting: false,
@@ -162,7 +166,7 @@ const reducer = (state, action) => {
             inLoginScreen: true
         };
     }
-    if (action.type === "signup_network_error") {
+    if (action.type === actions.SIGNUP_NETWORK_ERROR) {
         return {
             ...state,
             signupWaiting: false,
@@ -170,6 +174,9 @@ const reducer = (state, action) => {
             signupNetworkError: true,
             inSignupScreen: true
         };
+    }
+    if (action.type === actions.GETTING_POSTS) {
+        return { ...state, refreshing: true };
     }
 };
 

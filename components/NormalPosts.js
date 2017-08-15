@@ -64,6 +64,7 @@ class NormalPosts extends Component {
                     accessToken={this.props.storeState.accessToken}
                     navigation={this.props.navigation}
                     mainScreen={true}
+                    refreshing={this.props.storeState.refreshing}
                 />
                 <ActionButton
                     buttonColor={Helpers.RandomColor()}

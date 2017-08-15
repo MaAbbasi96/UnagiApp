@@ -21,14 +21,15 @@ export const LOGIN_WAITING = "login_waiting";
 export const LOGOUT = "logout";
 export const LOGIN_NETWORK_ERROR = "login_network_error";
 export const SIGNUP_NETWORK_ERROR = "signup_network_error";
+export const GETTING_POSTS = "getting_posts";
 
 var Helpers = require("./helpers");
 var Network = require("./network");
-export function getPosts() {
-    return {
-        type: GET_POSTS
-    };
-}
+// export function getPosts() {
+//     return {
+//         type: GET_POSTS
+//     };
+// }
 export function saveOldPosts(posts) {
     return {
         type: SAVE_OLD_POSTS,
@@ -50,12 +51,6 @@ export function addPost(text) {
 export function getUniqueID() {
     return {
         type: GET_UNIQUE_ID
-    };
-}
-export function unlikePost(postID) {
-    return {
-        type: UNLIKE_POST,
-        postID: postID
     };
 }
 export function savePosts(posts) {
@@ -94,6 +89,11 @@ export function setLocation(location) {
         location: location
     };
 }
+export function gettingPosts() {
+    return {
+        type: GETTING_POSTS
+    };
+}
 export function getAndSaveUniqueID() {
     return function(dispatch) {
         return Helpers.getUniqueID().then(
@@ -104,6 +104,7 @@ export function getAndSaveUniqueID() {
 }
 export function getAndSavePosts(accessToken, refreshToken) {
     return function(dispatch) {
+        dispatch(gettingPosts());
         return Helpers.getLocation().then(
             location => {
                 return Network.getPosts(
@@ -164,6 +165,7 @@ export function getAndSaveOldHotPosts(
 }
 export function getAndSaveHotPosts(accessToken, refreshToken) {
     return function(dispatch) {
+        dispatch(gettingPosts());
         return Helpers.getLocation().then(
             location => {
                 return Network.getHotPosts(
@@ -183,6 +185,7 @@ export function getAndSaveHotPosts(accessToken, refreshToken) {
 }
 export function getAndSaveMyPosts(accessToken, refreshToken) {
     return function(dispatch) {
+        dispatch(gettingPosts());
         return Network.getMyPosts(accessToken, refreshToken).then(
             posts => {
                 dispatch(saveMyPosts(posts));
