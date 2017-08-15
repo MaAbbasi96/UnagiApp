@@ -187,7 +187,14 @@ class SignupScreen extends Component {
                     </View>
                     <View style={styles.footerContainer}>
                         <TouchableOpacity
-                            activeOpacity={0.5}
+                            disabled={
+                                !(
+                                    this.state.username &&
+                                    this.state.password &&
+                                    this.state.password &&
+                                    this.state.repeatPassword
+                                )
+                            }
                             onPress={() => {
                                 if (
                                     this.state.password !=
