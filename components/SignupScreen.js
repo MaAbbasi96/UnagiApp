@@ -20,6 +20,7 @@ import {
     Platform
 } from "react-native";
 // import { signup } from "../../network";
+var Helpers = require("../helpers");
 import { signup } from "../actions";
 import { connect } from "react-redux";
 
@@ -33,6 +34,35 @@ class SignupScreen extends Component {
     constructor() {
         super();
         this.state = { animating: false };
+    }
+    validate(username, password, email) {
+        if (this.state.password != this.state.repeatPassword) {
+            Alert.alert(null, "رمز عبور و تکرار آن تطابق ندارند");
+            return false;
+        }
+        if (!Helpers.ValidateUsername(this.state.username)) {
+            Alert.alert(
+                null,
+                "نام کاربری باید حداقل  6 کاراکتر و شامل حروف انگلیسی باشد"
+            );
+            return false;
+        }
+        if (!Helpers.ValidatePassword(this.state.password)) {
+            Alert.alert(
+                null,
+                "گذرواژه باید حداقل 6 کاراکتر وشامل حروف انگلیسی و اعداد باشد"
+            );
+            return false;
+        }
+        if (!Helpers.ValidateEmail(this.state.email)) {
+            Alert.alert(null, "ایمیل صحیح نیست");
+            return false;
+        }
+        if (this.state.username == this.state.password) {
+            Alert.alert(null, "نام کاربری و گذرواژه نباید مطابق هم باشند");
+            return false;
+        }
+        return true;
     }
     static navigationOptions = {
         title: "اوناگی",
@@ -190,19 +220,16 @@ class SignupScreen extends Component {
                             activeOpacity={0.5}
                             onPress={() => {
                                 if (
-                                    this.state.password !=
-                                    this.state.repeatPassword
-                                ) {
-                                    Alert.alert(
-                                        null,
-                                        "رمز عبور و تکرار آن تطابق ندارند"
+                                    this.validate(
+                                        this.state.username,
+                                        this.state.password,
+                                        this.state.email
+                                    )
+                                )
+                                    this.props.signup(
+                                        this.state.username,
+                                        this.state.password
                                     );
-                                    return;
-                                }
-                                this.props.signup(
-                                    this.state.username,
-                                    this.state.password
-                                );
                             }}
                         >
                             <View style={styles.button}>

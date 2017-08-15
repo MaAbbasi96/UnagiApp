@@ -77,9 +77,28 @@ class PostItem extends Component {
     render() {
         return (
             <View style={styles.postItem}>
-                <Text style={styles.postContent}>
-                    {this.props.label}
-                </Text>
+                {!this.props.disableReply && <TouchableOpacity style = {{flex : 1}}
+                    onPress={()=>
+                    this.props.navigation.navigate("ReplyScreen", {
+                                label: this.props.label,
+                                accessToken: this.props.accessToken,
+                                likes: this.state.likes,
+                                id: this.props.id,
+                                isLiked: this.state.isLiked,
+                                date: this.props.date,
+                                location: this.props.location,
+                                autoFocus : false,
+                            })
+                     }
+                  > 
+                    <Text style={styles.postContent}>
+                        {this.props.label}
+                    </Text>
+                 </TouchableOpacity>} 
+                 {this.props.disableReply &&
+                    <Text style={styles.postContent}>
+                        {this.props.label}
+                    </Text>      }
                 <View
                     style={{
                         borderBottomColor: "rgb(226, 226, 226)",
@@ -156,7 +175,8 @@ class PostItem extends Component {
                                 id: this.props.repliedTo,
                                 isLiked: this.state.isLiked,
                                 date: this.props.date,
-                                location: this.props.location
+                                location: this.props.location,
+                                autoFocus : true
                             });
                         }}
                     >

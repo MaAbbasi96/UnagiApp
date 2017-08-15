@@ -235,7 +235,7 @@ export default class ReplyScreen extends Component {
                     <View style={styles.textInputView}>
                         <TextInput
                             value={this.state.text}
-                            autoFocus={true}
+                            autoFocus={this.props.navigation.state.params.autoFocus}
                             onChangeText={text => {
                                 this.setState({
                                     text: text,
