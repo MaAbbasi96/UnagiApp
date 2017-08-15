@@ -25,7 +25,7 @@ var myLocation = { latitude: 35.7293756, longitude: 51.42246219 };
 class HotPosts extends Component {
     constructor() {
         super();
-        this.state = { isFabDisabled: false };
+        this.state = { isFabDisabled: false, fabColor: Helpers.RandomColor() };
     }
     componentDidMount() {
         if (this.props.storeState)
@@ -52,7 +52,7 @@ class HotPosts extends Component {
                     mainScreen={true}
                 />
                 <ActionButton
-                    buttonColor={Helpers.RandomColor()}
+                    buttonColor={this.state.fabColor}
                     icon={<IconM name="create" color="white" size={30} />}
                     onPress={() => {
                         if (!this.state.isFabDisabled) {
