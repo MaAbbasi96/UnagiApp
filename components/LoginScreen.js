@@ -218,7 +218,7 @@ class LoginScreen extends Component {
                                                 this.setState({
                                                     isSignupDisabled: false
                                                 }),
-                                            1000
+                                            100
                                         );
                                     }
                                 }}

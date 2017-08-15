@@ -26,11 +26,6 @@ export const INCREASE_POST_REPLIES = "increase_post_replies";
 
 var Helpers = require("./helpers");
 var Network = require("./network");
-// export function getPosts() {
-//     return {
-//         type: GET_POSTS
-//     };
-// }
 export function saveOldPosts(posts) {
     return {
         type: SAVE_OLD_POSTS,

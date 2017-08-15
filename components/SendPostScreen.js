@@ -15,52 +15,6 @@ import IconM from "react-native-vector-icons/MaterialIcons";
 
 var Helpers = require("../helpers");
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        flexDirection: "column",
-        backgroundColor: "#DCEDC8"
-    },
-    sendButton: {
-        marginRight: 15,
-        opacity: 1
-    },
-    sendButtonDisabled: {
-        marginRight: 15,
-        opacity: 0.4
-    },
-    textInput: {
-        backgroundColor: "#DCEDC8",
-        color: "black",
-        marginRight: 10,
-        marginLeft: 10,
-        textAlignVertical: "top",
-        fontFamily: "IRAN_Sans",
-        fontSize: 15,
-        height: "100%"
-    },
-    headerRight: {
-        flexDirection: "row",
-        justifyContent: "center",
-        alignItems: "center"
-    },
-    charLimit: {
-        marginRight: 10,
-        marginTop: 4.5,
-        color: "#FFF",
-        fontSize: 19,
-        fontFamily: "IRAN_Sans",
-        fontWeight: "bold"
-    },
-    charLimitRed: {
-        marginRight: 10,
-        marginTop: 4.5,
-        color: "red",
-        fontSize: 19,
-        fontFamily: "IRAN_Sans",
-        fontWeight: "bold"
-    }
-});
 var charLimit = 160;
 
 export default class SendPostScreen extends Component {
@@ -169,3 +123,50 @@ export default class SendPostScreen extends Component {
         );
     }
 }
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        flexDirection: "column",
+        backgroundColor: "#DCEDC8"
+    },
+    sendButton: {
+        marginRight: 15,
+        opacity: 1
+    },
+    sendButtonDisabled: {
+        marginRight: 15,
+        opacity: 0.4
+    },
+    textInput: {
+        backgroundColor: "#DCEDC8",
+        color: "black",
+        marginRight: 10,
+        marginLeft: 10,
+        textAlignVertical: "top",
+        fontFamily: "IRAN_Sans",
+        fontSize: 15,
+        height: "100%"
+    },
+    headerRight: {
+        flexDirection: "row",
+        justifyContent: "center",
+        alignItems: "center"
+    },
+    charLimit: {
+        marginRight: 10,
+        marginTop: 4.5,
+        color: "#FFF",
+        fontSize: 19,
+        fontFamily: "IRAN_Sans",
+        fontWeight: "bold"
+    },
+    charLimitRed: {
+        marginRight: 10,
+        marginTop: 4.5,
+        color: "red",
+        fontSize: 19,
+        fontFamily: "IRAN_Sans",
+        fontWeight: "bold"
+    }
+});

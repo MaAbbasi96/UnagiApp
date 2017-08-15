@@ -145,17 +145,6 @@ const reducer = (state, action) => {
     if (action.type === actions.LOGOUT) {
         AsyncStorage.clear();
         return {};
-        // return {
-        //     ...state,
-        //     inLoginScreen: false,
-        //     inSignupScreen: false,
-        //     loginWaiting: false,
-        //     loginStatus: false,
-        //     signupWaiting: false,
-        //     signupStatus: false,
-        //     loginNetworkError: false,
-        //     signupNetworkError: false
-        // };
     }
     if (action.type === actions.LOGIN_NETWORK_ERROR) {
         return {
