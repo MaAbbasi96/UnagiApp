@@ -26,6 +26,8 @@ export default class PostsList extends Component {
         ) {
             return (
                 <TouchableOpacity
+                    disabled={this.props.refreshing}
+                    isP
                     style={styles.emptyTouchable}
                     onPress={() => this._onRefresh()}
                 >
@@ -36,9 +38,16 @@ export default class PostsList extends Component {
                             justifyContent: "center"
                         }}
                     >
-                        <Text style={styles.emptyText}>
-                            {"پستی یافت نشد.برای تلاش دوباره صفحه را لمس کنید."}
-                        </Text>
+                        {!this.props.refreshing &&
+                            <Text style={styles.emptyText}>
+                                {
+                                    "پستی یافت نشد.برای تلاش دوباره صفحه را لمس کنید."
+                                }
+                            </Text>}
+                        {this.props.refreshing &&
+                            <Text style={styles.emptyText}>
+                                {"در حال دریافت پست‌ها"}
+                            </Text>}
                     </View>
                 </TouchableOpacity>
             );
