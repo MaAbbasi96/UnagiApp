@@ -66,7 +66,7 @@ MainScreenNavigator.navigationOptions = props => {
                         " قصد خروج از حساب کاربری را دارید؟",
                         [
                             {
-                                text: "بله",
+                                text: "خروج",
                                 onPress: () => {
                                     store.dispatch(logout());
                                     const resetAction = NavigationActions.reset(
