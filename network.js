@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Fetch from "react-native-fetch";
-var serverPath = "http://45.55.213.147";
+var serverPath = "http://192.168.11.185:3000";
 export function getPosts(location, accessToken, refreshToken) {
     return fetch(serverPath + "/post", {
         method: "GET",
@@ -137,18 +137,7 @@ export function addPost(accessToken, refreshToken, location, text) {
         body: JSON.stringify({
             text
         })
-    })
-        .then(function(res) {
-            // console.log("Response" , res);
-            return;
-        })
-        .then(function(res) {
-            // func();
-            return;
-        })
-        .catch(err => {
-            console.log(err);
-        });
+    });
 }
 export function likePost(accessToken, refreshToken, location, postId, like) {
     var requestMethod;
