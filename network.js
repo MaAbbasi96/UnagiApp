@@ -200,7 +200,7 @@ export function getHotPosts(location, accessToken, refreshToken) {
 export function getMyPosts(accessToken, refreshToken) {
     location = { latitude: 1, longitude: 1 };
     return fetch(serverPath + "/user/post", {
-        method: "POST",
+        method: "GET",
         headers: {
             Accept: "application/json",
             "Content-Type": "application/json",
@@ -224,7 +224,7 @@ export function getMyPosts(accessToken, refreshToken) {
 export function getOldMyPosts(accessToken, refreshToken, lastpost) {
     location = { latitude: 1, longitude: 1 };
     return fetch(serverPath + "/user/post", {
-        method: "POST",
+        method: "GET",
         headers: {
             Accept: "application/json",
             "Content-Type": "application/json",

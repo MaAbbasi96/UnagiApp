@@ -63,6 +63,7 @@ export default class PostsList extends Component {
                             isLiked={item.isLiked}
                             likes={item.likes}
                             replies={item.replies}
+                            fatherText={item.fatherText}
                             location={this.props.location}
                             accessToken={this.props.accessToken}
                             refreshToken={this.props.refreshToken}

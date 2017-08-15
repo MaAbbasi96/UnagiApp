@@ -122,7 +122,6 @@ export default class ReplyScreen extends Component {
             this.props.navigation.state.params.accessToken,
             this.props.navigation.state.params.location
         ).then(response => {
-            console.log("RESPONSE", response.post.isLiked);
             this.setState({
                 item: response.post,
                 items: response.posts,
@@ -182,6 +181,7 @@ export default class ReplyScreen extends Component {
                         isLiked={this.state.item.isLiked}
                         likes={this.state.item.likes}
                         repliedTo={this.state.item.repliedTo}
+                        fatherText={this.state.item.fatherText}
                         location={this.props.navigation.state.params.location}
                         accessToken={
                             this.props.navigation.state.params.accessToken

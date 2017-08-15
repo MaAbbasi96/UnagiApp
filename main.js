@@ -44,7 +44,7 @@ const MainScreenNavigator = TabNavigator(
             },
             labelStyle: {
                 fontFamily: "IRAN_Sans",
-                fontSize: 18,
+                fontSize: 16,
                 fontWeight: "bold"
             }
         }

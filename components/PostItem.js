@@ -160,8 +160,8 @@ class PostItem extends Component {
                             });
                         }}
                     >
-                        <Text style={styles.date}>
-                            {"در پاسخ به این پست"}
+                        <Text style={styles.fatherText} numberOfLines={1}>
+                            {" در پاسخ به: " + this.props.fatherText}
                         </Text>
                     </TouchableOpacity>}
             </View>
@@ -240,6 +240,12 @@ const styles = StyleSheet.create({
     shareButton: {
         //flex: 1,
         marginRight: 12
+    },
+    fatherText: {
+        color: "#aaa",
+        marginTop: 5,
+        fontFamily: "IRAN_Sans",
+        fontSize: 13
     }
 });
 mapStateToProps = state => {
