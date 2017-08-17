@@ -1,7 +1,7 @@
 # Unagi
 
 ## About Project
-Unagi is a location social media smart phone application.
+Unagi is a location based social media smart phone application.
 Presently it is available for Android and iOS.
 It allows people to make posts and see posts within a fixed radius around them.<br>
 The application is developed using React Native framework <br>
