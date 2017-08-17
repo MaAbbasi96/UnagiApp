@@ -1,4 +1,4 @@
-# Rahnema-Team2-App
+# Unagi
 
 ## About Project
 Unagi is a location social media smart phone application.
